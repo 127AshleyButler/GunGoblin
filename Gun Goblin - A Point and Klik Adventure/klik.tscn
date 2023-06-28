@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://826b4fbeh616"]
+
+[ext_resource type="Script" path="res://klik.gd" id="1_lxo7v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6sti"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wbdis"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_lxo7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.378, 0, 0, 0, 0.378, 0, 0, 0, 0.378, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_b6sti")
+
+[node name="model_tmp" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_wbdis")
+skeleton = NodePath("")
