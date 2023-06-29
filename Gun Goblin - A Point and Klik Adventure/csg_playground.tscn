@@ -14,15 +14,23 @@ snap = 1e-06
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.233578, -0.135441, 0.0291027)
 snap = 1.0
-size = Vector3(4.08384, 0.401345, 5.01565)
+size = Vector3(7.09596, 0.401345, 11.0546)
 material = SubResource("StandardMaterial3D_vi38y")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_0fs1g")]
 transform = Transform3D(0.342, 0, 0, 0, 0.342, 0, 0, 0, 0.342, 0, 1.40276, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.925884, 0.377808, 0, -0.377808, 0.925884, 0, 2.33514, 3.92826)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0077666, 0.99997, 0, -0.99997, 0.0077666, 0, 2.47803, 0)
+transform = Transform3D(1, 0, 0, 0, 0.0077666, 0.99997, 0, -0.99997, 0.0077666, 0, 5.90055, 0)
+light_energy = 2.981
+light_volumetric_fog_energy = 1.61
+shadow_enabled = true
+shadow_bias = 1.434
+shadow_normal_bias = 6.857
+shadow_transmittance_bias = -4.137
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.081
+directional_shadow_fade_start = 0.814
+directional_shadow_pancake_size = 21.4
