@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwniapxuhyted"]
+[gd_scene load_steps=6 format=3 uid="uid://cwniapxuhyted"]
 
 [ext_resource type="Texture2D" uid="uid://b4w27goy76w6p" path="res://textures/texture_08.png" id="1_3q0bi"]
+[ext_resource type="Script" path="res://csg_playground.gd" id="1_vk383"]
 [ext_resource type="PackedScene" uid="uid://826b4fbeh616" path="res://klik.tscn" id="2_0fs1g"]
+[ext_resource type="MeshLibrary" uid="uid://2cfrtywltqj3" path="res://MeshLibrary.tres" id="4_sck33"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vi38y"]
 albedo_texture = ExtResource("1_3q0bi")
 uv1_triplanar = true
 
 [node name="CSGPlayground" type="Node3D"]
+script = ExtResource("1_vk383")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 snap = 1e-06
@@ -34,3 +37,10 @@ directional_shadow_mode = 1
 directional_shadow_split_1 = 0.081
 directional_shadow_fade_start = 0.814
 directional_shadow_pancake_size = 21.4
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("4_sck33")
+data = {
+"cells": PackedInt32Array(-3, 65535, 1441804, -4, 65535, 1441804, -5, 65535, 1441804, -6, 65535, 1441804, -7, 65535, 1441804, -8, 65535, 1441804, -9, 65535, 1441804, -10, 65535, 1441804, -11, 65535, 1441804, -12, 65535, 1441804, -14, 65535, 1441804, -2, 65535, 1441804, -15, 65535, 1048583, -15, 65532, 7, -13, 65532, 1441799, -14, 65532, 1441804, -15, 65533, 655372, -15, 65534, 655372, -13, 65533, 655372, -13, 65534, 655372, -13, 65535, 655362, -13, 65530, 655362, -13, 65529, 655372, -13, 65528, 5, -15, 65529, 655372, -15, 65528, 5, -11, 65529, 655372, -11, 65528, 5, -15, 65530, 7, -11, 65530, 655367, -12, 65530, 1048588, -14, 65530, 1048588, -14, 65526, 1441804, -12, 65526, 1441804, -11, 65525, 655372, -13, 65525, 655372, -15, 65525, 655372, -15, 65524, 10, -13, 65524, 5, -11, 65524, 5, -15, 65526, 1048584, -11, 65526, 1441800, -13, 65526, 655362)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
