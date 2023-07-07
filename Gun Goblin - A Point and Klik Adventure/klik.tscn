@@ -7,8 +7,9 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbdis"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("klik_model")]
 script = ExtResource("1_lxo7v")
+klik_model = NodePath("CollisionShape3D/model_tmp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.504, 0, 0, 0, 0.504, 0, 0, 0, 0.504, 0, 0.501912, 0)

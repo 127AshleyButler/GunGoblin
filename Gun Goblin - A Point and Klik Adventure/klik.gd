@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var klik_model: MeshInstance3D
 
 const SPEED = 4.0
 const JUMP_VELOCITY = 5.5

@@ -19,7 +19,11 @@ func _getWASD():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (_getWASD() == true):
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if (input_dir):
 		anim.play("run")
+		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		look_at(global_transform.origin + direction, Vector3.UP, true)
+
 	else: anim.play("idle")
 	
