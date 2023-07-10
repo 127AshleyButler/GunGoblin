@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkyghxdar0ydp"]
+
+[ext_resource type="PackedScene" uid="uid://boaaelfskr0u7" path="res://possum.glb" id="1_y2my2"]
+[ext_resource type="FontFile" uid="uid://7vnujxtk6osx" path="res://textures/Pokemon Kiddy Ding.ttf" id="2_r1bu0"]
+
+[node name="NPC" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="possum" parent="." instance=ExtResource("1_y2my2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1, 1.72881, 0)
+text = "fucking hell this font is hot"
+font = ExtResource("2_r1bu0")
+font_size = 50
