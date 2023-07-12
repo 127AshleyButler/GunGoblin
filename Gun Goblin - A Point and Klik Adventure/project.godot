@@ -60,6 +60,11 @@ jump={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="ground"
+3d_physics/layer_5="klik"
+
 [physics]
 
 3d/default_gravity=8.0

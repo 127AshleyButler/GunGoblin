@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd8llx4apjbp1"]
+
+[ext_resource type="PackedScene" uid="uid://dhbxeigq3teyd" path="res://possum_squish.glb" id="1_72t4c"]
+[ext_resource type="Script" path="res://possum_squish.gd" id="2_qi03b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vq7vo"]
+
+[node name="possum_NPC" instance=ExtResource("1_72t4c")]
+script = ExtResource("2_qi03b")
+text_to_say = "double click to add text or you're SCREWED!!!"
+
+[node name="Possum" parent="." index="0"]
+transform = Transform3D(0.4754, 0, 0, 0, 0.4754, 0, 0, 0, 0.4754, -0.253471, 0.834526, 1.24535e-07)
+
+[node name="Speech" type="Label3D" parent="." index="2"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1, 1.72881, 0)
+font_size = 50
+
+[node name="TalkingRadius" type="Area3D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TalkingRadius" index="0"]
+transform = Transform3D(1.813, 0, 0, 0, 1.813, 0, 0, 0, 1.813, 1.36507, 0.65, 0.0491558)
+shape = SubResource("SphereShape3D_vq7vo")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished" flags=18]
+[connection signal="area_entered" from="TalkingRadius" to="." method="_on_talking_radius_area_entered" flags=18]
+[connection signal="body_entered" from="TalkingRadius" to="." method="_on_talking_radius_body_entered" flags=18]
