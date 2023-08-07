@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwniapxuhyted"]
+[gd_scene load_steps=9 format=3 uid="uid://cwniapxuhyted"]
 
 [ext_resource type="Texture2D" uid="uid://b4w27goy76w6p" path="res://textures/texture_08.png" id="1_3q0bi"]
 [ext_resource type="Script" path="res://csg_playground.gd" id="1_vk383"]
@@ -6,6 +6,7 @@
 [ext_resource type="MeshLibrary" uid="uid://2cfrtywltqj3" path="res://MeshLibrary.tres" id="4_sck33"]
 [ext_resource type="PackedScene" uid="uid://bkyghxdar0ydp" path="res://npc.tscn" id="5_yxvda"]
 [ext_resource type="PackedScene" uid="uid://dd8llx4apjbp1" path="res://possum_squish.tscn" id="6_wmyjd"]
+[ext_resource type="PackedScene" uid="uid://doe41vrnlimh3" path="res://homunculus.tscn" id="7_4bxdk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vi38y"]
 albedo_texture = ExtResource("1_3q0bi")
@@ -58,3 +59,6 @@ transform = Transform3D(-0.0599162, 0, 0.998203, 0, 1, 0, -0.998203, 0, -0.05991
 
 [node name="possum_squish" parent="." instance=ExtResource("6_wmyjd")]
 transform = Transform3D(0.0502443, 0, -0.998737, 0, 1, 0, 0.998737, 0, 0.0502443, -0.310876, -0.0908051, -6.28408)
+
+[node name="Homunculus" parent="." instance=ExtResource("7_4bxdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)

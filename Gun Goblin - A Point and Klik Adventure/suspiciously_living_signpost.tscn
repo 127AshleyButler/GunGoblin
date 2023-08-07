@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dji6gihrusyb5"]
+
+[ext_resource type="PackedScene" uid="uid://dmc8dm0ukmpf0" path="res://signpost.tscn" id="1_3gox2"]
+
+[node name="Node3D" instance=ExtResource("1_3gox2")]

@@ -14,14 +14,3 @@ func _process(delta):
 		var direction = (Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		look_at(global_transform.origin + direction, Vector3.UP, true)
 	else: anim.play("idle")
-	
-func _getWASD():
-	if Input.is_action_pressed("move_down"):
-		return true;
-	if Input.is_action_pressed("move_left"):
-		return true;
-	if Input.is_action_pressed("move_right"):
-		return true;
-	if Input.is_action_pressed("move_up"):
-		return true;
-	return false;
