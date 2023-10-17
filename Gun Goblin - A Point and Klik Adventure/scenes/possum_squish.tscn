@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dd8llx4apjbp1"]
 
-[ext_resource type="PackedScene" uid="uid://dhbxeigq3teyd" path="res://possum_squish.glb" id="1_72t4c"]
-[ext_resource type="Script" path="res://possum_squish.gd" id="2_qi03b"]
+[ext_resource type="PackedScene" uid="uid://dhbxeigq3teyd" path="res://models/possum_squish.glb" id="1_72t4c"]
+[ext_resource type="Script" path="res://scripts/possum_squish.gd" id="2_qi03b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vq7vo"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkyghxdar0ydp"]
 
-[ext_resource type="PackedScene" uid="uid://boaaelfskr0u7" path="res://possum.glb" id="1_y2my2"]
+[ext_resource type="PackedScene" uid="uid://boaaelfskr0u7" path="res://models/possum.glb" id="1_y2my2"]
 [ext_resource type="FontFile" uid="uid://7vnujxtk6osx" path="res://textures/Pokemon Kiddy Ding.ttf" id="2_r1bu0"]
 
 [node name="NPC" type="Node3D"]

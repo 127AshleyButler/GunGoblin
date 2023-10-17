@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://boaaelfskr0u7"
-path="res://.godot/imported/possum.glb-d23822e25f6aca46fe37a272ee58d95c.scn"
+uid="uid://0eqdv2fa356s"
+path="res://.godot/imported/signpost.glb-477e10fa5424f515832e3deb0fc51567.scn"
 
 [deps]
 
-source_file="res://possum.glb"
-dest_files=["res://.godot/imported/possum.glb-d23822e25f6aca46fe37a272ee58d95c.scn"]
+source_file="res://models/signpost.glb"
+dest_files=["res://.godot/imported/signpost.glb-477e10fa5424f515832e3deb0fc51567.scn"]
 
 [params]
 

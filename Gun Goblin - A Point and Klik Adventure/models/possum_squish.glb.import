@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dhbxeigq3teyd"
-path="res://.godot/imported/possum_squish.glb-4c1d95ec547119f88dc134c5bb0a9389.scn"
+path="res://.godot/imported/possum_squish.glb-8f81766ab74114431270193873cfd91c.scn"
 
 [deps]
 
-source_file="res://possum_squish.glb"
-dest_files=["res://.godot/imported/possum_squish.glb-4c1d95ec547119f88dc134c5bb0a9389.scn"]
+source_file="res://models/possum_squish.glb"
+dest_files=["res://.godot/imported/possum_squish.glb-8f81766ab74114431270193873cfd91c.scn"]
 
 [params]
 

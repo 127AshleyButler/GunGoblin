@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Gun Goblin - A Point and Klik Adventure"
-run/main_scene="res://csg_playground.tscn"
+run/main_scene="res://scenes/csg_playground.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://klikfuckinggetsyou.png"
+config/icon="res://klikfuckinggetsyou.png"
 
 [display]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://doe41vrnlimh3"]
 
-[ext_resource type="PackedScene" uid="uid://826b4fbeh616" path="res://klik.tscn" id="1_wnfyv"]
-[ext_resource type="Script" path="res://homunculus.gd" id="2_310s5"]
+[ext_resource type="PackedScene" uid="uid://826b4fbeh616" path="res://scenes/klik.tscn" id="1_wnfyv"]
+[ext_resource type="Script" path="res://scripts/homunculus.gd" id="2_310s5"]
 
 [node name="Homunculus" instance=ExtResource("1_wnfyv")]
 script = ExtResource("2_310s5")

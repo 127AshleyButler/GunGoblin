@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1mbxlop6iugm"]
 
-[ext_resource type="PackedScene" uid="uid://bswnvppeuwcxh" path="res://klik.glb" id="1_fvpbi"]
-[ext_resource type="Script" path="res://klik_model.gd" id="2_u5tl0"]
+[ext_resource type="PackedScene" uid="uid://bswnvppeuwcxh" path="res://models/klik.glb" id="1_fvpbi"]
+[ext_resource type="Script" path="res://scripts/klik_model.gd" id="2_u5tl0"]
 
 [node name="klik" instance=ExtResource("1_fvpbi")]
 script = ExtResource("2_u5tl0")

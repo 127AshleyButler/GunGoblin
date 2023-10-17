@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://826b4fbeh616"]
 
-[ext_resource type="Script" path="res://klik.gd" id="1_lxo7v"]
-[ext_resource type="PackedScene" uid="uid://c1mbxlop6iugm" path="res://klik_model.tscn" id="2_loyio"]
+[ext_resource type="Script" path="res://scripts/klik.gd" id="1_lxo7v"]
+[ext_resource type="PackedScene" uid="uid://c1mbxlop6iugm" path="res://scenes/klik_model.tscn" id="2_loyio"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6sti"]
 
