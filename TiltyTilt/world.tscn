@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgwrj75qsmtis"]
+
+[ext_resource type="PackedScene" uid="uid://cvvpp4ei3x0ww" path="res://player.tscn" id="1_416l1"]
+[ext_resource type="PackedScene" uid="uid://chesybi136l1o" path="res://platform.tscn" id="2_qp15a"]
+
+[node name="world" type="Node3D"]
+
+[node name="RigidBody3D" parent="." instance=ExtResource("1_416l1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="AnimatableBody3D" parent="." instance=ExtResource("2_qp15a")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94886, 0.315699, 0, -0.315699, 0.94886, 0, 2.89318, 5.64505)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0156026, 0.999878, 0, -0.999878, -0.0156026, 6.60993, 3.66285, -2.86579)
