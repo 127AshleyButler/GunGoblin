@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjvvn6b2b36t0"]
+
+[ext_resource type="PackedScene" uid="uid://bdyrfu78j5nwk" path="res://models/ponk/ponk.glb" id="1_yti6b"]
+[ext_resource type="Script" path="res://scripts/ponk.gd" id="2_3vuxe"]
+
+[node name="ponk" instance=ExtResource("1_yti6b")]
+script = ExtResource("2_3vuxe")
+
+[node name="Skeleton3D" parent="base" index="0"]
+bones/0/position = Vector3(0.000386937, -1.03195, 0.00038273)
+bones/0/rotation = Quaternion(-0.00609594, 0.0481112, 0.00446692, 0.998813)
+bones/1/rotation = Quaternion(0.0816179, -0.00367043, -0.0447753, 0.995651)
+bones/2/position = Vector3(0.144281, 0.527267, 1.03678)
+bones/2/rotation = Quaternion(0.894442, -0.112718, -0.0424742, 0.430656)
+bones/3/position = Vector3(-1.03794, 0.590246, 0.596676)
+bones/3/rotation = Quaternion(0.885042, -0.27138, 0.0693407, 0.371815)
+bones/4/rotation = Quaternion(0.0524346, 0.00269335, -0.0537281, 0.997174)
+bones/5/rotation = Quaternion(0.0858827, -0.0355421, 0.0907256, 0.991529)
+bones/6/rotation = Quaternion(0.024697, -0.0397225, 0.153451, 0.987049)
+bones/7/rotation = Quaternion(0.258006, 0.00712258, 0.0769195, 0.96305)
+bones/8/rotation = Quaternion(0.281904, -0.0328801, -0.192241, 0.939411)
+bones/9/position = Vector3(0.231249, 0.849717, 1.13727)
+bones/9/rotation = Quaternion(0.264365, 0.0952909, -0.186581, 0.941392)
+bones/10/position = Vector3(-0.999628, 0.890999, 0.191374)
+bones/10/rotation = Quaternion(0.199763, -0.317152, 0.355077, 0.856405)
+
+[node name="AnimationPlayer" parent="." index="1"]
+reset_on_save = false
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

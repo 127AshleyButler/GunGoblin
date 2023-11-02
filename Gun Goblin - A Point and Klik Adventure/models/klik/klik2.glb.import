@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bquw0kcc104j"
-path="res://.godot/imported/klik2.glb-c1fc0079fc4a7d0e21c98dfe97e87598.scn"
+path="res://.godot/imported/klik2.glb-de8122d82a9c49414f38f7bd712ea0ed.scn"
 
 [deps]
 
-source_file="res://klik/klik2.glb"
-dest_files=["res://.godot/imported/klik2.glb-c1fc0079fc4a7d0e21c98dfe97e87598.scn"]
+source_file="res://models/klik/klik2.glb"
+dest_files=["res://.godot/imported/klik2.glb-de8122d82a9c49414f38f7bd712ea0ed.scn"]
 
 [params]
 

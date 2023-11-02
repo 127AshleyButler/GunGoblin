@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blwhch8d0pvuv"
-path.s3tc="res://.godot/imported/klik2_guntexture.png-97a68a4c2ddd5beac8c85600792dc1b8.s3tc.ctex"
+path.s3tc="res://.godot/imported/klik2_guntexture.png-f1041064a1c918bd4a5c1d1fb056e83d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://klik/klik2_guntexture.png"
-dest_files=["res://.godot/imported/klik2_guntexture.png-97a68a4c2ddd5beac8c85600792dc1b8.s3tc.ctex"]
+source_file="res://models/klik/klik2_guntexture.png"
+dest_files=["res://.godot/imported/klik2_guntexture.png-f1041064a1c918bd4a5c1d1fb056e83d.s3tc.ctex"]
 
 [params]
 

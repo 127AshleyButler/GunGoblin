@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caapnd51ak6vh"
-path.s3tc="res://.godot/imported/signpost_SignpostTexture.png-d1099827f26ea67408e2468c39a45e83.s3tc.ctex"
+uid="uid://bqcskgsbh13mv"
+path.s3tc="res://.godot/imported/klik2_000.png-7e44deff31779441dc8d3576cd2aac3e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://signpost_SignpostTexture.png"
-dest_files=["res://.godot/imported/signpost_SignpostTexture.png-d1099827f26ea67408e2468c39a45e83.s3tc.ctex"]
+source_file="res://models/klik/klik2_000.png"
+dest_files=["res://.godot/imported/klik2_000.png-7e44deff31779441dc8d3576cd2aac3e.s3tc.ctex"]
 
 [params]
 

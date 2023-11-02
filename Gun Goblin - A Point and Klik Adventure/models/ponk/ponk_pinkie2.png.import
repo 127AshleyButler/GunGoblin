@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqcskgsbh13mv"
-path.s3tc="res://.godot/imported/klik2_000.png-1fb564abd9b795687beec0ca72088403.s3tc.ctex"
+uid="uid://bxrwn3ax3thmp"
+path.s3tc="res://.godot/imported/ponk_pinkie2.png-d38e2b9ad44410b211bf791aa189a189.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://klik/klik2_000.png"
-dest_files=["res://.godot/imported/klik2_000.png-1fb564abd9b795687beec0ca72088403.s3tc.ctex"]
+source_file="res://models/ponk/ponk_pinkie2.png"
+dest_files=["res://.godot/imported/ponk_pinkie2.png-d38e2b9ad44410b211bf791aa189a189.s3tc.ctex"]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1bne4pdkgsa4"
-path.s3tc="res://.godot/imported/klik2_001.png-2f4339e86627f6dbb91afb988dda3c75.s3tc.ctex"
+uid="uid://bpmfqoqsm7neh"
+path.s3tc="res://.godot/imported/klik2_kliktexture.png-52bda652a5d3ba20072eec001d1a2593.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://klik/klik2_001.png"
-dest_files=["res://.godot/imported/klik2_001.png-2f4339e86627f6dbb91afb988dda3c75.s3tc.ctex"]
+source_file="res://models/klik/klik2_kliktexture.png"
+dest_files=["res://.godot/imported/klik2_kliktexture.png-52bda652a5d3ba20072eec001d1a2593.s3tc.ctex"]
 
 [params]
 
