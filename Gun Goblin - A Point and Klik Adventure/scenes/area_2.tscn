@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ejoo308fapmo"]
+[gd_scene load_steps=4 format=3 uid="uid://ejoo308fapmo"]
 
 [ext_resource type="PackedScene" uid="uid://r74a1hmekkco" path="res://models/quickplat.glb" id="1_6ixt0"]
 [ext_resource type="PackedScene" uid="uid://cu1q4fnn2ggt5" path="res://scenes/klik_2.tscn" id="2_5fjog"]
+[ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://garf/garf.glb" id="3_3uyti"]
 
 [node name="area2" type="Node3D"]
 
@@ -12,3 +13,6 @@ transform = Transform3D(2.42579, 0, 0, 0, 1, 0, 0, 0, 2.51259, -1.30292, -1.1246
 transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0, 20, 29)
 
 [node name="klik" parent="." instance=ExtResource("2_5fjog")]
+
+[node name="garf" parent="." instance=ExtResource("3_3uyti")]
+transform = Transform3D(1.44275, 0, 0, 0, 1.44275, 0, 0, 0, 1.44275, -11.1345, 20.1357, -38.5561)
