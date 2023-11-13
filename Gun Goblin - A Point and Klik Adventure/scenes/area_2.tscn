@@ -1,18 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://ejoo308fapmo"]
 
-[ext_resource type="PackedScene" uid="uid://r74a1hmekkco" path="res://models/quickplat.glb" id="1_6ixt0"]
-[ext_resource type="PackedScene" uid="uid://cu1q4fnn2ggt5" path="res://scenes/klik_2.tscn" id="2_5fjog"]
-[ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://garf/garf.glb" id="3_3uyti"]
+[ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="3_3uyti"]
+[ext_resource type="PackedScene" uid="uid://bop313lkmdrti" path="res://scenes/levels/quickplat.tscn" id="3_u4unq"]
+[ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="4_2gsbk"]
 
 [node name="area2" type="Node3D"]
 
-[node name="quickplat" parent="." instance=ExtResource("1_6ixt0")]
-transform = Transform3D(2.42579, 0, 0, 0, 1, 0, 0, 0, 2.51259, -1.30292, -1.12463, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0, 20, 29)
-
-[node name="klik" parent="." instance=ExtResource("2_5fjog")]
+transform = Transform3D(1, 0, 0, 0, 0.831557, -0.555439, 0, 0.555439, 0.831557, 0, 20, 29)
 
 [node name="garf" parent="." instance=ExtResource("3_3uyti")]
 transform = Transform3D(1.44275, 0, 0, 0, 1.44275, 0, 0, 0, 1.44275, -11.1345, 20.1357, -38.5561)
+
+[node name="klik" parent="." instance=ExtResource("4_2gsbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 10.3592)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 13.9583, 35.184, 107.827)
+
+[node name="quickplat" parent="." instance=ExtResource("3_u4unq")]
+transform = Transform3D(2.426, 0, 0, 0, 1, 0, 0, 0, 2.513, -1.30292, -1.12463, 0)

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bop313lkmdrti"]
+
+[ext_resource type="PackedScene" uid="uid://r74a1hmekkco" path="res://models/quickplat.glb" id="1_v4p0s"]
+
+[node name="quickplat" instance=ExtResource("1_v4p0s")]

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lcs6nf0srjge"
-path.s3tc="res://.godot/imported/garf_frame_8_delay-0.png-a08c731ebb1e15d29b1b3e76bdb4e8a2.s3tc.ctex"
+uid="uid://dmab8d30ako37"
+path.s3tc="res://.godot/imported/garf_frame_4_delay-0.png-d015e382c6eae1d6a1f6778d6c834288.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://garf/garf_frame_8_delay-0.png"
-dest_files=["res://.godot/imported/garf_frame_8_delay-0.png-a08c731ebb1e15d29b1b3e76bdb4e8a2.s3tc.ctex"]
+source_file="res://models/garf/garf_frame_4_delay-0.png"
+dest_files=["res://.godot/imported/garf_frame_4_delay-0.png-d015e382c6eae1d6a1f6778d6c834288.s3tc.ctex"]
 
 [params]
 

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bprcdpt2010gc"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_xf6t8"]
+[ext_resource type="Texture2D" uid="uid://djp1sj3aqkbeh" path="res://textures/barHorizontal_green_mid 200.png" id="2_cf20w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_adfl2"]
+radius = 1.40036
+height = 3.32603
+
+[node name="character" type="CharacterBody3D"]
+script = ExtResource("1_xf6t8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_adfl2")
+
+[node name="WallClingRight" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="WallClingLeft" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="HealthBar" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04233, 0)
+billboard = 1
+texture = ExtResource("2_cf20w")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+size = Vector2i(105, 26)
+
+[node name="HealthBar" type="ProgressBar" parent="HealthBar/SubViewport"]
+offset_right = 119.0
+offset_bottom = 31.0

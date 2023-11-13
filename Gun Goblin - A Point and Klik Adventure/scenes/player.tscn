@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://hm1s6dk7ysb"]
+
+[ext_resource type="PackedScene" uid="uid://bprcdpt2010gc" path="res://scenes/character.tscn" id="1_72l12"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_26kwa"]
+[ext_resource type="PackedScene" uid="uid://bquw0kcc104j" path="res://models/klik/klik2.glb" id="3_pivkp"]
+
+[node name="player" instance=ExtResource("1_72l12")]
+axis_lock_linear_z = true
+floor_constant_speed = true
+safe_margin = 0.01
+script = ExtResource("2_26kwa")
+player_num = 1
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.40619, 0)
+
+[node name="klik2" parent="." index="4" instance=ExtResource("3_pivkp")]

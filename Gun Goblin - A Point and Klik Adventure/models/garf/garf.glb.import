@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ba6gpn31vwps6"
-path="res://.godot/imported/garf.glb-4606601a8bc6a204171af513b073a002.scn"
+path="res://.godot/imported/garf.glb-2a366b1e546fcecd4eda45f696c554fc.scn"
 
 [deps]
 
-source_file="res://garf/garf.glb"
-dest_files=["res://.godot/imported/garf.glb-4606601a8bc6a204171af513b073a002.scn"]
+source_file="res://models/garf/garf.glb"
+dest_files=["res://.godot/imported/garf.glb-2a366b1e546fcecd4eda45f696c554fc.scn"]
 
 [params]
 
