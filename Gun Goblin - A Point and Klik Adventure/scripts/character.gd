@@ -10,9 +10,9 @@ signal die
 const SPEED = 20.0
 const JUMP_VELOCITY = 30.0
 const JUMP_GRACE_PERIOD = 0.2 # Time in seconds to allow character to jump right after they slip off a ledge
-const WALL_SLIDE_VELOCITY = 50.0 # Speed in which the player moves down when sliding on walls
-const HIGH_GRAVITY_MODIFIER = 4.0 # How fast the player falls when they are not holding jump
-const LOW_GRAVITY_MODIFIER = 2.0 # How much to multiply the gravity by when the player holds the jump key
+const WALL_SLIDE_VELOCITY = 15.0 # Speed in which the player moves down when sliding on walls
+const HIGH_GRAVITY_MODIFIER = 10.0 # How fast the player falls when they are not holding jump
+const LOW_GRAVITY_MODIFIER = 4.5 # How much to multiply the gravity by when the player holds the jump key
 const NO_TEAM = "NO_TEAM"
 
 var air_time = 0 # Time in seconds character is airborne

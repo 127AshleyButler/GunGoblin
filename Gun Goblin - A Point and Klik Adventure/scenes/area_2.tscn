@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ejoo308fapmo"]
+[gd_scene load_steps=8 format=3 uid="uid://ejoo308fapmo"]
 
 [ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="3_3uyti"]
 [ext_resource type="PackedScene" uid="uid://bop313lkmdrti" path="res://scenes/levels/quickplat.tscn" id="3_u4unq"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="4_2gsbk"]
+[ext_resource type="Texture2D" uid="uid://db4ix5a2nr6oo" path="res://textures/sidewalk_birthday_tragedy_part1.jpg" id="4_dn34m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luw7f"]
+albedo_texture = ExtResource("4_dn34m")
+uv1_scale = Vector3(5.71, 5.71, 5.71)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d4ejj"]
+material = SubResource("StandardMaterial3D_luw7f")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5kw3"]
 
 [node name="area2" type="Node3D"]
 
@@ -16,7 +26,17 @@ transform = Transform3D(1.44275, 0, 0, 0, 1.44275, 0, 0, 0, 1.44275, -11.1345, 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 10.3592)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 13.9583, 35.184, 107.827)
+transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 14.218, 48.129, 28.297)
 
 [node name="quickplat" parent="." instance=ExtResource("3_u4unq")]
 transform = Transform3D(2.426, 0, 0, 0, 1, 0, 0, 0, 2.513, -1.30292, -1.12463, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(99.435, 0, 0, 0, 99.435, 0, 0, 0, 99.435, 0, -19.1928, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_d4ejj")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_y5kw3")

@@ -2,10 +2,13 @@ extends "character.gd"
 
 @export var player_num = 1
 
+var facing = -1 # The direction the player is facing
+var current_animation = "idle_l"
 
 func _ready():
 	health = 100
 	super._ready()
+	$AnimatedSprite3D.play("idle_l")
 
 func _physics_process(delta):
 	# Handle debug inputs
@@ -28,7 +31,12 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
+		facing = direction
 		#$AnimatedSprite2D.play("default")
+#		if (direction == -1):
+#			$AnimationPlayer.play("run_l")
+#		else:
+#			$AnimationPlayer.play("run_r")
 		velocity.x = direction * SPEED
 	else:
 		#$AnimatedSprite2D.stop()
@@ -36,4 +44,14 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	update_animation_parameters()
+	
+func update_animation_parameters():
+	$AnimationTree["parameters/idle/blend_position"] = facing
+	$AnimationTree["parameters/run/blend_position"] = facing
+	$AnimationTree["parameters/rise/blend_position"] = facing
+	$AnimationTree["parameters/fall/blend_position"] = facing
+
+	$AnimationTree["parameters/conditions/idle"] = (velocity == Vector3.ZERO)
+
 	
