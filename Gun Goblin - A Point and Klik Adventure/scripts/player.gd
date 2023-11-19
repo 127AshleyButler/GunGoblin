@@ -4,6 +4,7 @@ extends "character.gd"
 
 var facing = -1 # The direction the player is facing
 var current_animation = "idle_l"
+var canShoot = true
 
 func _ready():
 	health = 100
@@ -16,7 +17,19 @@ func _physics_process(delta):
 		print("[DEBUG] Reloaded scene!")
 		get_tree().reload_current_scene()
 	
-	super._physics_process(delta)
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		air_time += delta
+	else:
+		air_time = 0
+		canShoot = true
+
+	# Handle Wall Sliding
+	if is_touching_wall():
+		# Wall Slide
+		if velocity.y > 0:
+			velocity.y = WALL_SLIDE_VELOCITY
+
 	# Lessen the gravity if jump is held
 	if Input.is_action_pressed("jump"):
 		gravity = world_gravity * LOW_GRAVITY_MODIFIER
@@ -27,6 +40,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump"):
 		handle_jump()
 	
+	if Input.is_action_just_pressed("shoot"):
+		handle_shoot()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -58,4 +73,8 @@ func update_animation_parameters():
 	$AnimationTree["parameters/conditions/holding_down"] = Input.is_action_pressed("move_down")
 	$AnimationTree["parameters/conditions/not_holding_down"] = !Input.is_action_pressed("move_down")
 
+func handle_shoot():
+	if canShoot:
+		canShoot = false
+		velocity.y += WALL_SLIDE_VELOCITY
 	

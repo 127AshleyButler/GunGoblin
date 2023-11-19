@@ -510,8 +510,8 @@ albedo_color = Color(1, 1, 1, 0.772549)
 [sub_resource type="SphereMesh" id="SphereMesh_e8qtx"]
 material = SubResource("StandardMaterial3D_vk0nv")
 
-[sub_resource type="Animation" id="Animation_k8bal"]
-resource_name = "run_l"
+[sub_resource type="Animation" id="Animation_ih1bx"]
+resource_name = "fall_l"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -522,7 +522,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"run_l"]
+"values": [&"fall_l"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -534,11 +534,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_tl1wm"]
-resource_name = "run_r"
+[sub_resource type="Animation" id="Animation_iwsax"]
+resource_name = "fall_r"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -549,7 +549,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"run_r"]
+"values": [&"fall_r"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -561,7 +561,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_w5pgu"]
@@ -672,8 +672,8 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_ih1bx"]
-resource_name = "fall_l"
+[sub_resource type="Animation" id="Animation_k8bal"]
+resource_name = "run_l"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -684,7 +684,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"fall_l"]
+"values": [&"run_l"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -696,11 +696,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_iwsax"]
-resource_name = "fall_r"
+[sub_resource type="Animation" id="Animation_tl1wm"]
+resource_name = "run_r"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -711,7 +711,34 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"fall_r"]
+"values": [&"run_r"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cd0oq"]
+resource_name = "sit_l"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"sit_l"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -725,6 +752,61 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "scale_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite3D")
+tracks/2/interp = 2
+tracks/2/loop_wrap = false
+tracks/2/keys = PackedFloat32Array(0, 1, 1.5, 0.5, 1, 0.2, 1, 0.8, 1.305, 1, 0.3, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 2
+tracks/3/loop_wrap = false
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_mq32d"]
+resource_name = "sit_r"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"sit_r"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "scale_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite3D")
+tracks/2/interp = 2
+tracks/2/loop_wrap = false
+tracks/2/keys = PackedFloat32Array(0, 1, 1.5, 0.5, 1, 0.2, 1, 0.8, 1.305, 1, 0.3, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 2
+tracks/3/loop_wrap = false
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_rmiax"]
 resource_name = "skid_l"
@@ -779,88 +861,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-
-[sub_resource type="Animation" id="Animation_mq32d"]
-resource_name = "sit_r"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"sit_r"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("particles/dust:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "scale_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite3D")
-tracks/2/interp = 2
-tracks/2/loop_wrap = false
-tracks/2/keys = PackedFloat32Array(0, 1, 1.5, 0.5, 1, 0.2, 1, 0.8, 1.305, 1, 0.3, 1, 1, 1, 1)
-tracks/3/type = "position_3d"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("AnimatedSprite3D")
-tracks/3/interp = 2
-tracks/3/loop_wrap = false
-tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_cd0oq"]
-resource_name = "sit_l"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"sit_l"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("particles/dust:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "scale_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite3D")
-tracks/2/interp = 2
-tracks/2/loop_wrap = false
-tracks/2/keys = PackedFloat32Array(0, 1, 1.5, 0.5, 1, 0.2, 1, 0.8, 1.305, 1, 0.3, 1, 1, 1, 1)
-tracks/3/type = "position_3d"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("AnimatedSprite3D")
-tracks/3/interp = 2
-tracks/3/loop_wrap = false
-tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ffujm"]
 _data = {
@@ -1037,16 +1037,17 @@ script = ExtResource("2_26kwa")
 player_num = 1
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022675, -1.20428, 0.0530386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022675, 2.47001, 0.0530386)
 
 [node name="HealthBar" parent="." index="3"]
-transform = Transform3D(4.26994, 0, 0, 0, 4.26994, 0, 0, 0, 4.26994, 0, 4.39437, 0)
+transform = Transform3D(4.26994, 0, 0, 0, 4.26994, 0, 0, 0, 4.26994, 0, 9.62632, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="4"]
+offset = Vector2(0, 100)
 pixel_size = 0.04
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_douo7")
-animation = &"sit_r"
+animation = &"meteor_up"
 
 [node name="SFX" type="Node3D" parent="." index="5"]
 
