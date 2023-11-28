@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://hm1s6dk7ysb"]
+[gd_scene load_steps=140 format=3 uid="uid://hm1s6dk7ysb"]
 
 [ext_resource type="PackedScene" uid="uid://bprcdpt2010gc" path="res://scenes/character.tscn" id="1_72l12"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_26kwa"]
@@ -66,7 +66,13 @@
 [ext_resource type="Texture2D" uid="uid://45yvgss7yxb7" path="res://textures/klik/walljump_l.png" id="65_5t3gj"]
 [ext_resource type="Texture2D" uid="uid://dk47ncuheuve3" path="res://textures/klik/walljump_r.png" id="66_faip5"]
 [ext_resource type="Texture2D" uid="uid://cobb33xlxmo4v" path="res://textures/klik/wallslide_l.png" id="67_k0fuj"]
+[ext_resource type="AudioStream" uid="uid://sdvcd0soavxr" path="res://sounds/SFX/steps.wav" id="68_7jsqm"]
+[ext_resource type="AudioStream" uid="uid://mmj14io8g06n" path="res://sounds/SFX/jump.wav" id="68_c08yi"]
 [ext_resource type="Texture2D" uid="uid://ci7esapmhydpx" path="res://textures/klik/wallslide_r.png" id="68_hbtg3"]
+[ext_resource type="AudioStream" uid="uid://c1om80xfgyk4s" path="res://sounds/SFX/lowpop.wav" id="69_18di1"]
+[ext_resource type="AudioStream" uid="uid://c78rfcaqnflde" path="res://sounds/SFX/93757__toyoto__wooshs-01.wav" id="69_ppsor"]
+[ext_resource type="AudioStream" uid="uid://cq8x5jcydpsno" path="res://sounds/SFX/highpop.wav" id="70_t4f0b"]
+[ext_resource type="AudioStream" uid="uid://8on28l3mwiec" path="res://sounds/SFX/93757__toyoto__wooshs-02.wav" id="70_xamc0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_douo7"]
 animations = [{
@@ -490,6 +496,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kg4b"]
+streams_count = 1
+random_pitch = 1.31
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("68_c08yi")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4f1i0"]
+streams_count = 2
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("69_ppsor")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("70_xamc0")
+stream_1/weight = 1.0
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_and3h"]
 lifetime_randomness = 0.19
 direction = Vector3(0, 1, 0)
@@ -510,6 +531,40 @@ albedo_color = Color(1, 1, 1, 0.772549)
 [sub_resource type="SphereMesh" id="SphereMesh_e8qtx"]
 material = SubResource("StandardMaterial3D_vk0nv")
 
+[sub_resource type="Animation" id="Animation_3430u"]
+resource_name = "dive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SFX/dive:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.00306414),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"longjump"]
+}
+tracks/2/type = "scale_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0.00102138, 1, 1.185, 0.885, 1, 0.0367697, 1, 1, 1, 1)
+
 [sub_resource type="Animation" id="Animation_ih1bx"]
 resource_name = "fall_l"
 tracks/0/type = "value"
@@ -526,7 +581,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("particles/dust:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -563,6 +618,106 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+
+[sub_resource type="Animation" id="Animation_uu2tg"]
+resource_name = "flip_l"
+length = 0.411
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"flip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 0.8, 1, 0.1, 1, 0.95, 1, 1, 0.2, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_by3qb"]
+resource_name = "flip_r"
+length = 0.411
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"flip"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 0.8, 1, 0.1, 1, 0.95, 1, 1, 0.2, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_w5pgu"]
 resource_name = "idle_l"
@@ -617,6 +772,158 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+
+[sub_resource type="Animation" id="Animation_50t4q"]
+resource_name = "meteor_down"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"meteor_down"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.1, 1, 0.95, 1, 1, 0.2, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_p7bce"]
+resource_name = "meteor_land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"meteor_land"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 0.8, 1, 0.1, 1, 0.95, 1, 1, 0.2, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_76cvk"]
+resource_name = "meteor_up"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"meteor_up"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles/dust:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.1, 1, 0.95, 1, 1, 0.2, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_rmfwg"]
 resource_name = "rise_l"
@@ -674,6 +981,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_k8bal"]
 resource_name = "run_l"
+length = 2.95
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -698,9 +1007,26 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_tl1wm"]
 resource_name = "run_r"
+length = 2.95
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -725,6 +1051,47 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SFX/footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("68_7jsqm")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_fmq1a"]
+resource_name = "sit_end"
+length = 0.0395
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SFX/sit_end")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("70_t4f0b")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "scale_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.00102138, 1, 1.115, 0.8, 1, 0.037791, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_cd0oq"]
 resource_name = "sit_l"
@@ -766,6 +1133,21 @@ tracks/3/path = NodePath("AnimatedSprite3D")
 tracks/3/interp = 2
 tracks/3/loop_wrap = false
 tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SFX/sit")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("69_18di1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_mq32d"]
 resource_name = "sit_r"
@@ -807,6 +1189,21 @@ tracks/3/path = NodePath("AnimatedSprite3D")
 tracks/3/interp = 2
 tracks/3/loop_wrap = false
 tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, 0.4, 1, 0, 0, 0)
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SFX/sit")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("69_18di1")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_rmiax"]
 resource_name = "skid_l"
@@ -864,19 +1261,29 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ffujm"]
 _data = {
+"dive": SubResource("Animation_3430u"),
 "fall_l": SubResource("Animation_ih1bx"),
 "fall_r": SubResource("Animation_iwsax"),
+"flip_l": SubResource("Animation_uu2tg"),
+"flip_r": SubResource("Animation_by3qb"),
 "idle_l": SubResource("Animation_w5pgu"),
 "idle_r": SubResource("Animation_s38jv"),
+"meteor_down": SubResource("Animation_50t4q"),
+"meteor_land": SubResource("Animation_p7bce"),
+"meteor_up": SubResource("Animation_76cvk"),
 "rise_l": SubResource("Animation_rmfwg"),
 "rise_r": SubResource("Animation_twifh"),
 "run_l": SubResource("Animation_k8bal"),
 "run_r": SubResource("Animation_tl1wm"),
+"sit_end": SubResource("Animation_fmq1a"),
 "sit_l": SubResource("Animation_cd0oq"),
 "sit_r": SubResource("Animation_mq32d"),
 "skid_l": SubResource("Animation_rmiax"),
 "skid_r": SubResource("Animation_ylk8t")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_72apg"]
+animation = &"dive"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_augwu"]
 animation = &"fall_l"
@@ -903,6 +1310,15 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_hp0xf")
 blend_point_1/pos = 1.0
 blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_38vun"]
+animation = &"meteor_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u0whu"]
+animation = &"meteor_land"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l11ud"]
+animation = &"meteor_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8a3dq"]
 animation = &"rise_l"
@@ -942,6 +1358,9 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_b0kor")
 blend_point_1/pos = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_586ld"]
+animation = &"sit_end"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mswkr"]
 animation = &"skid_l"
 
@@ -957,7 +1376,6 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jsrb1"]
 advance_mode = 2
-advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cyrro"]
 advance_mode = 2
@@ -985,7 +1403,7 @@ advance_expression = "velocity.y<0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q5643"]
 advance_mode = 2
-advance_expression = "velocity.y==0"
+advance_expression = "is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mw62"]
 advance_mode = 2
@@ -1003,41 +1421,68 @@ advance_condition = &"holding_down"
 advance_mode = 2
 advance_expression = "velocity.y == 0"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lnskr"]
-advance_mode = 2
-advance_condition = &"not_holding_down"
-advance_expression = "!velocity"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_45b2s"]
 advance_mode = 2
 advance_expression = "velocity"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4c2ba"]
+advance_mode = 2
+advance_expression = "Input.is_action_pressed(\"dive\")"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i5nk5"]
+advance_mode = 2
+advance_condition = &"not_holding_down"
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_74ck8"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j125w"]
 states/Start/position = Vector2(73.3333, 72)
+states/dive/node = SubResource("AnimationNodeAnimation_72apg")
+states/dive/position = Vector2(644.333, -49.6667)
 states/fall/node = SubResource("AnimationNodeBlendSpace1D_yo4qf")
 states/fall/position = Vector2(485.333, 230)
 states/idle/node = SubResource("AnimationNodeBlendSpace1D_d27tf")
 states/idle/position = Vector2(276, 77.5556)
+states/meteor_down/node = SubResource("AnimationNodeAnimation_38vun")
+states/meteor_down/position = Vector2(609, -153)
+states/meteor_land/node = SubResource("AnimationNodeAnimation_u0whu")
+states/meteor_land/position = Vector2(266.333, -75.6667)
+states/meteor_up/node = SubResource("AnimationNodeAnimation_l11ud")
+states/meteor_up/position = Vector2(413, -165.444)
 states/rise/node = SubResource("AnimationNodeBlendSpace1D_hyimg")
 states/rise/position = Vector2(694.667, 167.333)
 states/run/node = SubResource("AnimationNodeBlendSpace1D_7t6yw")
 states/run/position = Vector2(518.667, 26)
 states/sit/node = SubResource("AnimationNodeBlendSpace1D_r8qak")
-states/sit/position = Vector2(257.333, 215.333)
+states/sit/position = Vector2(204, 263.333)
+states/sit_end/node = SubResource("AnimationNodeAnimation_586ld")
+states/sit_end/position = Vector2(88.3333, 177.667)
 states/skid/node = SubResource("AnimationNodeBlendSpace1D_2c417")
 states/skid/position = Vector2(814.667, 46)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jsrb1"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cyrro"), "run", "rise", SubResource("AnimationNodeStateMachineTransition_ef6t7"), "rise", "fall", SubResource("AnimationNodeStateMachineTransition_x4oaw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_ugmj0"), "idle", "rise", SubResource("AnimationNodeStateMachineTransition_6ecqo"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_82e14"), "rise", "run", SubResource("AnimationNodeStateMachineTransition_q5643"), "fall", "rise", SubResource("AnimationNodeStateMachineTransition_7mw62"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_f76lv"), "idle", "sit", SubResource("AnimationNodeStateMachineTransition_3bgai"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_3t10r"), "sit", "idle", SubResource("AnimationNodeStateMachineTransition_lnskr"), "sit", "run", SubResource("AnimationNodeStateMachineTransition_45b2s")]
-graph_offset = Vector2(33, -8)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jsrb1"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cyrro"), "run", "rise", SubResource("AnimationNodeStateMachineTransition_ef6t7"), "rise", "fall", SubResource("AnimationNodeStateMachineTransition_x4oaw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_ugmj0"), "idle", "rise", SubResource("AnimationNodeStateMachineTransition_6ecqo"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_82e14"), "rise", "run", SubResource("AnimationNodeStateMachineTransition_q5643"), "fall", "rise", SubResource("AnimationNodeStateMachineTransition_7mw62"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_f76lv"), "idle", "sit", SubResource("AnimationNodeStateMachineTransition_3bgai"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_3t10r"), "sit", "run", SubResource("AnimationNodeStateMachineTransition_45b2s"), "idle", "meteor_land", SubResource("AnimationNodeStateMachineTransition_4c2ba"), "sit", "sit_end", SubResource("AnimationNodeStateMachineTransition_i5nk5"), "sit_end", "idle", SubResource("AnimationNodeStateMachineTransition_74ck8")]
+graph_offset = Vector2(-53, -83)
 
 [node name="player" instance=ExtResource("1_72l12")]
 axis_lock_linear_z = true
 floor_constant_speed = true
+floor_max_angle = 1.0472
 safe_margin = 0.01
 script = ExtResource("2_26kwa")
 player_num = 1
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022675, 2.47001, 0.0530386)
+
+[node name="WallClingRight" parent="." index="1"]
+target_position = Vector3(0, 0, 2)
+collide_with_areas = true
+
+[node name="WallClingLeft" parent="." index="2"]
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
 
 [node name="HealthBar" parent="." index="3"]
 transform = Transform3D(4.26994, 0, 0, 0, 4.26994, 0, 0, 0, 4.26994, 0, 9.62632, 0)
@@ -1047,11 +1492,29 @@ offset = Vector2(0, 100)
 pixel_size = 0.04
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_douo7")
-animation = &"meteor_up"
+animation = &"idle_r"
 
 [node name="SFX" type="Node3D" parent="." index="5"]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SFX" index="0"]
+[node name="footsteps" type="AudioStreamPlayer3D" parent="SFX" index="0"]
+volume_db = -10.0
+pitch_scale = 1.5
+doppler_tracking = 2
+
+[node name="jump" type="AudioStreamPlayer3D" parent="SFX" index="1"]
+stream = SubResource("AudioStreamRandomizer_1kg4b")
+volume_db = -10.0
+pitch_scale = 2.3
+
+[node name="sit" type="AudioStreamPlayer3D" parent="SFX" index="2"]
+volume_db = -10.0
+
+[node name="sit_end" type="AudioStreamPlayer3D" parent="SFX" index="3"]
+volume_db = -10.0
+
+[node name="dive" type="AudioStreamPlayer3D" parent="SFX" index="4"]
+stream = SubResource("AudioStreamRandomizer_4f1i0")
+volume_db = -5.0
 
 [node name="particles" type="Node3D" parent="." index="6"]
 
@@ -1073,7 +1536,6 @@ advance_expression_base_node = NodePath("..")
 active = true
 process_callback = 0
 parameters/conditions/holding_down = false
-parameters/conditions/idle = false
 parameters/conditions/not_holding_down = false
 parameters/fall/blend_position = 0
 parameters/idle/blend_position = 0.0938865

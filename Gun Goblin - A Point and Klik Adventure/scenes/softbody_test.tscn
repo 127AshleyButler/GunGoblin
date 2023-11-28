@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://crb8oia3d4r5p"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vgobo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c20rh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tyorr"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+mesh = SubResource("CapsuleMesh_vgobo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.10236)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.81922, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_c20rh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_tyorr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)

@@ -25,14 +25,14 @@ transform = Transform3D(1.44275, 0, 0, 0, 1.44275, 0, 0, 0, 1.44275, -11.1345, 2
 [node name="klik" parent="." instance=ExtResource("4_2gsbk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 10.3592)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.957823, 0.287361, 0, -0.287361, 0.957823, 14.218, 48.129, 28.297)
+[node name="Camera3D" type="Camera3D" parent="klik"]
+transform = Transform3D(1, 0, 0, 0, 0.957822, 0.287361, 0, -0.287361, 0.957822, 14.218, 4.3934, 17.9378)
 
 [node name="quickplat" parent="." instance=ExtResource("3_u4unq")]
 transform = Transform3D(2.426, 0, 0, 0, 1, 0, 0, 0, 2.513, -1.30292, -1.12463, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(99.435, 0, 0, 0, 99.435, 0, 0, 0, 99.435, 0, -19.1928, 0)
+transform = Transform3D(166.59, 0, 0, 0, 166.59, 0, 0, 0, 166.59, 0, -57.1928, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_d4ejj")

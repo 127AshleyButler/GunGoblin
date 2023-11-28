@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gun Goblin - A Point and Klik Adventure"
-run/main_scene="res://scenes/area_2.tscn"
+run/main_scene="res://scenes/levels/gg_anotherparkourscene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/image="res://klikfuckinggetsyou.png"
 config/icon="res://klikfuckinggetsyou.png"
@@ -23,6 +23,10 @@ window/size/mode=2
 [dotnet]
 
 project/assembly_name="Gun Goblin - A Point and Klik Adventure"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
 
 [input]
 
