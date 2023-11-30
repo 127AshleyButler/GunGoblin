@@ -37,15 +37,15 @@ func _physics_process(delta):
 	if is_touching_wall():
 		# Wall Slide
 		if velocity.y > 0:
-			velocity.y = WALL_SLIDE_VELOCITY
+			velocity.y = -WALL_SLIDE_VELOCITY
 
 	move_and_slide()
 
 func is_touching_wall():
 	if $WallClingRight.is_colliding():
-		return true
+		return 1
 	if $WallClingLeft.is_colliding():
-		return true
+		return -1
 	return false
 
 func take_damage(damage_amount):

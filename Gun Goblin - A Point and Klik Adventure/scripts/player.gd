@@ -3,11 +3,13 @@ extends "character.gd"
 @export var player_num = 1
 
 var facing = -1 # The direction the player is facing
+var direction = 0
 var current_animation = "idle_l"
 var canShoot = true
 var canDive = true
 
 const DIVE_SPEED = 50.0
+const WALL_SLIDE_GRAVITY_MODIFIER = 0.9
 
 func _ready():
 	health = 100
@@ -28,14 +30,11 @@ func _physics_process(delta):
 		canShoot = true
 		canDive = true
 
-#	if $WallClingLeft.get_collider():
-#		print("hit walll!!! hit my balls!!")
-
 	# Handle Wall Sliding
-	if is_touching_wall():
+	if is_touching_wall() and not is_on_floor():
 		# Wall Slide
-		if velocity.y > 0:
-			velocity.y = WALL_SLIDE_VELOCITY
+		if velocity.y < 0:
+			velocity.y = gravity * -WALL_SLIDE_GRAVITY_MODIFIER * delta
 
 	# Lessen the gravity if jump is held
 	if Input.is_action_pressed("jump"):
@@ -53,7 +52,7 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("move_left", "move_right")
+	direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		facing = direction
 		velocity.x = max_speed(direction * SPEED, velocity.x)
@@ -73,13 +72,14 @@ func update_animation_parameters():
 	# For animations that have left/right versions, this is how to let them know which version to play.
 	$AnimationTree["parameters/idle/blend_position"] = facing
 	$AnimationTree["parameters/run/blend_position"] = facing
-	$AnimationTree["parameters/rise/blend_position"] = facing
-	$AnimationTree["parameters/fall/blend_position"] = facing
 	$AnimationTree["parameters/sit/blend_position"] = facing
-
+	$AnimationTree["parameters/airborne/blend_position"] = Vector2(facing, velocity.y)
+	$AnimationTree["parameters/Wall Cling/blend_position"] = Vector2(facing, velocity.y)
+	
 	# Update conditions of other animations
 	$AnimationTree["parameters/conditions/holding_down"] = Input.is_action_pressed("move_down")
 	$AnimationTree["parameters/conditions/not_holding_down"] = !Input.is_action_pressed("move_down")
+	$AnimationTree["parameters/conditions/idle"] = (Input.get_axis("move_left", "move_right") == 0) and (is_on_floor())
 	
 func handle_jump():
 	# Handle Jump.
@@ -88,9 +88,10 @@ func handle_jump():
 		air_time = JUMP_GRACE_PERIOD
 		$SFX/jump.play()
 		# Handle Wall Jumps
-	if is_touching_wall():
+	if is_touching_wall() and not is_on_floor():
 		# Wall Jump
 		velocity.y = JUMP_VELOCITY
+		air_time = JUMP_GRACE_PERIOD
 		$SFX/jump.play()
 		
 func handle_dive():
@@ -112,4 +113,10 @@ func max_speed(speed1, speed2):
 	else:
 		return speed2
 	
+func is_touching_wall():
+	if $WallClingRight.is_colliding() and direction == 1:
+		return 1
+	if $WallClingLeft.is_colliding() and direction == -1:
+		return -1
+	return false
 
