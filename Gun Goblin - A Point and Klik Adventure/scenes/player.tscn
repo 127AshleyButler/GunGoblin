@@ -497,15 +497,13 @@ animations = [{
 }]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kg4b"]
-streams_count = 1
 random_pitch = 1.31
-random_volume_offset_db = 0.0
+streams_count = 1
 stream_0/stream = ExtResource("68_c08yi")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4f1i0"]
 streams_count = 2
-random_volume_offset_db = 0.0
 stream_0/stream = ExtResource("69_ppsor")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("70_xamc0")
@@ -516,9 +514,9 @@ lifetime_randomness = 0.19
 direction = Vector3(0, 1, 0)
 spread = 40.25
 flatness = 0.74
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 3.0
 initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
 damping_min = 6.452
 damping_max = 6.452
 scale_max = 2.0
@@ -1687,8 +1685,7 @@ offset = Vector2(0, 100)
 pixel_size = 0.04
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_douo7")
-animation = &"rise_l"
-frame_progress = 0.994543
+animation = &"dance"
 
 [node name="SFX" type="Node3D" parent="." index="5"]
 
@@ -1726,11 +1723,13 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="8"]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_ffujm")
+}
 tree_root = SubResource("AnimationNodeStateMachine_j125w")
-anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
-process_callback = 0
+anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/holding_down = false
 parameters/conditions/idle = false
 parameters/conditions/not_holding_down = false
