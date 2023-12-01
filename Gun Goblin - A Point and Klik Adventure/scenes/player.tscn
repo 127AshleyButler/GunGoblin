@@ -1685,7 +1685,7 @@ offset = Vector2(0, 100)
 pixel_size = 0.04
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_douo7")
-animation = &"dance"
+animation = &"rise_l"
 
 [node name="SFX" type="Node3D" parent="." index="5"]
 
