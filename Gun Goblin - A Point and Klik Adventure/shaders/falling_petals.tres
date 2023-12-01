@@ -1,0 +1,167 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://bxbtjg3kic143"]
+
+[ext_resource type="Texture2D" uid="uid://bo00cvqa7ug0l" path="res://textures/klik/bowserjr.png" id="1_ykmjd"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_c5xdy"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_x2mxt"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_6q3w2"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_wwrxg"]
+size = Vector2(844.952, 586.165)
+expression = "// Based on swirl shader from LKS: https://www.reddit.com/r/godot/comments/90de7a/swirl_shader/
+
+vec2 pos2d = uv.xy;
+
+/*float pi = 3.14;
+float distance_to_center = distance(pos2d, vec2(0.5, 0.5));
+float rotation_index = 6.0 * distance_to_center * pi * sin(time/20.0);
+
+pos2d -= vec2(0.5, 0.5);
+
+mat2 rotation_matrix = mat2(vec2(sin(rotation_index), -cos(rotation_index)),
+						    vec2(cos(rotation_index), sin(rotation_index)));
+pos2d = pos2d * rotation_matrix;
+
+pos2d += vec2(0.5, 0.5);
+position.xy = pos2d;*/
+
+
+pos2d += vec2(-time/20.0, 0.0);
+position.xy = pos2d;
+colorWeight = vec4(camPosition.x, camPosition.y, camPosition.z, 1);
+color = col;"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rixeb"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_puunm"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_oag47"]
+constant = Color(0, 0.612442, 0.770871, 1)
+
+[sub_resource type="VisualShader" id="VisualShader_q6cka"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_8;
+
+
+
+void fragment() {
+// Input:3
+	float n_out3p0 = TIME;
+
+
+// Input:7
+	vec2 n_out7p0 = UV;
+
+
+// ColorConstant:9
+	vec4 n_out9p0 = vec4(0.000000, 0.612442, 0.770871, 1.000000);
+
+
+// Input:11
+	vec3 n_out11p0 = VERTEX;
+
+
+	vec2 n_out6p0;
+	vec4 n_out6p1;
+	vec4 n_out6p2;
+// Expression:6
+	n_out6p0 = vec2(0.0, 0.0);
+	n_out6p1 = vec4(0.0, 0.0, 0.0, 0.0);
+	n_out6p2 = vec4(0.0, 0.0, 0.0, 0.0);
+	{
+		// Based on swirl shader from LKS: https://www.reddit.com/r/godot/comments/90de7a/swirl_shader/
+		
+		vec2 pos2d = n_out7p0.xy;
+		
+		/*float pi = 3.14;
+		float distance_to_center = distance(pos2d, vec2(0.5, 0.5));
+		float rotation_index = 6.0 * distance_to_center * pi * sin(n_out3p0/20.0);
+		
+		pos2d -= vec2(0.5, 0.5);
+		
+		mat2 rotation_matrix = mat2(vec2(sin(rotation_index), -cos(rotation_index)),
+								    vec2(cos(rotation_index), sin(rotation_index)));
+		pos2d = pos2d * rotation_matrix;
+		
+		pos2d += vec2(0.5, 0.5);
+		n_out6p0.xy = pos2d;*/
+		
+		
+		pos2d += vec2(-n_out3p0/20.0, 0.0);
+		n_out6p0.xy = pos2d;
+		n_out6p2 = vec4(vec4(n_out11p0, 0.0).x, vec4(n_out11p0, 0.0).y, vec4(n_out11p0, 0.0).z, 1);
+		n_out6p1 = n_out9p0;
+	}
+
+
+// Texture2D:8
+	vec4 n_out8p0 = texture(tex_frg_8, n_out6p0);
+
+
+// Mix:10
+	vec4 n_out10p0 = mix(n_out8p0, n_out6p1, n_out6p2);
+
+
+// Output:0
+	ALBEDO = vec3(n_out10p0.xyz);
+	ALPHA = n_out8p0.x;
+	EMISSION = vec3(n_out8p0.xyz);
+
+
+}
+"
+nodes/fragment/0/position = Vector2(1020, 60)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_6q3w2")
+nodes/fragment/3/position = Vector2(-380, 40)
+nodes/fragment/6/node = SubResource("VisualShaderNodeExpression_wwrxg")
+nodes/fragment/6/position = Vector2(-160, 100)
+nodes/fragment/6/size = Vector2(844.952, 586.165)
+nodes/fragment/6/input_ports = "0,0,time;1,3,uv;2,5,col;3,5,camPosition;"
+nodes/fragment/6/output_ports = "0,3,position;1,5,color;2,5,colorWeight;"
+nodes/fragment/6/expression = "// Based on swirl shader from LKS: https://www.reddit.com/r/godot/comments/90de7a/swirl_shader/
+
+vec2 pos2d = uv.xy;
+
+/*float pi = 3.14;
+float distance_to_center = distance(pos2d, vec2(0.5, 0.5));
+float rotation_index = 6.0 * distance_to_center * pi * sin(time/20.0);
+
+pos2d -= vec2(0.5, 0.5);
+
+mat2 rotation_matrix = mat2(vec2(sin(rotation_index), -cos(rotation_index)),
+						    vec2(cos(rotation_index), sin(rotation_index)));
+pos2d = pos2d * rotation_matrix;
+
+pos2d += vec2(0.5, 0.5);
+position.xy = pos2d;*/
+
+
+pos2d += vec2(-time/20.0, 0.0);
+position.xy = pos2d;
+colorWeight = vec4(camPosition.x, camPosition.y, camPosition.z, 1);
+color = col;"
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_rixeb")
+nodes/fragment/7/position = Vector2(-420, 120)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_puunm")
+nodes/fragment/8/position = Vector2(700, -40)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorConstant_oag47")
+nodes/fragment/9/position = Vector2(-460, 260)
+nodes/fragment/10/node = SubResource("VisualShaderNodeMix_c5xdy")
+nodes/fragment/10/position = Vector2(820, 240)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_x2mxt")
+nodes/fragment/11/position = Vector2(-520, 420)
+nodes/fragment/connections = PackedInt32Array(3, 0, 6, 0, 7, 0, 6, 1, 6, 0, 8, 0, 8, 0, 0, 5, 8, 0, 0, 1, 9, 0, 6, 2, 8, 0, 10, 0, 10, 0, 0, 0, 6, 1, 10, 1, 6, 2, 10, 2, 11, 0, 6, 3)
+
+[resource]
+render_priority = 0
+shader = SubResource("VisualShader_q6cka")
+shader_parameter/tex_frg_8 = ExtResource("1_ykmjd")

@@ -1,0 +1,18 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dwxa4k04nxsh1"]
+
+[ext_resource type="Texture2D" uid="uid://bo00cvqa7ug0l" path="res://textures/klik/bowserjr.png" id="1_nw58h"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_2ucll"]
+panorama = ExtResource("1_nw58h")
+
+[sub_resource type="Sky" id="Sky_ybpgn"]
+sky_material = SubResource("PanoramaSkyMaterial_2ucll")
+
+[resource]
+background_mode = 2
+background_color = Color(0.937255, 0.937255, 0.937255, 1)
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_ybpgn")
+ambient_light_source = 3
+ambient_light_color = Color(0.862745, 0.811765, 0.694118, 1)
+ambient_light_energy = 2.3

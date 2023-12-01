@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccwgr57u563r"]
+[gd_scene load_steps=5 format=3 uid="uid://ccwgr57u563r"]
 
 [ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
 [ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
+[ext_resource type="Environment" uid="uid://dwxa4k04nxsh1" path="res://shaders/UTTTEnvironment.tres" id="2_n524h"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
 
 [node name="gg_anotherparkourscene" instance=ExtResource("1_f6dkf")]
 
-[node name="klik" parent="." index="1" instance=ExtResource("3_axnh8")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = ExtResource("2_n524h")
+
+[node name="sun" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, -0.422618, 0, 85.3038, 0)
+
+[node name="klik" parent="." index="3" instance=ExtResource("3_axnh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 1.3592)
 
 [node name="Camera3D" type="Camera3D" parent="klik" index="9"]
 transform = Transform3D(1, 0, 0, 0, 0.957822, 0.287361, 0, -0.287361, 0.957822, -0.755194, 8.56034, 41.9488)
 
-[node name="level visual" type="Sprite3D" parent="." index="2"]
+[node name="level visual" type="Sprite3D" parent="." index="4"]
 transform = Transform3D(9.87981, 0, 0, 0, 9.87981, 0, 0, 0, 9.87981, 0, 0, -0.892487)
 texture = ExtResource("2_7246l")

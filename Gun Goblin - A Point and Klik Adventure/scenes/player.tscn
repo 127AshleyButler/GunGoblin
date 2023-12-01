@@ -1688,7 +1688,7 @@ pixel_size = 0.04
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_douo7")
 animation = &"rise_l"
-frame_progress = 0.336229
+frame_progress = 0.994543
 
 [node name="SFX" type="Node3D" parent="." index="5"]
 

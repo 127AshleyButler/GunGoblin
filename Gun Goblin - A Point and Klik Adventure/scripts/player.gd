@@ -4,12 +4,14 @@ extends "character.gd"
 
 var facing = -1 # The direction the player is facing
 var direction = 0
-var current_animation = "idle_l"
 var canShoot = true
 var canDive = true
 
 const DIVE_SPEED = 50.0
 const WALL_SLIDE_GRAVITY_MODIFIER = 0.9
+const HORIZONTAL_WALL_JUMP_SPEED = 50.0
+const MAX_FALLING_SPEED = -50.0
+const HOLDING_DOWN_FALLING_MULTIPLIER = 2.0
 
 func _ready():
 	health = 100
@@ -55,15 +57,20 @@ func _physics_process(delta):
 	direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		facing = direction
-		velocity.x = max_speed(direction * SPEED, velocity.x)
+		velocity.x = direction * SPEED
+		#velocity.x = max_speed(direction * SPEED, velocity.x)
 	else:
 		#$AnimatedSprite2D.stop()
+		#velocity.x = max_speed(move_toward(velocity.x, 0, SPEED), velocity.x)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	# Handle Dive.
 	if Input.is_action_just_pressed("dive"):
 		handle_dive()
-
+	if (Input.is_action_pressed("move_down")):
+		velocity.y = max(velocity.y, MAX_FALLING_SPEED * HOLDING_DOWN_FALLING_MULTIPLIER)
+	else:
+		velocity.y = max(velocity.y, MAX_FALLING_SPEED)
 	move_and_slide()
 	
 	update_animation_parameters()
@@ -90,6 +97,7 @@ func handle_jump():
 		# Handle Wall Jumps
 	if is_touching_wall() and not is_on_floor():
 		# Wall Jump
+		velocity.x = HORIZONTAL_WALL_JUMP_SPEED * -facing
 		velocity.y = JUMP_VELOCITY
 		air_time = JUMP_GRACE_PERIOD
 		$SFX/jump.play()
@@ -114,9 +122,9 @@ func max_speed(speed1, speed2):
 		return speed2
 	
 func is_touching_wall():
-	if $WallClingRight.is_colliding() and direction == 1:
+	if $WallClingRight.is_colliding() and facing == 1 and not Input.is_action_pressed("move_down"):
 		return 1
-	if $WallClingLeft.is_colliding() and direction == -1:
+	if $WallClingLeft.is_colliding() and facing == -1 and not Input.is_action_pressed("move_down"):
 		return -1
 	return false
 

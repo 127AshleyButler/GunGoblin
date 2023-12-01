@@ -7,7 +7,7 @@ extends CharacterBody3D
 
 signal die
 
-const SPEED = 20.0
+const SPEED = 30.0
 const JUMP_VELOCITY = 30.0
 const JUMP_GRACE_PERIOD = 0.2 # Time in seconds to allow character to jump right after they slip off a ledge
 const WALL_SLIDE_VELOCITY = 15.0 # Speed in which the player moves down when sliding on walls
