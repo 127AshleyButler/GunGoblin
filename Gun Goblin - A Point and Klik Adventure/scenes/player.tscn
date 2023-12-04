@@ -497,15 +497,13 @@ animations = [{
 }]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1kg4b"]
-streams_count = 1
 random_pitch = 1.31
-random_volume_offset_db = 0.0
+streams_count = 1
 stream_0/stream = ExtResource("68_c08yi")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4f1i0"]
 streams_count = 2
-random_volume_offset_db = 0.0
 stream_0/stream = ExtResource("69_ppsor")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("70_xamc0")
@@ -516,9 +514,9 @@ lifetime_randomness = 0.19
 direction = Vector3(0, 1, 0)
 spread = 40.25
 flatness = 0.74
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 3.0
 initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
 damping_min = 6.452
 damping_max = 6.452
 scale_max = 2.0
