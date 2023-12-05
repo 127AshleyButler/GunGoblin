@@ -310,6 +310,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_xtkn2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -318,12 +319,7 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(11, 18)
 sprite_frames = SubResource("SpriteFrames_svrsu")
-animation = &"talk_glass"
-frame_progress = 0.259435
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(18, 21)
-scale = Vector2(1.3125, 1.3125)
-texture = ExtResource("2_4fvif")
+animation = &"idle"
+frame_progress = 0.8572

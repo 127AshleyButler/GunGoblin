@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://hm1s6dk7ysb"]
+[gd_scene load_steps=147 format=3 uid="uid://hm1s6dk7ysb"]
 
 [ext_resource type="PackedScene" uid="uid://bprcdpt2010gc" path="res://scenes/character.tscn" id="1_72l12"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_26kwa"]
@@ -1655,7 +1655,9 @@ states/skid/position = Vector2(814.667, 46)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jsrb1"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cyrro"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_f76lv"), "idle", "sit", SubResource("AnimationNodeStateMachineTransition_3bgai"), "sit", "run", SubResource("AnimationNodeStateMachineTransition_45b2s"), "idle", "meteor_land", SubResource("AnimationNodeStateMachineTransition_4c2ba"), "sit", "sit_end", SubResource("AnimationNodeStateMachineTransition_i5nk5"), "sit_end", "idle", SubResource("AnimationNodeStateMachineTransition_74ck8"), "airborne", "idle", SubResource("AnimationNodeStateMachineTransition_krrog"), "idle", "airborne", SubResource("AnimationNodeStateMachineTransition_fxl1i"), "airborne", "run", SubResource("AnimationNodeStateMachineTransition_a0787"), "run", "airborne", SubResource("AnimationNodeStateMachineTransition_pgkvu"), "airborne", "Wall Cling", SubResource("AnimationNodeStateMachineTransition_386g8"), "Wall Cling", "airborne", SubResource("AnimationNodeStateMachineTransition_pbkxu")]
 graph_offset = Vector2(-33, 13)
 
-[node name="player" instance=ExtResource("1_72l12")]
+[sub_resource type="BoxMesh" id="BoxMesh_cbcp8"]
+
+[node name="player" groups=["player"] instance=ExtResource("1_72l12")]
 axis_lock_linear_z = true
 floor_constant_speed = true
 floor_max_angle = 1.0472
@@ -1739,3 +1741,7 @@ parameters/idle/blend_position = 0.0938865
 parameters/run/blend_position = -1.01092
 parameters/sit/blend_position = 0
 parameters/skid/blend_position = 0
+
+[node name="cursor" type="MeshInstance3D" parent="." index="9"]
+top_level = true
+mesh = SubResource("BoxMesh_cbcp8")

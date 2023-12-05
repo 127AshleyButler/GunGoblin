@@ -1,5 +1,6 @@
 extends "character.gd"
 
+#region player variables
 @export var player_num = 1
 
 var facing = -1 # The direction the player is facing
@@ -13,6 +14,11 @@ const HORIZONTAL_WALL_JUMP_SPEED = 50.0
 const MAX_FALLING_SPEED = -50.0
 const HOLDING_DOWN_FALLING_MULTIPLIER = 2.0
 
+@onready var camera = get_viewport().get_camera_3d()
+@onready var cursor = $cursor
+#endregion
+
+#region ready and physics processing
 func _ready():
 	health = 100
 	super._ready()
@@ -73,21 +79,12 @@ func _physics_process(delta):
 		velocity.y = max(velocity.y, MAX_FALLING_SPEED)
 	move_and_slide()
 	
+	update_3D_cursor_position()
+	
 	update_animation_parameters()
-	
-func update_animation_parameters():
-	# For animations that have left/right versions, this is how to let them know which version to play.
-	$AnimationTree["parameters/idle/blend_position"] = facing
-	$AnimationTree["parameters/run/blend_position"] = facing
-	$AnimationTree["parameters/sit/blend_position"] = facing
-	$AnimationTree["parameters/airborne/blend_position"] = Vector2(facing, velocity.y)
-	$AnimationTree["parameters/Wall Cling/blend_position"] = Vector2(facing, velocity.y)
-	
-	# Update conditions of other animations
-	$AnimationTree["parameters/conditions/holding_down"] = Input.is_action_pressed("move_down")
-	$AnimationTree["parameters/conditions/not_holding_down"] = !Input.is_action_pressed("move_down")
-	$AnimationTree["parameters/conditions/idle"] = (Input.get_axis("move_left", "move_right") == 0) and (is_on_floor())
-	
+#endregions
+
+#region platformer physics functions
 func handle_jump():
 	# Handle Jump.
 	if is_on_floor() or air_time < JUMP_GRACE_PERIOD:
@@ -127,4 +124,40 @@ func is_touching_wall():
 	if $WallClingLeft.is_colliding() and facing == -1 and not Input.is_action_pressed("move_down"):
 		return -1
 	return false
+#endregion
 
+#region Point functions
+
+func update_3D_cursor_position():
+	# based on: https://www.youtube.com/watch?v=KT06pv06Q1U
+	var ray_length = 1000
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * ray_length
+	var space = get_world_3d().direct_space_state
+	var rayQuery = PhysicsRayQueryParameters3D.new()
+	rayQuery.from = from
+	rayQuery.to = to
+	rayQuery.collide_with_areas = true
+	var result = space.intersect_ray(rayQuery)
+	#print(result)
+	
+	if (result):
+		cursor.global_transform.origin = result.position
+	
+#endregion
+
+#region animation functions
+func update_animation_parameters():
+	# For animations that have left/right versions, this is how to let them know which version to play.
+	$AnimationTree["parameters/idle/blend_position"] = facing
+	$AnimationTree["parameters/run/blend_position"] = facing
+	$AnimationTree["parameters/sit/blend_position"] = facing
+	$AnimationTree["parameters/airborne/blend_position"] = Vector2(facing, velocity.y)
+	$AnimationTree["parameters/Wall Cling/blend_position"] = Vector2(facing, velocity.y)
+	
+	# Update conditions of other animations
+	$AnimationTree["parameters/conditions/holding_down"] = Input.is_action_pressed("move_down")
+	$AnimationTree["parameters/conditions/not_holding_down"] = !Input.is_action_pressed("move_down")
+	$AnimationTree["parameters/conditions/idle"] = (Input.get_axis("move_left", "move_right") == 0) and (is_on_floor())
+#endregion

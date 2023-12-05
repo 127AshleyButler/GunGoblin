@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccwgr57u563r"]
+[gd_scene load_steps=10 format=3 uid="uid://ccwgr57u563r"]
 
 [ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
 [ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c0nwoxhpwtv3o" path="res://scenes/point.tscn" id="2_qsatv"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
 [ext_resource type="Script" path="res://scripts/draggableObject.gd" id="6_0ugcs"]
-[ext_resource type="AudioStream" uid="uid://hv6axmiaq56s" path="res://sounds/SFX/femurdesign_theremin_looping.wav" id="6_i0plm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u2xo8"]
 
@@ -49,12 +48,6 @@ shape = SubResource("SphereShape3D_u2xo8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level/test ball/CollisionShape3D" index="0"]
 mesh = SubResource("SphereMesh_t54xf")
 skeleton = NodePath("../..")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="level/test ball" index="1"]
-stream = ExtResource("6_i0plm")
-volume_db = 3.0
-pitch_scale = 0.5
-autoplay = true
 
 [node name="level visual" type="Sprite3D" parent="level" index="1"]
 transform = Transform3D(9.87981, 0, 0, 0, 9.87981, 0, 0, 0, 9.87981, 0, 0, -0.892487)
