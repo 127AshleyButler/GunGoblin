@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/image="res://klikfuckinggetsyou.png"
 config/icon="res://klikfuckinggetsyou.png"
 
+[autoload]
+
+Events="*res://scripts/events.gd"
+
 [display]
 
 window/size/mode=2

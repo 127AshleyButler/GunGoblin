@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b02praf1gu6wu"]
+
+[ext_resource type="Script" path="res://scripts/draggableObject.gd" id="1_54eit"]
+[ext_resource type="Texture2D" uid="uid://mv2akadiqkom" path="res://textures/he has no style.png" id="2_fxi5d"]
+[ext_resource type="AudioStream" uid="uid://hv6axmiaq56s" path="res://sounds/SFX/femurdesign_theremin_looping.wav" id="2_pun8x"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ibv2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72fpl"]
+transparency = 1
+albedo_texture = ExtResource("2_fxi5d")
+
+[sub_resource type="SphereMesh" id="SphereMesh_c8m3w"]
+material = SubResource("StandardMaterial3D_72fpl")
+
+[node name="draggable_object" type="RigidBody3D" groups=["draggable"]]
+axis_lock_linear_z = true
+script = ExtResource("1_54eit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(5.87, 0, 0, 0, 5.87, 0, 0, 0, 5.87, 0, 0, 0)
+shape = SubResource("SphereShape3D_ibv2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_c8m3w")
+skeleton = NodePath("../..")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_pun8x")
+volume_db = 3.0
+pitch_scale = 0.5
+autoplay = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

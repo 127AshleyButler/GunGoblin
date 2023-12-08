@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://c0nwoxhpwtv3o"]
+[gd_scene load_steps=95 format=3 uid="uid://c0nwoxhpwtv3o"]
 
 [ext_resource type="Script" path="res://scenes/point.gd" id="1_xtkn2"]
 [ext_resource type="Texture2D" uid="uid://cxj4kf8odso4v" path="res://sprites/point/p.cursor.1.png" id="2_4fvif"]
@@ -35,9 +35,9 @@
 [ext_resource type="Texture2D" uid="uid://ctdlodyelwuln" path="res://sprites/point/p.victory.1.png" id="33_jciya"]
 [ext_resource type="Texture2D" uid="uid://di4snxnxch0hq" path="res://sprites/point/p.victory.2.png" id="34_8i6fu"]
 
-[sub_resource type="Animation" id="Animation_u0x0i"]
-resource_name = "to_idle"
-length = 0.321
+[sub_resource type="Animation" id="Animation_t6v56"]
+resource_name = "end_grab"
+length = 0.3605
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,15 +45,15 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"to_morphtarget", &"to_idle", &"idle"]
+"values": [&"grab_release", &"grab_none"]
 }
 
-[sub_resource type="Animation" id="Animation_f8m5s"]
-resource_name = "to_victory"
-length = 0.3565
+[sub_resource type="Animation" id="Animation_iw06p"]
+resource_name = "from_glass"
+length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,15 +61,15 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"to_morphtarget", &"to_victory", &"victory"]
+"values": [&"glass", &"to_glass"]
 }
 
-[sub_resource type="Animation" id="Animation_12wuv"]
-resource_name = "loop_idle"
-length = 0.1295
+[sub_resource type="Animation" id="Animation_rixes"]
+resource_name = "from_grab"
+length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -77,26 +77,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"idle"]
-}
-
-[sub_resource type="Animation" id="Animation_stn2m"]
-resource_name = "loop_victory"
-length = 0.208
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"victory"]
+"values": [&"grab_none", &"to_grab"]
 }
 
 [sub_resource type="Animation" id="Animation_02iry"]
@@ -131,6 +115,86 @@ tracks/0/keys = {
 "values": [&"victory", &"to_victory", &"to_morphtarget"]
 }
 
+[sub_resource type="Animation" id="Animation_aa4ib"]
+resource_name = "loop_glass"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"glass"]
+}
+
+[sub_resource type="Animation" id="Animation_bht21"]
+resource_name = "loop_glass_talk"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"talk_glass"]
+}
+
+[sub_resource type="Animation" id="Animation_kokje"]
+resource_name = "loop_grab"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"grab_none"]
+}
+
+[sub_resource type="Animation" id="Animation_12wuv"]
+resource_name = "loop_idle"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_ola66"]
+resource_name = "loop_idle_squint"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle_squint"]
+}
+
 [sub_resource type="Animation" id="Animation_vxes3"]
 resource_name = "loop_talk"
 length = 0.1295
@@ -163,9 +227,9 @@ tracks/0/keys = {
 "values": [&"talk_squint"]
 }
 
-[sub_resource type="Animation" id="Animation_ola66"]
-resource_name = "loop_idle_squint"
-length = 0.1295
+[sub_resource type="Animation" id="Animation_stn2m"]
+resource_name = "loop_victory"
+length = 0.208
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -176,28 +240,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"idle_squint"]
+"values": [&"victory"]
 }
 
-[sub_resource type="Animation" id="Animation_aa4ib"]
-resource_name = "loop_glass"
-length = 0.1295
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"glass"]
-}
-
-[sub_resource type="Animation" id="Animation_iw06p"]
-resource_name = "from_glass"
-length = 0.15
+[sub_resource type="Animation" id="Animation_2kwkd"]
+resource_name = "start_grab"
+length = 0.16
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -208,8 +256,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"glass", &"to_glass"]
+"values": [&"grab_windup", &"grab_1"]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SFX/start_grab")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_mnb0d"]
 resource_name = "to_glass"
@@ -225,38 +284,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [&"to_morphtarget", &"to_glass", &"glass"]
-}
-
-[sub_resource type="Animation" id="Animation_bht21"]
-resource_name = "loop_glass_talk"
-length = 0.1295
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"talk_glass"]
-}
-
-[sub_resource type="Animation" id="Animation_rixes"]
-resource_name = "from_grab"
-length = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"grab_none", &"to_grab"]
 }
 
 [sub_resource type="Animation" id="Animation_5w4om"]
@@ -275,8 +302,40 @@ tracks/0/keys = {
 "values": [&"to_morphtarget", &"to_grab", &"grab_none"]
 }
 
-[sub_resource type="Animation" id="Animation_kokje"]
-resource_name = "loop_grab"
+[sub_resource type="Animation" id="Animation_u0x0i"]
+resource_name = "to_idle"
+length = 0.321
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"to_morphtarget", &"to_idle", &"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_f8m5s"]
+resource_name = "to_victory"
+length = 0.3565
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"to_morphtarget", &"to_victory", &"victory"]
+}
+
+[sub_resource type="Animation" id="Animation_pospi"]
+resource_name = "loop_grabbing"
 length = 0.1295
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -288,39 +347,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"grab_none"]
-}
-
-[sub_resource type="Animation" id="Animation_2kwkd"]
-resource_name = "start_grab"
-length = 0.3605
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"grab_windup", &"grab_1"]
-}
-
-[sub_resource type="Animation" id="Animation_t6v56"]
-resource_name = "end_grab"
-length = 0.3605
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"grab_release", &"grab_none"]
+"values": [&"grab_1"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3pn6o"]
@@ -333,6 +360,7 @@ _data = {
 "loop_glass": SubResource("Animation_aa4ib"),
 "loop_glass_talk": SubResource("Animation_bht21"),
 "loop_grab": SubResource("Animation_kokje"),
+"loop_grabbing": SubResource("Animation_pospi"),
 "loop_idle": SubResource("Animation_12wuv"),
 "loop_idle_squint": SubResource("Animation_ola66"),
 "loop_talk": SubResource("Animation_vxes3"),
@@ -655,7 +683,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qfjt"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"hovering_over_grabbable"
+advance_expression = "hovering_over == \"draggable\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f2hnm"]
 switch_mode = 2
@@ -668,7 +696,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_efg2p"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"idle"
+advance_expression = "is_idle and hovering_over == \"nothing\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d10ex"]
 switch_mode = 2
@@ -699,12 +727,12 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pajjw"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"hovering_over_interesting"
+advance_expression = "hovering_over == \"inspectable\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmquo"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"idle"
+advance_expression = "is_idle and hovering_over == \"nothing\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_67hlt"]
 switch_mode = 2
@@ -767,7 +795,9 @@ states/to_idle/position = Vector2(313.333, 88.6667)
 states/to_victory/node = SubResource("AnimationNodeAnimation_tj16q")
 states/to_victory/position = Vector2(42.6667, -19)
 transitions = ["Start", "to_idle", SubResource("AnimationNodeStateMachineTransition_ijawr"), "to_idle", "loop_idle", SubResource("AnimationNodeStateMachineTransition_ilt0t"), "loop_idle", "from_idle", SubResource("AnimationNodeStateMachineTransition_0qfjt"), "from_idle", "to_grab", SubResource("AnimationNodeStateMachineTransition_f2hnm"), "to_grab", "loop_grab", SubResource("AnimationNodeStateMachineTransition_62ke1"), "loop_grab", "from_grab", SubResource("AnimationNodeStateMachineTransition_efg2p"), "from_grab", "to_idle 2", SubResource("AnimationNodeStateMachineTransition_d10ex"), "to_idle 2", "loop_idle", SubResource("AnimationNodeStateMachineTransition_mxl4t"), "loop_idle", "from_idle 2", SubResource("AnimationNodeStateMachineTransition_dxuq5"), "loop_victory", "from_victory", SubResource("AnimationNodeStateMachineTransition_0alsc"), "from_victory", "to_idle 3", SubResource("AnimationNodeStateMachineTransition_bl5wt"), "to_idle 3", "loop_idle", SubResource("AnimationNodeStateMachineTransition_o34ud"), "loop_idle", "from_idle 3", SubResource("AnimationNodeStateMachineTransition_pajjw"), "loop_glass", "from_glass", SubResource("AnimationNodeStateMachineTransition_xmquo"), "from_glass", "to_idle 4", SubResource("AnimationNodeStateMachineTransition_67hlt"), "to_idle 4", "loop_idle", SubResource("AnimationNodeStateMachineTransition_0p3dk"), "from_idle 2", "to_victory", SubResource("AnimationNodeStateMachineTransition_skw4u"), "to_victory", "loop_victory", SubResource("AnimationNodeStateMachineTransition_ihca8"), "from_idle 3", "to_glass", SubResource("AnimationNodeStateMachineTransition_6nysm"), "to_glass", "loop_glass", SubResource("AnimationNodeStateMachineTransition_rxm1s")]
-graph_offset = Vector2(-111, -179.441)
+graph_offset = Vector2(-129, -131.441)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t8b3q"]
 
 [node name="Point" type="Control"]
 layout_mode = 3
@@ -787,17 +817,16 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(11, 18)
 sprite_frames = SubResource("SpriteFrames_svrsu")
-animation = &"grab_none"
-frame_progress = 0.0744959
+animation = &"grab_windup"
+frame_progress = 0.988361
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3pn6o")
 }
 tree_root = SubResource("AnimationNodeStateMachine_l2sd1")
+advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/hovering_over_grabbable = false
-parameters/conditions/hovering_over_interesting = false
 parameters/conditions/idle = false
 parameters/conditions/victorious = false
 
@@ -807,7 +836,11 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_l2sd1")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/hovering_over_grabbable = false
-parameters/conditions/hovering_over_interesting = false
 parameters/conditions/idle = false
 parameters/conditions/victorious = false
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="start_grab" type="AudioStreamPlayer" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_t8b3q")
+pitch_scale = 2.47

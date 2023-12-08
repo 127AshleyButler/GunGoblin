@@ -1,19 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccwgr57u563r"]
+[gd_scene load_steps=10 format=3 uid="uid://ccwgr57u563r"]
 
 [ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
 [ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
 [ext_resource type="Environment" uid="uid://dwxa4k04nxsh1" path="res://shaders/UTTTEnvironment.tres" id="2_n524h"]
 [ext_resource type="PackedScene" uid="uid://c0nwoxhpwtv3o" path="res://scenes/point.tscn" id="2_qsatv"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
-[ext_resource type="Script" path="res://scripts/draggableObject.gd" id="6_0ugcs"]
-[ext_resource type="AudioStream" uid="uid://hv6axmiaq56s" path="res://sounds/SFX/femurdesign_theremin_looping.wav" id="6_i0plm"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_u2xo8"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_t54xf"]
+[ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="8_80xnb"]
+[ext_resource type="PackedScene" uid="uid://b02praf1gu6wu" path="res://scenes/objects/draggable_object.tscn" id="8_iw6nb"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_sv5nm"]
 plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u2xo8"]
 
 [node name="gg_anotherparkourscene" instance=ExtResource("1_f6dkf")]
 
@@ -37,35 +35,25 @@ size = 78.108
 
 [node name="level" type="Node3D" parent="." index="5"]
 
-[node name="test ball" type="RigidBody3D" parent="level" index="0" groups=["draggable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 1.3592)
-axis_lock_linear_z = true
-script = ExtResource("6_0ugcs")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="level/test ball" index="0"]
-transform = Transform3D(5.87, 0, 0, 0, 5.87, 0, 0, 0, 5.87, 0, 0, 0)
-shape = SubResource("SphereShape3D_u2xo8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/test ball/CollisionShape3D" index="0"]
-mesh = SubResource("SphereMesh_t54xf")
-skeleton = NodePath("../..")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="level/test ball" index="1"]
-stream = ExtResource("6_i0plm")
-volume_db = 3.0
-pitch_scale = 0.5
-autoplay = true
-
-[node name="level visual" type="Sprite3D" parent="level" index="1"]
+[node name="level visual" type="Sprite3D" parent="level" index="0"]
 transform = Transform3D(9.87981, 0, 0, 0, 9.87981, 0, 0, 0, 9.87981, 0, 0, -0.892487)
 sorting_offset = -53.495
 texture = ExtResource("2_7246l")
 
-[node name="raycast backdrop" type="StaticBody3D" parent="level" index="2"]
+[node name="raycast backdrop" type="StaticBody3D" parent="level" index="1"]
 collision_layer = 128
 collision_mask = 128
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level/raycast backdrop" index="0"]
 shape = SubResource("WorldBoundaryShape3D_sv5nm")
 
-[connection signal="input_event" from="level/test ball" to="level/test ball" method="_on_input_event"]
+[node name="draggable_object" parent="level" index="2" instance=ExtResource("8_iw6nb")]
+
+[node name="garf" parent="." index="6" instance=ExtResource("8_80xnb")]
+transform = Transform3D(2.08091, 0, 0, 0, 2.08091, 0, 0, 0, 2.08091, 58.7721, 46.4901, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="garf" index="1" groups=["inspectable"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="garf/StaticBody3D" index="0"]
+transform = Transform3D(5.87, 0, 0, 0, 5.87, 0, 0, 0, 5.87, 0, 0, 0)
+shape = SubResource("SphereShape3D_u2xo8")
