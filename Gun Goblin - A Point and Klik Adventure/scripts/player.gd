@@ -131,6 +131,8 @@ func is_touching_wall():
 func update_3D_cursor_position():
 	# based on: https://www.youtube.com/watch?v=KT06pv06Q1U
 	var ray_length = 1000
+	if (!get_viewport()):
+		return
 	var mouse_pos = get_viewport().get_mouse_position()
 	var from = camera.project_ray_origin(mouse_pos)
 	var to = from + camera.project_ray_normal(mouse_pos) * ray_length

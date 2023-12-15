@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://hoptxpuilu3o"]
+
+[ext_resource type="Script" path="res://scripts/Line3D.gd" id="1_xru0j"]
+[ext_resource type="Material" uid="uid://oc2jst8hyrq6" path="res://shaders/laser.tres" id="2_aqnaf"]
+
+[sub_resource type="Curve3D" id="Curve3D_166ch"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.12946, 0.666837, -1.57844, 1.52884, 0.910799, -1.40218, -1.52884, -0.910799, 1.40218, 0.483916, 1.81618, -1.39495, 2.572, 0.51, -1.234, -1.67731, -0.509606, 1.2335, -2.04067, 1.89208, -0.063015, 3.01871, 1.74111, -2.39155, 1.901, -1.741, 2.392, -3.72476, 1.65359, 0.982264, -2.2, -0.575, -3.55, -1.46466, -1.47755, 1.42507, -2.06802, -0.363236, 1.35588),
+"tilts": PackedFloat32Array(0, 0, 0, -1.00945, 0)
+}
+point_count = 5
+
+[node name="Line3D" type="Node3D"]
+script = ExtResource("1_xru0j")
+line_radius = 0.19
+line_resolution = 10
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(0, 0.19, 0.111679, 0.153713, 0.180701, 0.0587132, 0.180701, -0.0587132, 0.111679, -0.153713, 2.32675e-17, -0.19, -0.111679, -0.153713, -0.180701, -0.0587132, -0.180701, 0.0587132, -0.111679, 0.153713)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 0.4
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("2_aqnaf")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_166ch")

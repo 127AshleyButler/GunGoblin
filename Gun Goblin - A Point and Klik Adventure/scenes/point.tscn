@@ -163,6 +163,22 @@ tracks/0/keys = {
 "values": [&"grab_none"]
 }
 
+[sub_resource type="Animation" id="Animation_pospi"]
+resource_name = "loop_grabbing"
+length = 0.1295
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"grab_1"]
+}
+
 [sub_resource type="Animation" id="Animation_12wuv"]
 resource_name = "loop_idle"
 length = 0.1295
@@ -332,22 +348,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [&"to_morphtarget", &"to_victory", &"victory"]
-}
-
-[sub_resource type="Animation" id="Animation_pospi"]
-resource_name = "loop_grabbing"
-length = 0.1295
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"grab_1"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3pn6o"]
@@ -817,8 +817,7 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(11, 18)
 sprite_frames = SubResource("SpriteFrames_svrsu")
-animation = &"grab_windup"
-frame_progress = 0.988361
+animation = &"idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {

@@ -1,24 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://b02praf1gu6wu"]
+[gd_scene load_steps=8 format=3 uid="uid://b02praf1gu6wu"]
 
 [ext_resource type="Script" path="res://scripts/draggableObject.gd" id="1_54eit"]
-[ext_resource type="Texture2D" uid="uid://mv2akadiqkom" path="res://textures/he has no style.png" id="2_fxi5d"]
+[ext_resource type="Material" uid="uid://20srbgt2bney" path="res://shaders/lightning.tres" id="2_bp4b2"]
 [ext_resource type="AudioStream" uid="uid://hv6axmiaq56s" path="res://sounds/SFX/femurdesign_theremin_looping.wav" id="2_pun8x"]
+[ext_resource type="Material" uid="uid://oc2jst8hyrq6" path="res://shaders/laser.tres" id="4_587cc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ibv2m"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72fpl"]
-transparency = 1
-albedo_texture = ExtResource("2_fxi5d")
-
 [sub_resource type="SphereMesh" id="SphereMesh_c8m3w"]
-material = SubResource("StandardMaterial3D_72fpl")
+material = ExtResource("2_bp4b2")
+
+[sub_resource type="Curve3D" id="Curve3D_ad8ba"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.015, 2.495, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="draggable_object" type="RigidBody3D" groups=["draggable"]]
 axis_lock_linear_z = true
 script = ExtResource("1_54eit")
+theramin_pitch_speed = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(5.87, 0, 0, 0, 5.87, 0, 0, 0, 5.87, 0, 0, 0)
+transform = Transform3D(-2.56586e-07, 0, -5.87, 0, 5.87, 0, 5.87, 0, -2.56586e-07, 0, 0, 0)
 shape = SubResource("SphereShape3D_ibv2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -27,8 +32,27 @@ skeleton = NodePath("../..")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_pun8x")
-volume_db = 3.0
+volume_db = -2.549
 pitch_scale = 0.5
-autoplay = true
+doppler_tracking = 2
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+top_level = true
+polygon = PackedVector2Array(0, 0, 0, 1)
+mode = 2
+path_node = NodePath("../BeamPath")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("4_587cc")
+
+[node name="BeamPath" type="Path3D" parent="."]
+top_level = true
+curve = SubResource("Curve3D_ad8ba")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
