@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds3hctx353mf0"]
+
+[ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/tank_level_basic.glb" id="1_2s81v"]
+[ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="3_fi4hd"]
+[ext_resource type="PackedScene" uid="uid://vrqaov4grcpw" path="res://scenes/tanks/tank_level_basic_2.tscn" id="3_wlsro"]
+
+[node name="tank_level_basic" instance=ExtResource("1_2s81v")]
+
+[node name="TankDriver" parent="." index="1" instance=ExtResource("3_fi4hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.18378, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812612, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
+projection = 1
+current = true
+fov = 118.125
+size = 37.76
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
+
+[node name="tank_level_basic3" parent="." index="4" instance=ExtResource("3_wlsro")]
