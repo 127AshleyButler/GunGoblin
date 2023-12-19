@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b08nxi61oc3eo"
+path="res://.godot/imported/bone.obj-f9c9a32a33ed8811077a56f7521b8dff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bone.obj-f9c9a32a33ed8811077a56f7521b8dff.mesh"]
+
+source_file="res://wigglebone-5eb18fac259526d708de074c2c3a8c7d29f7ef54/examples/wigglebone/bone.obj"
+dest_files=["res://.godot/imported/bone.obj-f9c9a32a33ed8811077a56f7521b8dff.mesh", "res://.godot/imported/bone.obj-f9c9a32a33ed8811077a56f7521b8dff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

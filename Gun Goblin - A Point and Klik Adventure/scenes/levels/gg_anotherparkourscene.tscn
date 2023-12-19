@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccwgr57u563r"]
+[gd_scene load_steps=11 format=3 uid="uid://ccwgr57u563r"]
 
 [ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
 [ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
 [ext_resource type="Environment" uid="uid://dwxa4k04nxsh1" path="res://shaders/UTTTEnvironment.tres" id="2_n524h"]
 [ext_resource type="PackedScene" uid="uid://c0nwoxhpwtv3o" path="res://scenes/point.tscn" id="2_qsatv"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
+[ext_resource type="PackedScene" uid="uid://c7007qk1iob7y" path="res://wigglebone-5eb18fac259526d708de074c2c3a8c7d29f7ef54/examples/wigglebone/palm/palm.tscn" id="7_r4bxm"]
 [ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="8_80xnb"]
 [ext_resource type="PackedScene" uid="uid://b02praf1gu6wu" path="res://scenes/objects/draggable_object.tscn" id="8_iw6nb"]
 
@@ -48,6 +49,9 @@ collision_mask = 128
 shape = SubResource("WorldBoundaryShape3D_sv5nm")
 
 [node name="draggable_object" parent="level" index="2" instance=ExtResource("8_iw6nb")]
+
+[node name="Palm" parent="level/draggable_object" index="4" instance=ExtResource("7_r4bxm")]
+transform = Transform3D(4.035, 0, 0, 0, 4.035, 0, 0, 0, 4.035, -1.22624, -1.90735e-06, -1.70362)
 
 [node name="garf" parent="." index="6" instance=ExtResource("8_80xnb")]
 transform = Transform3D(2.08091, 0, 0, 0, 2.08091, 0, 0, 0, 2.08091, 58.7721, 46.4901, 0)
