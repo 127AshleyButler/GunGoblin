@@ -1,17 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=11 format=3 uid="uid://cj8co8kr1xew8"]
 
-[ext_resource type="PackedScene" path="res://models/tank/tank_peasint.glb" id="1_5ys8d"]
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
+[ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
+[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="2_umt7d"]
+[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="4_do5q2"]
+[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="5_lf5f5"]
+[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="6_xrrrh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
 height = 2.64885
 
+[sub_resource type="Animation" id="Animation_dbl8a"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
+_data = {
+"idle": SubResource("Animation_dbl8a")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("4_do5q2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_lf5f5")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_xrrrh")
+stream_2/weight = 1.0
+
 [node name="TankDriver" type="CharacterBody3D"]
 script = ExtResource("1_nsmu1")
-
-[node name="tank_peasint" parent="." instance=ExtResource("1_5ys8d")]
+bullet_scene = ExtResource("2_umt7d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
 shape = SubResource("CapsuleShape3D_dewea")
+
+[node name="model" parent="." instance=ExtResource("2_7jgw6")]
+
+[node name="BulletSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52614, 1.84747)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pk1r4")
+}
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_wc2fb")

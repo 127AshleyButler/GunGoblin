@@ -10,7 +10,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.18378, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812612, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
+transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
 projection = 1
 current = true
 fov = 118.125
@@ -20,3 +20,7 @@ size = 37.76
 transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
 
 [node name="tank_level_basic3" parent="." index="4" instance=ExtResource("3_wlsro")]
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.934326, -0.875801, -1.33765)
+size = Vector3(57.0415, 2, 55.3413)

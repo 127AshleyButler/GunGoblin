@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://muthdhyr8o8e"]
+
+[ext_resource type="PackedScene" uid="uid://ceireu513crim" path="res://models/tank/tank_peasint.glb" id="1_jjx24"]
+
+[node name="tank_peasint" instance=ExtResource("1_jjx24")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0, 0.0359916, 2.76591)
