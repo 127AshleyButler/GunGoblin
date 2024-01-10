@@ -5,4 +5,4 @@
 [node name="tank_peasint" instance=ExtResource("1_jjx24")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, 0.0359916, 2.76591)
+bones/0/position = Vector3(0, 0.0465775, 2.76591)

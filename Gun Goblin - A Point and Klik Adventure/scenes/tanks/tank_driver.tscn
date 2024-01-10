@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=16 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -29,9 +29,35 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_xrrrh")
 stream_2/weight = 1.0
 
+[sub_resource type="Curve" id="Curve_7dx83"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.171154, 0.215094), 0.0, 0.0, 0, 0, Vector2(0.771154, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_j4o2f"]
+curve = SubResource("Curve_7dx83")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v4v88"]
+emission_shape_offset = Vector3(0, 0, 1.755)
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_j4o2f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72usa"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 0.564706, 0.407843)
+grow_amount = 4.465
+
+[sub_resource type="SphereMesh" id="SphereMesh_0fgtc"]
+material = SubResource("StandardMaterial3D_72usa")
+radial_segments = 4
+rings = 1
+
 [node name="TankDriver" type="CharacterBody3D"]
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
+shooting_delay = 0.15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
@@ -49,3 +75,17 @@ libraries = {
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc2fb")
+
+[node name="Charging" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, 1.88335)
+emitting = false
+lifetime = 1.54
+speed_scale = 2.8
+process_material = SubResource("ParticleProcessMaterial_v4v88")
+draw_pass_1 = SubResource("SphereMesh_0fgtc")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50295, 1.94974)
+strength = 10.28
+attenuation = 2.14355
+radius = 3.3

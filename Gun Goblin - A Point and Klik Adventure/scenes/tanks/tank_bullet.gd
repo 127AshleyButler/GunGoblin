@@ -3,11 +3,13 @@ extends CharacterBody3D
 
 const SPEED = 12.0
 var bounces = 1
+## used to determine how powerful of a shot the bullet is
+var charge_shot_time = 0
 
 func _ready():
 	var direction = basis.z * 1
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+	velocity.x = direction.x * SPEED * (1 + charge_shot_time)
+	velocity.z = direction.z * SPEED * (1 + charge_shot_time)
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
