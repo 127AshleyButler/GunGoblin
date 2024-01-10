@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5hge8usva2lj"]
+
+[ext_resource type="Texture2D" uid="uid://bnj8a1lqcf6ik" path="res://sprites/objects/Window.png" id="1_vyofg"]
+[ext_resource type="Script" path="res://scripts/objects/physical_window.gd" id="2_5l482"]
+[ext_resource type="PackedScene" uid="uid://b02praf1gu6wu" path="res://scenes/objects/draggable_object.tscn" id="2_hhdka"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tiw78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vyofg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_us30h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3ady"]
+size = Vector3(0.847412, 0.673828, 1.15479)
+
+[node name="PhysicalWindow" type="AnimatedSprite3D" node_paths=PackedStringArray("physics_component")]
+transform = Transform3D(69.3453, 0, 0, 0, 69.3453, 0, 0, 0, 69.3453, 0, 0, 0)
+alpha_antialiasing_edge = 0.3
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_tiw78")
+script = ExtResource("2_5l482")
+physics_component = NodePath("draggable_object")
+
+[node name="draggable_object" parent="." instance=ExtResource("2_hhdka")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="draggable_object"]
+transform = Transform3D(40.4087, 0, 0, 0, 40.4087, 0, 0, 0, 40.4087, 0, 0, 0)
+shape = SubResource("BoxShape3D_us30h")
+
+[node name="Area3D" type="Area3D" parent="." groups=["inspectable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.418197)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.313114, 0, 0, 0, 0.313114, 0, 0, 0, 0.313114, 0.301438, 0.307125, -0.42469)
+shape = SubResource("BoxShape3D_o3ady")

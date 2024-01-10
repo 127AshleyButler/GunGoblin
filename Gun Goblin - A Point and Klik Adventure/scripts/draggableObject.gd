@@ -11,6 +11,8 @@ var _picked = false
 var _last_mouse_pos = Vector2.ZERO
 var _mouse_pos = Vector2.ZERO
 
+#@export var collision_scene : CollisionShape3D
+
 @export var line_radius = 0.5
 @export var line_resolution = 10
 
@@ -80,7 +82,8 @@ func _physics_process(delta):
 		linear_damp = 0
 		$AudioStreamPlayer3D.stream_paused = true
 		$CSGPolygon3D.hide()
-		
+	# Move parent with draggable object
+	#get_parent().position = global_position
 
 
 func _on_input_event(camera, event, position, normal, shape_idx):

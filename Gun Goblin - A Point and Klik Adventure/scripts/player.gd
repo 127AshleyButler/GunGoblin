@@ -143,12 +143,13 @@ func update_3D_cursor_position():
 	rayQuery.collide_with_areas = true
 	var result = space.intersect_ray(rayQuery)
 	if (result):
+		
 		cursor.global_transform.origin = result.position
 		# Check if the object that's being hovered over is inspectable/draggable
-		if result.collider.is_in_group("draggable"):
-			Events.emit_signal("hovered_over_object", "draggable")
-		elif result.collider.is_in_group("inspectable"):
+		if result.collider.is_in_group("inspectable"):
 			Events.emit_signal("hovered_over_object", "inspectable")
+		elif result.collider.is_in_group("draggable"):
+			Events.emit_signal("hovered_over_object", "draggable")
 		else: # Not mousing over anything in particular
 			Events.emit_signal("hovered_over_object", "nothing")
 	

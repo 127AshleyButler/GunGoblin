@@ -1,13 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccwgr57u563r"]
+[gd_scene load_steps=10 format=3 uid="uid://ccwgr57u563r"]
 
 [ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
 [ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
 [ext_resource type="Environment" uid="uid://dwxa4k04nxsh1" path="res://shaders/UTTTEnvironment.tres" id="2_n524h"]
 [ext_resource type="PackedScene" uid="uid://c0nwoxhpwtv3o" path="res://scenes/point.tscn" id="2_qsatv"]
 [ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
-[ext_resource type="PackedScene" uid="uid://c7007qk1iob7y" path="res://wigglebone-5eb18fac259526d708de074c2c3a8c7d29f7ef54/examples/wigglebone/palm/palm.tscn" id="7_r4bxm"]
+[ext_resource type="PackedScene" uid="uid://c5hge8usva2lj" path="res://scenes/objects/physical_window.tscn" id="6_jebgx"]
 [ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="8_80xnb"]
-[ext_resource type="PackedScene" uid="uid://b02praf1gu6wu" path="res://scenes/objects/draggable_object.tscn" id="8_iw6nb"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_sv5nm"]
 plane = Plane(0, 0, 1, 0)
@@ -27,7 +26,7 @@ environment = ExtResource("2_n524h")
 transform = Transform3D(-0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, -0.422618, 0, 85.3038, 0)
 
 [node name="klik" parent="." index="4" instance=ExtResource("3_axnh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.7356, 1.3592)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 43.7356, 1.3592)
 
 [node name="Camera3D" type="Camera3D" parent="klik" index="9"]
 transform = Transform3D(1, 0, 0, 0, 0.957822, 0.287361, 0, -0.287361, 0.957822, -0.755194, 8.56034, 41.9488)
@@ -48,10 +47,8 @@ collision_mask = 128
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level/raycast backdrop" index="0"]
 shape = SubResource("WorldBoundaryShape3D_sv5nm")
 
-[node name="draggable_object" parent="level" index="2" instance=ExtResource("8_iw6nb")]
-
-[node name="Palm" parent="level/draggable_object" index="4" instance=ExtResource("7_r4bxm")]
-transform = Transform3D(4.035, 0, 0, 0, 4.035, 0, 0, 0, 4.035, -1.22624, -1.90735e-06, -1.70362)
+[node name="PhysicalWindow" parent="level" index="2" instance=ExtResource("6_jebgx")]
+transform = Transform3D(37.5107, 0, 0, 0, 37.5107, 0, 0, 0, 37.5107, 116.411, 0, 0)
 
 [node name="garf" parent="." index="6" instance=ExtResource("8_80xnb")]
 transform = Transform3D(2.08091, 0, 0, 0, 2.08091, 0, 0, 0, 2.08091, 58.7721, 46.4901, 0)
