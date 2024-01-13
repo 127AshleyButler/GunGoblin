@@ -19,11 +19,6 @@ func _ready():
 	$AnimatedSprite3D.play("idle_l")
 
 func _physics_process(delta):
-	# Handle debug inputs
-	if Input.is_action_just_pressed("debug_reload"):
-		print("[DEBUG] Reloaded scene!")
-		get_tree().reload_current_scene()
-	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		air_time += delta

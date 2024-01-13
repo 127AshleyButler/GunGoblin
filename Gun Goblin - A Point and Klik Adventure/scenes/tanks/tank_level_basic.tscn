@@ -7,20 +7,24 @@
 [node name="tank_level_basic" instance=ExtResource("1_2s81v")]
 
 [node name="TankDriver" parent="." index="1" instance=ExtResource("3_fi4hd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.18378, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -16.8584, 0.186146, -0.493752)
 
-[node name="Camera3D" type="Camera3D" parent="." index="2"]
+[node name="TankDriver2" parent="." index="2" instance=ExtResource("3_fi4hd")]
+transform = Transform3D(0.0915711, 0, 0.995799, 0, 1, 0, -0.995799, 0, 0.0915711, 16.1182, 0.186146, -0.493752)
+player_string = "2"
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
 transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
 projection = 1
 current = true
 fov = 118.125
 size = 37.76
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
 
-[node name="tank_level_basic3" parent="." index="4" instance=ExtResource("3_wlsro")]
+[node name="tank_level_basic3" parent="." index="5" instance=ExtResource("3_wlsro")]
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." index="5"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.934326, -0.875801, -1.33765)
 size = Vector3(57.0415, 2, 55.3413)
