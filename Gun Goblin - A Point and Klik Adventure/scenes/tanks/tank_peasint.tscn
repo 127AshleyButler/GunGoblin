@@ -1,8 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://muthdhyr8o8e"]
+[gd_scene load_steps=4 format=3 uid="uid://muthdhyr8o8e"]
 
 [ext_resource type="PackedScene" uid="uid://ceireu513crim" path="res://models/tank/tank_peasint.glb" id="1_jjx24"]
+
+[sub_resource type="Animation" id="Animation_8jiqm"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Peasint Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3.2149, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xfj1n"]
+_data = {
+"die": SubResource("Animation_8jiqm")
+}
 
 [node name="tank_peasint" instance=ExtResource("1_jjx24")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(0, 0.0465775, 2.76591)
+
+[node name="Peasint Body" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.997314, 0, 0.0732382, 0, 1, 0, -0.0732382, 0, -0.997314, 0, 0, 0)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="2"]
+active = false
+libraries = {
+"": SubResource("AnimationLibrary_xfj1n")
+}

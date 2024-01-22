@@ -9,4 +9,5 @@ albedo_texture = ExtResource("2_o0bh0")
 [node name="tank_level_basic2" instance=ExtResource("1_ewru6")]
 
 [node name="Floor" parent="." index="0"]
+layers = 2
 material_override = SubResource("StandardMaterial3D_ptn3f")
