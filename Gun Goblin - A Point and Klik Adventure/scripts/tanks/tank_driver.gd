@@ -7,6 +7,10 @@ extends CharacterBody3D
 @export_range(0, 1, 0.01, "or_greater", "or_less") var shooting_delay = 0.1
 ## How much time a shot needs to be charged until it upgrades to the next tier
 @export_range(0, 3, 0.01, "or_greater", "or_less") var charge_tier_increment_time = 1
+## The total number of active bullets this tank can have at once
+@export_range(1, 10, 1, "or_greater", "or_less") var max_concurrent_bullets = 5
+## The total number of active mines this tank can have at once
+@export_range(1, 10, 1, "or_greater", "or_less") var max_concurrent_mines = 3
 ## The string representing which player controls this. "" For player 1, "2" for player 2, "3" for player 3, etc.
 @export var player_string = ""
 
@@ -18,6 +22,8 @@ var current_shooting_delay = 0
 var current_frozen_time = 0
 var charge_shot_time = 0
 var charge_tier = 0
+var bullet_count = 0
+var mine_count = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -72,22 +78,29 @@ func update_timers(delta):
 	current_shooting_delay -= delta
 
 func handle_shooting():
+	if (bullet_count >= max_concurrent_bullets):
+		return
 	if (current_shooting_delay > 0):
 		return
 	else:
 		current_shooting_delay = shooting_delay
+	bullet_count += 1
 	var new_bullet = bullet_scene.instantiate()
 	new_bullet.charge_tier = charge_tier
 	new_bullet.position = $BulletSpawner.position
+	new_bullet.parent_id = get_rid()
 	add_child(new_bullet)
 	$Fire.play()
 	reset_charge()
 	
 func handle_mine_laying():
+	if (mine_count >= max_concurrent_mines):
+		return
 	if (current_shooting_delay > 0):
 		return
 	else:
 		current_shooting_delay = shooting_delay
+	mine_count += 1
 	var new_mine = mine_scene.instantiate()
 	new_mine.charge_tier = charge_tier
 	if charge_tier < 1: # Uncharged, lay mine directly behind tank.
@@ -116,3 +129,9 @@ func update_charge_shot(delta):
 		$ChargeTierIncreased.play()
 		charge_tier += 1
 		$ChargeTierIncreasedParticles.emitting = true
+
+func decrement_bullet_count():
+	bullet_count -= 1
+
+func decrement_mine_count():
+	mine_count -= 1

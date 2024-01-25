@@ -320,6 +320,20 @@ tracks/12/keys = {
 "method": &"stop"
 }]
 }
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"decrement_parent_mine_count"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_tuof3"]
 resource_name = "idle"
@@ -809,14 +823,17 @@ rings = 4
 transform = Transform3D(1.22833, 0, 0, 0, 1.22833, 0, 0, 0, 1.22833, 0, 0, 0)
 top_level = true
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_mluqr")
 
 [node name="Hurtbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.387066, 0, 0, 0, 0.387066, 0, 0, 0, 0.387066, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ufbg2")
+disabled = true
 
 [node name="Model" type="MeshInstance3D" parent="Hurtbox"]
 transform = Transform3D(2.58354, 0, 0, 0, 2.58354, 0, 0, 0, 2.58354, 0, -2.58354, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_jlwof")
 skeleton = NodePath("../..")
 
@@ -859,6 +876,7 @@ libraries = {
 
 [node name="DetectionRadius" type="Area3D" parent="."]
 collision_layer = 0
+collision_mask = 9
 monitoring = false
 monitorable = false
 
@@ -868,23 +886,18 @@ shape = SubResource("CapsuleShape3D_8r82i")
 [node name="ActivationTimer" type="Timer" parent="."]
 
 [node name="ExplosionRadius" type="Area3D" parent="."]
-transform = Transform3D(-7.91225, 0, -6.11526, 0, 10, 0, 6.11526, 0, -7.91225, 0, 0, 0)
-visible = false
-collision_mask = 3
-monitoring = false
-monitorable = false
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+collision_mask = 15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionRadius"]
 shape = SubResource("SphereShape3D_rpari")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ExplosionRadius"]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-visible = false
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("SphereMesh_rbxwa")
 
 [node name="ExplosionMark" type="Decal" parent="."]
 transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, 0, -0.00467101, 0)
-visible = false
 texture_albedo = ExtResource("5_arq1u")
 upper_fade = 0.0181113
 distance_fade_enabled = true

@@ -53,6 +53,9 @@ func _on_activation_timer_timeout():
 func _on_explosion_radius_body_entered(body):
 	if body.has_method("hit"):
 		body.hit()
+	if body.is_in_group("Debris"):
+		var impulse_direction = position - body.position
+		body.apply_impulse(body.position, impulse_direction)
 
 func _on_explosion_radius_area_entered(area):
 	if area.has_method("hit"):
@@ -62,3 +65,6 @@ func calculate_charge_tier_stat_bonus():
 	charge_tier_speed_bonus = min(charge_tier, 2) * 0.4
 	charge_tier_height_bonus = (min(charge_tier, 4)) * 0.6
 	#scale *= 1 + (charge_tier * 0.15)
+
+func decrement_parent_mine_count():
+	get_parent().decrement_mine_count()

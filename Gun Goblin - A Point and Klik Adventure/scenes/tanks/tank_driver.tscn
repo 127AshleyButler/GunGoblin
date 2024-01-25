@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=34 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -10,6 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://da6vtde1q8360" path="res://sounds/SFX/blank.wav" id="7_5tk2f"]
 [ext_resource type="AudioStream" uid="uid://4pjcbtx7gqeu" path="res://sounds/SFX/659007__bigdino1995__chargeup.wav" id="7_psfxl"]
 [ext_resource type="AudioStream" uid="uid://nxi3v4wpf564" path="res://sounds/SFX/492027__crinkem__blow-dart.wav" id="8_ymsnc"]
+[ext_resource type="PackedScene" uid="uid://cclwg0q2sbwv2" path="res://models/tank/Debris/Debris_Peasint.glb" id="11_5r7vx"]
+[ext_resource type="PackedScene" uid="uid://byh8e3y4or5x1" path="res://models/tank/Debris/Debris_Tank.glb" id="12_akqab"]
+[ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_j1keq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
@@ -20,18 +23,128 @@ resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("model:rotation")
+tracks/0/path = NodePath("model:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, -2),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Charging:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_dbl8a"]
 resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
@@ -114,7 +227,18 @@ material = SubResource("StandardMaterial3D_dnkqy")
 radial_segments = 8
 rings = 3
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wktrw"]
+size = Vector3(1, 0.7, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eocrc"]
+size = Vector3(1.225, 0.82, 1.865)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aujq1"]
+height = 1.0
+radius = 0.2
+
 [node name="TankDriver" type="CharacterBody3D"]
+collision_layer = 5
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
 mine_scene = ExtResource("3_w853r")
@@ -125,7 +249,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9
 shape = SubResource("CapsuleShape3D_dewea")
 
 [node name="model" parent="." instance=ExtResource("2_7jgw6")]
-transform = Transform3D(1, 0, 2.89599e-05, 0, 1, 0, -2.89599e-05, 0, 1, 0, 0, 0)
 
 [node name="BulletSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00637579, 1.54476, 1.84843)
@@ -178,3 +301,46 @@ speed_scale = 1.99
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_r6t6l")
 draw_pass_1 = SubResource("SphereMesh_gjt8a")
+
+[node name="Debris" type="Node3D" parent="."]
+process_mode = 4
+visible = false
+
+[node name="Peasint" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 9
+linear_velocity = Vector3(0, 10, 0)
+angular_velocity = Vector3(0, 0, 0.261799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Peasint"]
+transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 1.53671, 0)
+shape = SubResource("BoxShape3D_wktrw")
+
+[node name="Debris_Peasint" parent="Debris/Peasint" instance=ExtResource("11_5r7vx")]
+
+[node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 13
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+linear_velocity = Vector3(0, 10, 0)
+angular_velocity = Vector3(0, 0, 0.261799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Tank"]
+transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 0.469671, 0)
+shape = SubResource("BoxShape3D_eocrc")
+
+[node name="Debris_Tank" parent="Debris/Tank" instance=ExtResource("12_akqab")]
+
+[node name="Shaft" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 9
+linear_velocity = Vector3(0, 10, 0)
+angular_velocity = Vector3(0, 0, 0.261799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Shaft"]
+transform = Transform3D(1.3898, 0, 0, 0, -6.07501e-08, -1.3898, 0, 1.3898, -6.07501e-08, 0, 1.48982, 1.35004)
+shape = SubResource("CylinderShape3D_aujq1")
+
+[node name="Debris_Shaft" parent="Debris/Shaft" instance=ExtResource("13_j1keq")]
