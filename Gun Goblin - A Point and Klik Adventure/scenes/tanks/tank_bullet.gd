@@ -36,7 +36,7 @@ func handle_bouncing():
 		
 func calculate_charge_tier_stat_bonus():
 	charge_tier_speed_bonus = charge_tier * 0.4
-	scale *= 1 + (charge_tier * 0.15)
+	scale *= 1 + (min(charge_tier, 4) * 0.15)
 	bounces += charge_tier
 	if charge_tier >= 3:
 		$RocketTrail.show()

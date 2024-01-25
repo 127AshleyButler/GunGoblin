@@ -36,12 +36,16 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot" + player_string) and current_shooting_delay <= 0:
 		update_charge_shot(delta)
 		
+	# Handle charge mines
+	if Input.is_action_pressed("lay_mine" + player_string) and current_shooting_delay <= 0:
+		update_charge_shot(delta)
+		
 	# Handle firing.
 	if Input.is_action_just_released("shoot" + player_string):
 		handle_shooting()
 		
 	# Handle mine laying
-	if Input.is_action_just_pressed("lay_mine" + player_string):
+	if Input.is_action_just_released("lay_mine" + player_string):
 		handle_mine_laying()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -90,7 +94,8 @@ func handle_mine_laying():
 		new_mine.position = $MineSpawner.position
 	else: # Charged mine, shoot the mine outwards in an arc instead.
 		new_mine.position = $BulletSpawner.position
-		new_mine.is_shot = true
+		new_mine.airborne = true
+		$FireMine.play()
 	add_child(new_mine)
 	reset_charge()
 	

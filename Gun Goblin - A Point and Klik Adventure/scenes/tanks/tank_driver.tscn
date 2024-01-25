@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=28 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="6_xrrrh"]
 [ext_resource type="AudioStream" uid="uid://da6vtde1q8360" path="res://sounds/SFX/blank.wav" id="7_5tk2f"]
 [ext_resource type="AudioStream" uid="uid://4pjcbtx7gqeu" path="res://sounds/SFX/659007__bigdino1995__chargeup.wav" id="7_psfxl"]
+[ext_resource type="AudioStream" uid="uid://nxi3v4wpf564" path="res://sounds/SFX/492027__crinkem__blow-dart.wav" id="8_ymsnc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
@@ -47,6 +48,12 @@ stream_1/stream = ExtResource("5_lf5f5")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_xrrrh")
 stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4xi6g"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_ymsnc")
+stream_0/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_7dx83"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.171154, 0.215094), 0.0, 0.0, 0, 0, Vector2(0.771154, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -121,7 +128,7 @@ shape = SubResource("CapsuleShape3D_dewea")
 transform = Transform3D(1, 0, 2.89599e-05, 0, 1, 0, -2.89599e-05, 0, 1, 0, 0, 0)
 
 [node name="BulletSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52614, 1.84747)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00637579, 1.54476, 1.84843)
 
 [node name="MineSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -133,6 +140,9 @@ libraries = {
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc2fb")
+
+[node name="FireMine" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_4xi6g")
 
 [node name="Charging" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, 1.88335)

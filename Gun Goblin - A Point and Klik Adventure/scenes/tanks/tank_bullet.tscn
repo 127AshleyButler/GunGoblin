@@ -9,7 +9,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12ha6"]
 resource_name = "Material"
 cull_mode = 2
-albedo_color = Color(0.937255, 0.418553, 0.150358, 1)
 metallic = 1.0
 roughness = 0.228916
 
@@ -315,8 +314,9 @@ process_material = SubResource("ParticleProcessMaterial_v1cfg")
 draw_pass_1 = SubResource("SphereMesh_wewvq")
 
 [node name="Plink" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.712164, 0, 0, 0, 0.712164, 0, 0, 0, 0.712164, 0, 0, 0)
 stream = SubResource("AudioStreamRandomizer_1ta7t")
-volume_db = -23.652
+volume_db = -19.0
 max_db = 2.81
 pitch_scale = 0.84
 
