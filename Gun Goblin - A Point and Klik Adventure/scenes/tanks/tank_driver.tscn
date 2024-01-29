@@ -243,6 +243,7 @@ script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
 mine_scene = ExtResource("3_w853r")
 shooting_delay = 0.15
+max_concurrent_mines = 99
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)

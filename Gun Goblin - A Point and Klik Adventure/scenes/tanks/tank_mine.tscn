@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://csassjfat0bdr"]
+[gd_scene load_steps=32 format=3 uid="uid://csassjfat0bdr"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_mine.gd" id="1_mluqr"]
 [ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="2_acdfu"]
@@ -23,6 +23,12 @@ material = SubResource("StandardMaterial3D_1033t")
 height = 1.0
 radial_segments = 10
 rings = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr71l"]
+albedo_color = Color(0.882353, 0.0784314, 0.141176, 1)
+roughness = 0.15
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 1.25
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6bqll"]
 random_pitch = 1.54
@@ -158,10 +164,66 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "scale_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hurtbox/Model")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 2.58354, 2.58354, 2.58354, 1, 1, 3.6, 3.6, 3.6)
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Primed:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Primed:pitch_scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.4]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AnimationPlayer:current_animation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"destroy"]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Hurtbox/Model:surface_material_override/0")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_jr71l")]
+}
 
 [sub_resource type="Animation" id="Animation_qsfl3"]
 resource_name = "destroy"
 length = 5.0
+step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -241,7 +303,7 @@ tracks/6/path = NodePath("ExplosionRadius:monitoring")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0.05, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -253,7 +315,7 @@ tracks/7/path = NodePath("ExplosionRadius:monitorable")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0.05, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -792,6 +854,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [&"idle"]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Primed:pitch_scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r24o5"]
 _data = {
@@ -836,6 +910,7 @@ transform = Transform3D(2.58354, 0, 0, 0, 2.58354, 0, 0, 0, 2.58354, 0, -2.58354
 visible = false
 mesh = SubResource("CapsuleMesh_jlwof")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jr71l")
 
 [node name="Shadow" type="Decal" parent="Hurtbox/Model"]
 transform = Transform3D(1.19733, 0, 0, 0, 3.47701, 0, 0, 0, 1.19733, 0, -3.97591, 0)
@@ -854,7 +929,7 @@ transform = Transform3D(0.814113, 0, 0, 0, 0.814113, 0, 0, 0, 0.814113, 0, 0, 0)
 stream = SubResource("AudioStreamRandomizer_28wvx")
 volume_db = -10.537
 max_db = 2.81
-pitch_scale = 1.2
+pitch_scale = 1.4
 
 [node name="Explosion" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0.814113, 0, 0, 0, 0.814113, 0, 0, 0, 0.814113, 0, 0, 0)
@@ -890,6 +965,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 collision_mask = 15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionRadius"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
 shape = SubResource("SphereShape3D_rpari")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ExplosionRadius"]

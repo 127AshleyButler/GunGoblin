@@ -8,9 +8,9 @@ extends CharacterBody3D
 ## How much time a shot needs to be charged until it upgrades to the next tier
 @export_range(0, 3, 0.01, "or_greater", "or_less") var charge_tier_increment_time = 1
 ## The total number of active bullets this tank can have at once
-@export_range(1, 10, 1, "or_greater", "or_less") var max_concurrent_bullets = 5
+@export_range(1, 99, 1, "or_greater", "or_less") var max_concurrent_bullets = 5
 ## The total number of active mines this tank can have at once
-@export_range(1, 10, 1, "or_greater", "or_less") var max_concurrent_mines = 3
+@export_range(1, 99, 1, "or_greater", "or_less") var max_concurrent_mines = 3
 ## The string representing which player controls this. "" For player 1, "2" for player 2, "3" for player 3, etc.
 @export var player_string = ""
 
@@ -79,6 +79,7 @@ func update_timers(delta):
 
 func handle_shooting():
 	if (bullet_count >= max_concurrent_bullets):
+		$Charging.emitting = false
 		return
 	if (current_shooting_delay > 0):
 		return
@@ -95,6 +96,7 @@ func handle_shooting():
 	
 func handle_mine_laying():
 	if (mine_count >= max_concurrent_mines):
+		$Charging.emitting = false
 		return
 	if (current_shooting_delay > 0):
 		return

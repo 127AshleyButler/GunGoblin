@@ -4,6 +4,7 @@ extends CharacterBody3D
 ## How long after placement until the mine will detect tanks driving over it
 @export_range(0, 20, 0.5, "or_greater", "or_less") var mine_activation_time = 1
 var mine_active = false
+var mine_about_to_explode = false
 var airborne = true
 const SPEED = 6.0
 var charge_tier = 0
@@ -31,24 +32,32 @@ func _physics_process(delta):
 		
 	var collision = move_and_collide(velocity * delta)
 	
-	if collision:
+	if collision and not mine_about_to_explode:
 		airborne = false
 		$ActivationTimer.start()
 		$AnimationPlayer.play("landing")
 
 func hit():
-	$AnimationPlayer.play("destroy")
-
+	$AnimationPlayer.speed_scale = 1.75
+	get_ready_to_explode()
+	
+func get_ready_to_explode():
+	if mine_about_to_explode:
+		return
+	$AnimationPlayer.play("blinking")
+	mine_about_to_explode = true
+	
 func _on_detection_radius_body_entered(body):
 	if mine_active:
-		$AnimationPlayer.play("destroy")
+		get_ready_to_explode()
 
 func _on_activation_timer_timeout():
 	if mine_active:
 		return
 	mine_active = true
 	$DetectionRadius.monitoring = true
-	$AnimationPlayer.play("priming")
+	if not mine_about_to_explode:
+		$AnimationPlayer.play("priming")
 
 func _on_explosion_radius_body_entered(body):
 	if body.has_method("hit"):
