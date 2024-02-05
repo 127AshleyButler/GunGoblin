@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal die(player_num)
+
 @export var bullet_scene : PackedScene
 @export var mine_scene : PackedScene
 @export_category("Tank Properties")
@@ -31,7 +33,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	$model/AnimationPlayer.play("Idle")
 	$AnimationPlayer.play("idle")
-	print(Input.get_connected_joypads())
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -115,6 +116,7 @@ func handle_mine_laying():
 	reset_charge()
 	
 func hit():
+	die.emit(int(player_string))
 	$AnimationPlayer.play("die")
 
 func reset_charge():

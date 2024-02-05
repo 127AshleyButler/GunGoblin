@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cufjm0tf0ouma"]
+
+[ext_resource type="PackedScene" uid="uid://cy8md4r6b254t" path="res://models/tank/levels/level_mob_grinder.glb" id="1_rey52"]
+[ext_resource type="Texture2D" uid="uid://bixxw0avw06xm" path="res://models/tank/wood_level.jpg" id="2_ttb6k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_er1d8"]
+albedo_texture = ExtResource("2_ttb6k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkn1o"]
+albedo_color = Color(0.984314, 0, 0.215686, 1)
+metallic_specular = 0.22
+roughness = 0.17
+
+[node name="level_mob_grinder" instance=ExtResource("1_rey52")]
+
+[node name="Ramp" parent="." index="0"]
+layers = 3
+
+[node name="Hole Floor" parent="." index="1"]
+layers = 3
+material_override = SubResource("StandardMaterial3D_er1d8")
+
+[node name="Hole Outline" parent="." index="2"]
+transform = Transform3D(8.67452, 0, 0, 0, -1.2311, 0, 0, 0, 8.67452, 0, -1.148, 0)
+layers = 3
+surface_material_override/0 = SubResource("StandardMaterial3D_tkn1o")
+
+[node name="PlayerSpawn1" type="Node3D" parent="." index="3" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.858, 0.186, 0)
+
+[node name="PlayerSpawn2" type="Node3D" parent="." index="4" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.118, 0.186, 0)
+
+[node name="PlayerSpawn3" type="Node3D" parent="." index="5" groups=["PlayerSpawn"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.186, -16.858)
+
+[node name="PlayerSpawn4" type="Node3D" parent="." index="6" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.186, 16.858)
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152405, 2.0918, 0.0520935)
+size = Vector3(64.3553, 6.18359, 62.3082)

@@ -41,6 +41,8 @@ func handle_bouncing():
 		bounces -= 1
 		can_hit_parent = true
 		$Plink.play()
+		if bounces == 0:
+			$AnimationPlayer.play("idle_wavering")
 	else:
 		$AnimationPlayer.play("destroy")
 		

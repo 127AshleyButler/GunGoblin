@@ -1,30 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds3hctx353mf0"]
+[gd_scene load_steps=3 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/tank_level_basic.glb" id="1_2s81v"]
-[ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="3_fi4hd"]
 [ext_resource type="PackedScene" uid="uid://vrqaov4grcpw" path="res://scenes/tanks/tank_level_basic_2.tscn" id="3_wlsro"]
 
 [node name="tank_level_basic" instance=ExtResource("1_2s81v")]
 
-[node name="TankDriver" parent="." index="1" instance=ExtResource("3_fi4hd")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -16.8584, 0.186146, -0.493752)
+[node name="tank_level_basic3" parent="." index="1" instance=ExtResource("3_wlsro")]
 
-[node name="TankDriver2" parent="." index="2" instance=ExtResource("3_fi4hd")]
-transform = Transform3D(0.0915711, 0, 0.995799, 0, 1, 0, -0.995799, 0, 0.0915711, 16.1182, 0.186146, -0.493752)
-player_string = "2"
+[node name="PlayerSpawn1" type="Node3D" parent="." index="2" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.858, 0.186, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." index="3"]
-transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
-projection = 1
-current = true
-fov = 118.125
-size = 37.76
+[node name="PlayerSpawn2" type="Node3D" parent="." index="3" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.118, 0.186, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
+[node name="PlayerSpawn3" type="Node3D" parent="." index="4" groups=["PlayerSpawn"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.186, -16.858)
 
-[node name="tank_level_basic3" parent="." index="5" instance=ExtResource("3_wlsro")]
+[node name="PlayerSpawn4" type="Node3D" parent="." index="5" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.186, 16.858)
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.934326, -0.875801, -1.33765)
-size = Vector3(57.0415, 2, 55.3413)
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152405, 2.0918, 0.0520935)
+size = Vector3(64.3553, 6.18359, 62.3082)

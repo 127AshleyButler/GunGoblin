@@ -1,0 +1,151 @@
+[gd_scene load_steps=21 format=3 uid="uid://bq3mc4atgatic"]
+
+[ext_resource type="Script" path="res://scripts/tanks/tank_game_master.gd" id="1_bew4q"]
+[ext_resource type="PackedScene" uid="uid://wywoghw4r2hb" path="res://scenes/tanks/level_simple_geometry.tscn" id="2_03nb0"]
+[ext_resource type="PackedScene" uid="uid://cufjm0tf0ouma" path="res://scenes/tanks/level_mob_grinder.tscn" id="3_ggqq2"]
+[ext_resource type="PackedScene" uid="uid://ds3hctx353mf0" path="res://scenes/tanks/tank_level_basic.tscn" id="4_lsslv"]
+[ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="5_nhs2n"]
+[ext_resource type="AudioStream" uid="uid://b6q8fmowedblj" path="res://sounds/SFX/partyhorn.wav" id="6_fkv02"]
+[ext_resource type="Material" uid="uid://p1qych564ct7" path="res://shaders/confetti.tres" id="7_hnlb2"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ap71x"]
+random_pitch = 1.33
+streams_count = 1
+stream_0/stream = ExtResource("6_fkv02")
+stream_0/weight = 1.0
+
+[sub_resource type="Gradient" id="Gradient_w6hb6"]
+interpolation_mode = 1
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.201923, 0.379808, 0.586538, 0.822115)
+colors = PackedColorArray(0.817218, 0, 0.276462, 1, 0.138994, 0.500676, 0.489852, 1, 0, 0.697699, 0.349072, 1, 1, 0.426031, 0.289078, 1, 0.819608, 0.890196, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1235j"]
+gradient = SubResource("Gradient_w6hb6")
+
+[sub_resource type="Curve" id="Curve_tet3c"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.548077, 0.016619), 0.0, 0.0, 0, 0, Vector2(0.99999, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_sso7o"]
+curve = SubResource("Curve_tet3c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lc14a"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+color = Color(0.921569, 0.878431, 0.941176, 1)
+color_initial_ramp = SubResource("GradientTexture1D_1235j")
+hue_variation_curve = SubResource("CurveTexture_sso7o")
+
+[sub_resource type="Curve" id="Curve_tfcek"]
+_data = [Vector2(0.0018797, 0), 0.0, 0.0, 0, 0, Vector2(0.137218, 0.653141), 0.0, 0.0, 0, 0, Vector2(0.516917, 0.743396), 0.0, 0.0, 0, 0, Vector2(0.783835, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mb3v"]
+vertex_color_use_as_albedo = true
+roughness = 0.14
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_kdeuu"]
+material = SubResource("StandardMaterial3D_3mb3v")
+section_length = 0.1
+section_segments = 8
+curve = SubResource("Curve_tfcek")
+
+[sub_resource type="Curve" id="Curve_bm4fu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0788462, 1), 0.0, 0.0, 0, 0, Vector2(0.644231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kirwq"]
+curve = SubResource("Curve_bm4fu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ld77h"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(1, 0.5, 1)
+emission_shape = 1
+emission_sphere_radius = 3.65
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+angular_velocity_min = -69.12
+angular_velocity_max = 69.12
+damping_min = 7.0
+damping_max = 7.0
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_kirwq")
+color = Color(0.921569, 0.878431, 0.941176, 1)
+color_initial_ramp = SubResource("GradientTexture1D_1235j")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_orren"]
+material = ExtResource("7_hnlb2")
+size = Vector3(1, 0.03, 1)
+
+[node name="tank_game_master" type="Node3D"]
+script = ExtResource("1_bew4q")
+level_scenes = Array[PackedScene]([ExtResource("2_03nb0"), ExtResource("3_ggqq2"), ExtResource("4_lsslv")])
+tank_driver_scene = ExtResource("5_nhs2n")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
+projection = 1
+current = true
+fov = 118.125
+size = 37.76
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
+
+[node name="OneTankLeftTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="DisplayText" type="Label3D" parent="."]
+transform = Transform3D(15.4127, 0, 0, 0, 15.4127, 0, 0, 0, 15.4127, 0, 22.5988, 0)
+billboard = 1
+font_size = 64
+
+[node name="ResultsTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Victory" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ap71x")
+volume_db = -10.551
+
+[node name="Confetti2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.53483, 0)
+emitting = false
+amount = 30
+lifetime = 10.0
+speed_scale = 2.0
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 5.19
+process_material = SubResource("ParticleProcessMaterial_lc14a")
+draw_pass_1 = SubResource("RibbonTrailMesh_kdeuu")
+
+[node name="Confetti" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.53483, 0)
+emitting = false
+amount = 30
+lifetime = 10.0
+speed_scale = 2.0
+explosiveness = 0.9
+collision_base_size = 1.0
+trail_lifetime = 5.58
+process_material = SubResource("ParticleProcessMaterial_ld77h")
+draw_pass_1 = SubResource("BoxMesh_orren")
+
+[connection signal="timeout" from="OneTankLeftTimer" to="." method="_on_one_tank_left_timer_timeout"]
+[connection signal="timeout" from="ResultsTimer" to="." method="_on_results_timer_timeout"]

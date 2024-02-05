@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=37 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -12,7 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://nxi3v4wpf564" path="res://sounds/SFX/492027__crinkem__blow-dart.wav" id="8_ymsnc"]
 [ext_resource type="PackedScene" uid="uid://cclwg0q2sbwv2" path="res://models/tank/Debris/Debris_Peasint.glb" id="11_5r7vx"]
 [ext_resource type="PackedScene" uid="uid://byh8e3y4or5x1" path="res://models/tank/Debris/Debris_Tank.glb" id="12_akqab"]
+[ext_resource type="AudioStream" uid="uid://8o40tpyds82d" path="res://sounds/SFX/peasint_tank_die1.wav" id="12_vjth7"]
 [ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_j1keq"]
+[ext_resource type="AudioStream" uid="uid://b7hli3eecmsao" path="res://sounds/SFX/peasint_tank_die2.wav" id="13_m1nb8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
@@ -93,6 +95,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Debris/Peasint/Scream:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_dbl8a"]
@@ -230,6 +244,14 @@ rings = 3
 [sub_resource type="BoxShape3D" id="BoxShape3D_wktrw"]
 size = Vector3(1, 0.7, 1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brr4j"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("12_vjth7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_m1nb8")
+stream_1/weight = 1.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_eocrc"]
 size = Vector3(1.225, 0.82, 1.865)
 
@@ -310,8 +332,8 @@ visible = false
 [node name="Peasint" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
 collision_mask = 9
-linear_velocity = Vector3(0, 10, 0)
-angular_velocity = Vector3(0, 0, 0.261799)
+linear_velocity = Vector3(0, 25, 0)
+angular_velocity = Vector3(0, 0.261799, 0.523599)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Peasint"]
 transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 1.53671, 0)
@@ -319,10 +341,13 @@ shape = SubResource("BoxShape3D_wktrw")
 
 [node name="Debris_Peasint" parent="Debris/Peasint" instance=ExtResource("11_5r7vx")]
 
+[node name="Scream" type="AudioStreamPlayer3D" parent="Debris/Peasint"]
+stream = SubResource("AudioStreamRandomizer_brr4j")
+doppler_tracking = 2
+
 [node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
 collision_mask = 13
-axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 linear_velocity = Vector3(0, 10, 0)
