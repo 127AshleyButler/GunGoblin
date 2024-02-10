@@ -77,3 +77,6 @@ func calculate_charge_tier_stat_bonus():
 
 func decrement_parent_mine_count():
 	get_parent().decrement_mine_count()
+
+func _on_expiration_timer_timeout(): # Mine failed to land in a reasonable amount of time, destroy it as a failsafe
+	hit()

@@ -8,6 +8,7 @@ var charge_tier = 0
 var charge_tier_speed_bonus = 0
 var can_hit_parent = false # Bullets need to bounce at least once before they can hit the tank that spawned them.
 var parent_id
+var velocity_magnitutde = 0
 
 func _ready():
 	$AnimationPlayer.play("idle")
@@ -19,8 +20,11 @@ func _ready():
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		$ExpirationTimer.start()
 		velocity = velocity.bounce(collision.get_normal())
 		look_at(global_position + velocity, Vector3.UP, true)
+		#rotation.x = 0
+		#velocity = velocity.normalized() * velocity_magnitutde
 		if collision.get_collider().has_method("hit"):
 			#collision.get_collider().hit()
 			#hit()
@@ -55,3 +59,7 @@ func calculate_charge_tier_stat_bonus():
 
 func decrement_parent_bullet_count():
 	get_parent().decrement_bullet_count()
+
+
+func _on_expiration_timer_timeout(): # Bullet likely escaped level bounds, destroy it as a failsafe.
+	hit()

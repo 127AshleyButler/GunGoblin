@@ -389,7 +389,7 @@ disable_receive_shadows = true
 [sub_resource type="PrismMesh" id="PrismMesh_vdf7u"]
 material = SubResource("StandardMaterial3D_peupt")
 
-[node name="tank_bullet" type="CharacterBody3D"]
+[node name="tank_bullet" type="CharacterBody3D" groups=["Projectile"]]
 transform = Transform3D(1.40417, 0, 0, 0, 1.40417, 0, 0, 0, 1.40417, 0, 0, 0)
 top_level = true
 collision_layer = 4
@@ -454,3 +454,9 @@ pitch_scale = 1.22
 transform = Transform3D(0.205, 0, 0, 0, -2.27299e-08, 0.15, 0, -0.52, -6.55671e-09, 0, 0.01, -0.355)
 visible = false
 mesh = SubResource("PrismMesh_vdf7u")
+
+[node name="ExpirationTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="ExpirationTimer" to="." method="_on_expiration_timer_timeout"]

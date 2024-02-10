@@ -14,14 +14,14 @@ signal die(player_num)
 ## The total number of active mines this tank can have at once
 @export_range(1, 99, 1, "or_greater", "or_less") var max_concurrent_mines = 3
 ## The string representing which player controls this. "" For player 1, "2" for player 2, "3" for player 3, etc.
-@export var player_string = ""
+@export var player_num = ""
 
 const DRIVING_SPEED = 10.0
 const ROTATION_SPEED = 0.08
 const JUMP_VELOCITY = 4.5
 
+var can_shoot = false # Players can't shoot until the round has officially started
 var current_shooting_delay = 0
-var current_frozen_time = 0
 var charge_shot_time = 0
 var charge_tier = 0
 var bullet_count = 0
@@ -33,33 +33,41 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	$model/AnimationPlayer.play("Idle")
 	$AnimationPlayer.play("idle")
+	for projectile in get_children():
+		if projectile.is_in_group("Projectile"):
+			remove_child(projectile)
+			projectile.queue_free()
+	can_shoot = false
+	current_shooting_delay = 0
+	charge_shot_time = 0
+	charge_tier = 0
+	bullet_count = 0
+	mine_count = 0
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Handle charge shots
-	if Input.is_action_pressed("shoot" + player_string) and current_shooting_delay <= 0:
-		update_charge_shot(delta)
-		
-	# Handle charge mines
-	if Input.is_action_pressed("lay_mine" + player_string) and current_shooting_delay <= 0:
-		update_charge_shot(delta)
-		
-	# Handle firing.
-	if Input.is_action_just_released("shoot" + player_string):
-		handle_shooting()
-		
-	# Handle mine laying
-	if Input.is_action_just_released("lay_mine" + player_string):
-		handle_mine_laying()
+	if can_shoot:
+		# Handle charge shots
+		if Input.is_action_pressed("shoot" + player_num) and current_shooting_delay <= 0:
+			update_charge_shot(delta)
+		# Handle charge mines
+		if Input.is_action_pressed("lay_mine" + player_num) and current_shooting_delay <= 0:
+			update_charge_shot(delta)
+		# Handle firing.
+		if Input.is_action_just_released("shoot" + player_num):
+			handle_shooting()
+		# Handle mine laying
+		if Input.is_action_just_released("lay_mine" + player_num):
+			handle_mine_laying()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_axis("move_down" + player_string, "move_up" + player_string)
+	var input_dir = Input.get_axis("move_down" + player_num, "move_up" + player_num)
 	
-	var rotation_dir = Input.get_axis("move_right" + player_string, "move_left" + player_string)
+	var rotation_dir = Input.get_axis("move_right" + player_num, "move_left" + player_num)
 	var direction
 	if rotation_dir:
 		rotate_y(rotation_dir * ROTATION_SPEED)
@@ -116,7 +124,7 @@ func handle_mine_laying():
 	reset_charge()
 	
 func hit():
-	die.emit(int(player_string))
+	die.emit(int(player_num))
 	$AnimationPlayer.play("die")
 
 func reset_charge():
@@ -139,3 +147,9 @@ func decrement_bullet_count():
 
 func decrement_mine_count():
 	mine_count -= 1
+
+func start_of_round(): # Called by the tank_game_master
+	can_shoot = true
+
+func update_label(player_num): # Called by the tank_game_master
+	$model/PlayerLabel.text = "P" + player_num + "\nV"

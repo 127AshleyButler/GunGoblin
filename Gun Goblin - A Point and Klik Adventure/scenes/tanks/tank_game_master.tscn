@@ -99,7 +99,7 @@ level_scenes = Array[PackedScene]([ExtResource("2_03nb0"), ExtResource("3_ggqq2"
 tank_driver_scene = ExtResource("5_nhs2n")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812611, -0.133531, 27.4917, 32.3904)
+transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812612, -0.133531, 25.2595, 32.3904)
 projection = 1
 current = true
 fov = 118.125
@@ -110,14 +110,16 @@ transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 
 
 [node name="OneTankLeftTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="DisplayText" type="Label3D" parent="."]
 transform = Transform3D(15.4127, 0, 0, 0, 15.4127, 0, 0, 0, 15.4127, 0, 22.5988, 0)
 billboard = 1
 font_size = 64
 
-[node name="ResultsTimer" type="Timer" parent="."]
+[node name="NewRoundTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="Victory" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_ap71x")
@@ -147,5 +149,63 @@ trail_lifetime = 5.58
 process_material = SubResource("ParticleProcessMaterial_ld77h")
 draw_pass_1 = SubResource("BoxMesh_orren")
 
+[node name="RoundStartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="TextDurationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Ready" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="Go" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="Scores" type="Node3D" parent="."]
+
+[node name="Player1" type="Label3D" parent="Scores"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.039, 12.649, -10.295)
+billboard = 1
+modulate = Color(0, 0.686275, 0.686275, 1)
+outline_modulate = Color(0, 0.29, 0.29, 1)
+text = "P1:
+0"
+font_size = 287
+outline_size = 122
+
+[node name="Player2" type="Label3D" parent="Scores"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.039, 12.649, -10.295)
+billboard = 1
+modulate = Color(1, 0.498039, 0.219608, 1)
+outline_modulate = Color(0.47, 0.23171, 0.1034, 1)
+text = "P2:
+0"
+font_size = 287
+outline_size = 122
+
+[node name="Player3" type="Label3D" parent="Scores"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.039, 12.649, 37.815)
+billboard = 1
+modulate = Color(0.299796, 0.784014, 3.85046e-07, 1)
+outline_modulate = Color(0.145667, 0.38, 0, 1)
+text = "P3:
+0"
+font_size = 287
+outline_size = 122
+
+[node name="Player4" type="Label3D" parent="Scores"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.039, 12.649, 37.815)
+billboard = 1
+modulate = Color(1, 0.451692, 0.608902, 1)
+outline_modulate = Color(0.6, 0.27, 0.3635, 1)
+text = "P4:
+0"
+font_size = 287
+outline_size = 122
+
 [connection signal="timeout" from="OneTankLeftTimer" to="." method="_on_one_tank_left_timer_timeout"]
-[connection signal="timeout" from="ResultsTimer" to="." method="_on_results_timer_timeout"]
+[connection signal="timeout" from="NewRoundTimer" to="." method="_on_round_over_timer_timeout"]
+[connection signal="timeout" from="NewRoundTimer" to="." method="_on_new_round_timer_timeout"]
+[connection signal="timeout" from="RoundStartTimer" to="." method="_on_round_start_timer_timeout"]
+[connection signal="timeout" from="TextDurationTimer" to="." method="_on_text_duration_timer_timeout"]
