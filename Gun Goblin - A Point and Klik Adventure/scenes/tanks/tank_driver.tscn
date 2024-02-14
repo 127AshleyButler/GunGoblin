@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=42 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -250,6 +250,15 @@ streams_count = 1
 stream_0/stream = ExtResource("8_ymsnc")
 stream_0/weight = 1.0
 
+[sub_resource type="Curve" id="Curve_2tdhh"]
+min_value = -10.0
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 3.37595, 0, 1, Vector2(0.578846, 1.95415), 0.0, 0.0, 0, 0, Vector2(0.990385, 9.40401), 0.0, 0.0, 0, 0, Vector2(1, 0), -978.013, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxfe3"]
+curve = SubResource("Curve_2tdhh")
+
 [sub_resource type="Curve" id="Curve_7dx83"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.171154, 0.215094), 0.0, 0.0, 0, 0, Vector2(0.771154, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -262,6 +271,9 @@ emission_shape_offset = Vector3(0, 0, 1.755)
 emission_shape = 2
 emission_sphere_radius = 1.0
 gravity = Vector3(0, 0, 0)
+radial_accel_min = -4.8
+radial_accel_max = -0.5
+radial_accel_curve = SubResource("CurveTexture_yxfe3")
 scale_curve = SubResource("CurveTexture_j4o2f")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72usa"]
@@ -336,7 +348,8 @@ stream_1/stream = ExtResource("17_tw765")
 stream_1/weight = 1.0
 
 [node name="TankDriver" type="CharacterBody3D" groups=["TankDriver"]]
-collision_layer = 5
+collision_layer = 20
+collision_mask = 17
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
 mine_scene = ExtResource("3_w853r")
@@ -373,9 +386,11 @@ libraries = {
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_wc2fb")
+bus = &"SFX"
 
 [node name="FireMine" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_4xi6g")
+bus = &"SFX"
 
 [node name="Charging" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, 1.88335)
@@ -385,21 +400,17 @@ speed_scale = 4.8
 process_material = SubResource("ParticleProcessMaterial_v4v88")
 draw_pass_1 = SubResource("SphereMesh_0fgtc")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50295, 1.94974)
-strength = 10.28
-attenuation = 2.14355
-radius = 3.3
-
 [node name="ChargeTierIncreased" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_psfxl")
 volume_db = -19.0
 max_db = 0.0
+bus = &"SFX"
 
 [node name="MineLayed" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_p1voy")
 volume_db = -5.0
 pitch_scale = 1.3
+bus = &"SFX"
 
 [node name="ChargeTierIncreasedParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -430,6 +441,7 @@ shape = SubResource("BoxShape3D_wktrw")
 
 [node name="Scream" type="AudioStreamPlayer3D" parent="Debris/Peasint"]
 stream = SubResource("AudioStreamRandomizer_brr4j")
+bus = &"SFX"
 doppler_tracking = 2
 
 [node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]

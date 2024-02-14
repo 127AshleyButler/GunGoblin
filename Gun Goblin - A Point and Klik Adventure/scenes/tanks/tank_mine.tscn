@@ -935,6 +935,7 @@ stream = SubResource("AudioStreamRandomizer_6bqll")
 volume_db = -5.0
 max_db = 2.81
 pitch_scale = 0.84
+bus = &"SFX"
 
 [node name="Primed" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0.814113, 0, 0, 0, 0.814113, 0, 0, 0, 0.814113, 0, 0, 0)
@@ -942,12 +943,14 @@ stream = SubResource("AudioStreamRandomizer_28wvx")
 volume_db = -10.537
 max_db = 2.81
 pitch_scale = 1.4
+bus = &"SFX"
 
 [node name="Explosion" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0.814113, 0, 0, 0, 0.814113, 0, 0, 0, 0.814113, 0, 0, 0)
 stream = SubResource("AudioStreamRandomizer_fcui8")
 volume_db = 5.18
 pitch_scale = 1.22
+bus = &"SFX"
 
 [node name="Debris" type="GPUParticles3D" parent="."]
 emitting = false
@@ -963,7 +966,7 @@ libraries = {
 
 [node name="DetectionRadius" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 9
+collision_mask = 25
 monitoring = false
 monitorable = false
 
@@ -975,7 +978,7 @@ shape = SubResource("CapsuleShape3D_8r82i")
 [node name="ExplosionRadius" type="Area3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 visible = false
-collision_mask = 15
+collision_mask = 31
 monitoring = false
 monitorable = false
 

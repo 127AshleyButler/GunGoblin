@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://bq3mc4atgatic"]
+[gd_scene load_steps=22 format=3 uid="uid://bq3mc4atgatic"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_game_master.gd" id="1_bew4q"]
-[ext_resource type="PackedScene" uid="uid://wywoghw4r2hb" path="res://scenes/tanks/level_simple_geometry.tscn" id="2_03nb0"]
+[ext_resource type="PackedScene" uid="uid://wywoghw4r2hb" path="res://scenes/tanks/level_simple_geometry.tscn" id="2_yqwkx"]
 [ext_resource type="PackedScene" uid="uid://cufjm0tf0ouma" path="res://scenes/tanks/level_mob_grinder.tscn" id="3_ggqq2"]
 [ext_resource type="PackedScene" uid="uid://ds3hctx353mf0" path="res://scenes/tanks/tank_level_basic.tscn" id="4_lsslv"]
 [ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="5_nhs2n"]
+[ext_resource type="PackedScene" uid="uid://dym73nwkj4utc" path="res://scenes/tanks/level_garf_shrine.tscn" id="5_ueguf"]
 [ext_resource type="AudioStream" uid="uid://b6q8fmowedblj" path="res://sounds/SFX/partyhorn.wav" id="6_fkv02"]
 [ext_resource type="Material" uid="uid://p1qych564ct7" path="res://shaders/confetti.tres" id="7_hnlb2"]
 
@@ -95,7 +96,7 @@ size = Vector3(1, 0.03, 1)
 
 [node name="tank_game_master" type="Node3D"]
 script = ExtResource("1_bew4q")
-level_scenes = Array[PackedScene]([ExtResource("2_03nb0"), ExtResource("3_ggqq2"), ExtResource("4_lsslv")])
+level_scenes = Array[PackedScene]([ExtResource("2_yqwkx"), ExtResource("3_ggqq2"), ExtResource("4_lsslv"), ExtResource("5_ueguf")])
 tank_driver_scene = ExtResource("5_nhs2n")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -104,9 +105,6 @@ projection = 1
 current = true
 fov = 118.125
 size = 37.76
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
 
 [node name="OneTankLeftTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -124,6 +122,7 @@ one_shot = true
 [node name="Victory" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_ap71x")
 volume_db = -10.551
+bus = &"SFX"
 
 [node name="Confetti2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.53483, 0)
@@ -205,7 +204,7 @@ font_size = 287
 outline_size = 122
 
 [connection signal="timeout" from="OneTankLeftTimer" to="." method="_on_one_tank_left_timer_timeout"]
-[connection signal="timeout" from="NewRoundTimer" to="." method="_on_round_over_timer_timeout"]
 [connection signal="timeout" from="NewRoundTimer" to="." method="_on_new_round_timer_timeout"]
+[connection signal="timeout" from="NewRoundTimer" to="." method="_on_round_over_timer_timeout"]
 [connection signal="timeout" from="RoundStartTimer" to="." method="_on_round_start_timer_timeout"]
 [connection signal="timeout" from="TextDurationTimer" to="." method="_on_text_duration_timer_timeout"]

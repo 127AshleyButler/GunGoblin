@@ -1,0 +1,173 @@
+[gd_scene load_steps=18 format=3 uid="uid://o1kolv3p78q4"]
+
+[ext_resource type="Texture2D" uid="uid://wliqomqyhjn2" path="res://textures/Tanks/Fire.png" id="1_7yxjw"]
+[ext_resource type="Script" path="res://scripts/tanks/fire_projectile.gd" id="1_fbdpy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bvdb5"]
+friction = 0.0
+
+[sub_resource type="Animation" id="Animation_0vfch"]
+resource_name = "expire"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D/AnimatedSprite3D:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_an3ed"]
+resource_name = "spawn"
+length = 0.5
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 1.38976, 1.38976, 1.38976)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewhd5"]
+_data = {
+"expire": SubResource("Animation_0vfch"),
+"spawn": SubResource("Animation_an3ed")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2oph6"]
+radius = 0.370575
+height = 1.58849
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndayl"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(0, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0akk"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(29, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfyyg"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(58, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcqkp"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(87, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk13u"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(116, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1dxn"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(145, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqwl8"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(174, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoxbt"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(203, 0, 29, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf2cg"]
+atlas = ExtResource("1_7yxjw")
+region = Rect2(232, 0, 29, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jghxh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndayl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0akk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfyyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcqkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk13u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1dxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqwl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoxbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf2cg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="fire_projectile" type="RigidBody3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 9
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_bvdb5")
+script = ExtResource("1_fbdpy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ewhd5")
+}
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24983, 0)
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CapsuleShape3D_2oph6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.0407466, 0)
+shape = SubResource("CapsuleShape3D_2oph6")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="CollisionShape3D" groups=["Projectile"]]
+transform = Transform3D(10.7872, 0, 0, 0, 10.7872, 0, 0, 0, 2.03532, 0, 0.209083, 0)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_jghxh")
+frame_progress = 0.701254
+speed_scale = 2.0
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="LaunchDirection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.00027)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

@@ -36,3 +36,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.186, 16.858)
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152405, 2.0918, 0.0520935)
 size = Vector3(64.3553, 6.18359, 62.3082)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)

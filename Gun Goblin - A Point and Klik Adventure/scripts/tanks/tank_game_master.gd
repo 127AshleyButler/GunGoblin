@@ -20,6 +20,10 @@ func select_random_level():
 		selected_level.queue_free()
 	assert(level_scenes.size() > 0)
 	selected_level = level_scenes.pick_random().instantiate()
+	#selected_level = level_scenes[3].instantiate()
+	# If the level is cavernous, enable a reverb effect.
+	AudioServer.set_bus_effect_enabled(1, 0, selected_level.is_in_group("Cavernous"))
+		
 	print("Selected level:", selected_level)
 	add_child(selected_level)
 

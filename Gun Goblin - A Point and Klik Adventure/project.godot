@@ -201,12 +201,8 @@ lay_mine4={
 3d_physics/layer_2="Mine"
 3d_physics/layer_3="Bullet"
 3d_physics/layer_4="Debris"
-3d_physics/layer_5="klik"
+3d_physics/layer_5="Players"
 
 [physics]
 
 3d/default_gravity=8.0
-
-[rendering]
-
-environment/defaults/default_clear_color=Color(0.207843, 0.670588, 0.74902, 1)
