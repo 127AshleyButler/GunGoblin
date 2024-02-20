@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 12.0
+const SPEED = 12.0 * 1.404
 var bounces = 1
 ## used to determine how powerful of a shot the bullet is
 var charge_tier = 0
@@ -25,20 +25,23 @@ func _physics_process(delta):
 		look_at(global_position + velocity, Vector3.UP, true)
 		#rotation.x = 0
 		#velocity = velocity.normalized() * velocity_magnitutde
-		if collision.get_collider().has_method("hit"):
+		if collision.get_collider().has_method("hit_with_love"):
 			#collision.get_collider().hit()
 			#hit()
 			if (collision.get_collider().get_rid() == parent_id) and can_hit_parent:
-				collision.get_collider().hit()
-				hit()
+				collision.get_collider().hit_with_love()
+				vanish()
 			elif collision.get_collider().get_rid() != parent_id:
-				collision.get_collider().hit()
-				hit()
+				collision.get_collider().hit_with_love()
+				vanish()
 		else: # Hit a wall (probably), handle bouncing
 			handle_bouncing()
 
 func hit():
 	$AnimationPlayer.play("destroy")
+	
+func vanish():
+	$AnimationPlayer.play("vanish")
 
 func handle_bouncing():
 	if bounces > 0:

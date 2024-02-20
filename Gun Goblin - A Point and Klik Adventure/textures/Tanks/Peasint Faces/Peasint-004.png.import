@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7gj6eri8xncs"
-path.s3tc="res://.godot/imported/mine shadow.png-d88454115a0119cb0aba1cd8cf02b955.s3tc.ctex"
+uid="uid://dyv4gyd0yh5eh"
+path.s3tc="res://.godot/imported/Peasint-004.png-74bd2a603db53bc41c923f69fdda66a0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Tanks/mine shadow.png"
-dest_files=["res://.godot/imported/mine shadow.png-d88454115a0119cb0aba1cd8cf02b955.s3tc.ctex"]
+source_file="res://textures/Tanks/Peasint Faces/Peasint-004.png"
+dest_files=["res://.godot/imported/Peasint-004.png-74bd2a603db53bc41c923f69fdda66a0.s3tc.ctex"]
 
 [params]
 

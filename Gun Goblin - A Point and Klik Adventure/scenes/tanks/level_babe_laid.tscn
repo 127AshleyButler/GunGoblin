@@ -1,0 +1,327 @@
+[gd_scene load_steps=13 format=3 uid="uid://dws2ihqass11q"]
+
+[ext_resource type="PackedScene" uid="uid://dreq6g3c0niyr" path="res://models/tank/levels/level_garf_shrine.glb" id="1_m3ixt"]
+[ext_resource type="PackedScene" uid="uid://lffa48far1id" path="res://scenes/tanks/spike_top.tscn" id="2_7guwd"]
+[ext_resource type="Script" path="res://scripts/tanks/level_babe_laid.gd" id="2_okrxt"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_3i4bh"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ntuve"]
+sun_disk_scale = 21.87
+ground_color = Color(0.262745, 0.2, 0.12549, 1)
+energy_multiplier = 1.8
+
+[sub_resource type="Sky" id="Sky_ij1g1"]
+sky_material = SubResource("PhysicalSkyMaterial_ntuve")
+
+[sub_resource type="Environment" id="Environment_rroin"]
+background_mode = 2
+sky = SubResource("Sky_ij1g1")
+
+[sub_resource type="Animation" id="Animation_l751b"]
+resource_name = "initial"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spike_top:is_active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spike_top2:is_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("spike_top3:is_active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("spike_top4:is_active")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("spike_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpikeActivationTimer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [-1],
+"method": &"start"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("spike_top/SpotLight3D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_6l4gh"]
+resource_name = "activate_spike2"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spike_top2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spike_top2/SpotLight3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jo702"]
+resource_name = "activate_spike3"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spike_top3")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spike_top3/SpotLight3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7jukb"]
+resource_name = "activate_spike4"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spike_top4")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spike_top4/SpotLight3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpikeActivationTimer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1534"]
+_data = {
+"activate_spike2": SubResource("Animation_6l4gh"),
+"activate_spike3": SubResource("Animation_jo702"),
+"activate_spike4": SubResource("Animation_7jukb"),
+"initial": SubResource("Animation_l751b")
+}
+
+[node name="level_babe_laid" groups=["Cavernous"] instance=ExtResource("1_m3ixt")]
+script = ExtResource("2_okrxt")
+
+[node name="Pillar" parent="." index="0"]
+visible = false
+
+[node name="garf" parent="." index="1"]
+visible = false
+
+[node name="PlayerSpawn1" type="Node3D" parent="." index="4" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.858, 0.186, -16.014)
+
+[node name="PlayerSpawn2" type="Node3D" parent="." index="5" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.118, 0.186, 15.4456)
+
+[node name="PlayerSpawn3" type="Node3D" parent="." index="6" groups=["PlayerSpawn"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 15.7018, 0.186, -16.858)
+
+[node name="PlayerSpawn4" type="Node3D" parent="." index="7" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6423, 0.186, 16.858)
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152405, 2.0918, 0.0520935)
+size = Vector3(64.3553, 6.18359, 62.3082)
+
+[node name="spike_top" parent="." index="9" node_paths=PackedStringArray("target_location") instance=ExtResource("2_7guwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 6.904, -25)
+target_location = NodePath("../Top Center")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="spike_top" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.27333, 0)
+visible = false
+light_color = Color(0.807843, 0, 0.352941, 1)
+light_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 8.49446
+spot_angle = 23.4263
+
+[node name="spike_top2" parent="." index="10" node_paths=PackedStringArray("target_location") instance=ExtResource("2_7guwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 6.904, 25)
+target_location = NodePath("../Top Center")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="spike_top2" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.27333, 0)
+visible = false
+light_color = Color(0.215686, 0.521569, 0, 1)
+light_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 8.49446
+spot_angle = 23.4263
+
+[node name="spike_top3" parent="." index="11" node_paths=PackedStringArray("target_location") instance=ExtResource("2_7guwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 6.9, -25)
+target_location = NodePath("../Top Center")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="spike_top3" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.27333, 0)
+visible = false
+light_color = Color(0, 0.45098, 0.772549, 1)
+light_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 8.49446
+spot_angle = 23.4263
+
+[node name="spike_top4" parent="." index="12" node_paths=PackedStringArray("target_location") instance=ExtResource("2_7guwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 6.904, 25)
+target_location = NodePath("../Top Center")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="spike_top4" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.27333, 0)
+visible = false
+light_color = Color(0.65098, 0.352941, 0, 1)
+light_energy = 16.0
+light_size = 1.0
+light_specular = 16.0
+spot_range = 8.49446
+spot_angle = 23.4263
+
+[node name="Top Center" type="Node3D" parent="." index="13"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Top Center" index="0"]
+mesh = SubResource("PrismMesh_3i4bh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="14"]
+environment = SubResource("Environment_rroin")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.7847, 0)
+light_color = Color(0.733333, 0.686275, 0.870588, 1)
+light_energy = 9.303
+light_specular = 7.512
+spot_range = 48.5091
+spot_angle = 70.3125
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="16"]
+libraries = {
+"": SubResource("AnimationLibrary_i1534")
+}
+
+[node name="SpikeActivationTimer" type="Timer" parent="." index="17"]
+wait_time = 10.0
+
+[connection signal="timeout" from="SpikeActivationTimer" to="." method="_on_spike_activation_timer_timeout"]

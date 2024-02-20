@@ -41,15 +41,15 @@ func hit():
 	$AnimationPlayer.speed_scale = 1.75
 	get_ready_to_explode()
 	
+func _on_detection_radius_body_entered(body):
+	if mine_active:
+		get_ready_to_explode()
+		
 func get_ready_to_explode():
 	if mine_about_to_explode:
 		return
 	$AnimationPlayer.play("blinking")
 	mine_about_to_explode = true
-	
-func _on_detection_radius_body_entered(body):
-	if mine_active:
-		get_ready_to_explode()
 
 func _on_activation_timer_timeout():
 	if mine_active:

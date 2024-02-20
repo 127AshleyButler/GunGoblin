@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b380wq4ko3hvm"]
+[gd_scene load_steps=30 format=3 uid="uid://b380wq4ko3hvm"]
 
 [ext_resource type="ArrayMesh" uid="uid://cm6q0s4nyfblr" path="res://models/tank/heart_bullet.tres" id="1_f35pj"]
+[ext_resource type="Script" path="res://scripts/tanks/heart_bullet.gd" id="1_pm3bs"]
 [ext_resource type="AudioStream" uid="uid://cq8x5jcydpsno" path="res://sounds/SFX/highpop.wav" id="2_uykw5"]
 [ext_resource type="AudioStream" uid="uid://c1om80xfgyk4s" path="res://sounds/SFX/lowpop.wav" id="3_spwnc"]
+[ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="3_tdilb"]
 [ext_resource type="AudioStream" uid="uid://o36f6q4wwdhg" path="res://sounds/SFX/snowball-smash-1-36743.mp3" id="4_6b285"]
-[ext_resource type="Texture2D" uid="uid://cnnd6jq2dhopv" path="res://textures/Tanks/bullet shadow.png" id="5_d5ihq"]
 [ext_resource type="ArrayMesh" uid="uid://cnkvvpn38mish" path="res://models/tank/heart_bullet_broken.tres" id="5_gab2k"]
 
 [sub_resource type="Curve" id="Curve_7617y"]
@@ -31,7 +32,7 @@ color = Color(0.729412, 0.729412, 0.729412, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g53ls"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.772549)
+albedo_color = Color(0.737255, 0.14902, 0.329412, 0.772549)
 
 [sub_resource type="SphereMesh" id="SphereMesh_miyiu"]
 material = SubResource("StandardMaterial3D_g53ls")
@@ -53,6 +54,15 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("3_spwnc")
 stream_1/weight = 1.0
 
+[sub_resource type="Curve" id="Curve_eivq8"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dhdfp"]
+curve = SubResource("Curve_eivq8")
+
 [sub_resource type="Curve" id="Curve_l5725"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0788462, 0.9851), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -61,12 +71,20 @@ point_count = 3
 curve = SubResource("Curve_l5725")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5jatw"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(0, 0, 0)
+angle_min = -11.5
+angle_max = 172.8
+angle_curve = SubResource("CurveTexture_dhdfp")
 direction = Vector3(0, 0, -1)
 spread = 59.81
+flatness = 0.795
 initial_velocity_min = 0.25
 initial_velocity_max = 5.0
 angular_velocity_min = -388.67
 angular_velocity_max = 369.56
+scale_min = 0.5
+scale_max = 0.5
 scale_curve = SubResource("CurveTexture_ebsd3")
 collision_mode = 1
 collision_friction = 0.0
@@ -89,22 +107,266 @@ disable_receive_shadows = true
 [sub_resource type="PrismMesh" id="PrismMesh_7dfqs"]
 material = SubResource("StandardMaterial3D_peupt")
 
-[node name="heart_bullet" type="CharacterBody3D"]
+[sub_resource type="Animation" id="Animation_oy4lq"]
+resource_name = "destroy"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Debris:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"decrement_parent_bullet_count"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("model:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RocketTrail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smash:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_p5x1l"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Debris:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kdc3o"]
+resource_name = "idle_wavering"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model/Trail:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("model/SmokeTrail:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8lde7"]
+resource_name = "vanish"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Debris:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"decrement_parent_bullet_count"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("model:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RocketTrail:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ki4iv"]
+_data = {
+"destroy": SubResource("Animation_oy4lq"),
+"idle": SubResource("Animation_p5x1l"),
+"idle_wavering": SubResource("Animation_kdc3o"),
+"vanish": SubResource("Animation_8lde7")
+}
+
+[node name="heart_bullet" type="CharacterBody3D" groups=["Projectile"]]
+top_level = true
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_pm3bs")
 
 [node name="model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.24131, 0, 0, 0, -1.0548e-08, -0.24131, 0, 0.24131, -1.0548e-08, 0, 0, 0)
+transform = Transform3D(0.4092, 0, 0, 0, -3.34882e-08, -0.4092, 0, 0.766122, -1.78867e-08, 0, 0, -0.185044)
 mesh = ExtResource("1_f35pj")
 skeleton = NodePath("")
 
 [node name="Trail" type="GPUParticles3D" parent="model"]
-transform = Transform3D(4.14404, 0, 0, 0, -3.83693e-13, 4.14404, 0, -4.14404, -3.83693e-13, -0.0408581, -0.251619, 0.286324)
+transform = Transform3D(4.14404, 0, 0, 0, -4.40536e-13, 4.14404, 0, -4.14404, -4.40536e-13, -0.0408581, -0.25162, 0.286324)
 randomness = 0.11
 process_material = SubResource("ParticleProcessMaterial_sqdm2")
 draw_pass_1 = SubResource("SphereMesh_miyiu")
 
 [node name="Shadow" type="Decal" parent="model"]
-transform = Transform3D(-1.46548e-07, -7.94019e-08, 1.8165, 1.67631, 7.94019e-08, 1.58804e-07, -7.3274e-08, 1.8165, 7.94018e-08, 3.09098e-09, 0.260036, 4.04384)
-texture_albedo = ExtResource("5_d5ihq")
+transform = Transform3D(-1.5876e-07, -1.37104e-07, 1.816, 1.816, 1.37104e-07, 1.5876e-07, -1.37104e-07, 1.816, 1.37104e-07, 3.09098e-09, 0.260036, 4.04384)
+texture_albedo = ExtResource("3_tdilb")
 
 [node name="SmokeTrail" type="GPUParticles3D" parent="model"]
 transform = Transform3D(4.14404, 0, 0, 0, -3.83693e-13, 4.14404, 0, -4.14404, -3.83693e-13, -0.0408581, -0.251619, 0.286324)
@@ -116,7 +378,6 @@ draw_pass_1 = SubResource("SphereMesh_0s7fn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.387, 0, 0, 0, 0.387, 0, 0, 0, 0.387, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_to2u7")
-disabled = true
 
 [node name="Plink" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0.712164, 0, 0, 0, 0.712164, 0, 0, 0, 0.712164, 0, 0, 0)
@@ -127,12 +388,15 @@ pitch_scale = 0.84
 bus = &"SFX"
 
 [node name="Debris" type="GPUParticles3D" parent="."]
-explosiveness = 0.88
+transform = Transform3D(1.02354, 0, 0, 0, -4.43356e-08, -1.01428, 0, 1.01428, -4.43356e-08, 0, 0, 0)
+emitting = false
+amount = 2
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
 randomness = 0.27
 process_material = SubResource("ParticleProcessMaterial_5jatw")
-draw_passes = 2
 draw_pass_1 = ExtResource("5_gab2k")
-draw_pass_2 = ExtResource("5_gab2k")
 
 [node name="Smash" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_exa7d")
@@ -148,3 +412,8 @@ mesh = SubResource("PrismMesh_7dfqs")
 [node name="ExpirationTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ki4iv")
+}

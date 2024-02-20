@@ -6,24 +6,44 @@ extends Node3D
 var selected_level
 var player_count
 var alive_players = []
+var unloved_players = []
 var scores = {}
 var player_objects = []
 var round_over = false
+var level_num = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DebugTools.next_level.connect(next_level)
+	DebugTools.prev_level.connect(prev_level)
 	initiate_players()
+	select_random_level()
 	new_round()
 
 func select_random_level():
+	level_num = randi() % level_scenes.size()
+	select_level(level_num)
+	new_round()
+
+func next_level():
+	level_num += 1
+	select_level(level_num)
+	new_round()
+	
+func prev_level():
+	level_num -= 1
+	select_level(level_num)
+	new_round()
+
+func select_level(level = 0):
 	if (selected_level):
 		selected_level.queue_free()
 	assert(level_scenes.size() > 0)
-	selected_level = level_scenes.pick_random().instantiate()
-	#selected_level = level_scenes[3].instantiate()
+	level %= level_scenes.size()
+	level_num = level
+	selected_level = level_scenes[level].instantiate()
 	# If the level is cavernous, enable a reverb effect.
 	AudioServer.set_bus_effect_enabled(1, 0, selected_level.is_in_group("Cavernous"))
-		
 	print("Selected level:", selected_level)
 	add_child(selected_level)
 
@@ -34,6 +54,7 @@ func initiate_players():
 		var new_player = tank_driver_scene.instantiate()
 		new_player.player_num = str(player_num)
 		new_player.die.connect(_on_tank_driver_die)
+		new_player.loved.connect(_on_tank_driver_loved)
 		new_player.name = "Player" + str(player_num)
 		new_player.update_label(str(player_num))
 		if new_player.name in scores:
@@ -47,8 +68,10 @@ func respawn_players():
 	var spawn_locations = ["PlayerSpawn1", "PlayerSpawn2", "PlayerSpawn3", "PlayerSpawn4"]
 	spawn_locations.shuffle()
 	alive_players = []
+	unloved_players = []
 	for player in player_objects:
 		alive_players.append(int(player.player_num))
+		unloved_players.append(int(player.player_num))
 		player.set_physics_process(true)
 		var new_player_spawn = selected_level.get_node(spawn_locations.pop_front())
 		if (new_player_spawn):
@@ -61,11 +84,12 @@ func new_round():
 	round_over = false
 	$Confetti.restart()
 	$Confetti.emitting = false
-	select_random_level()
 	respawn_players()
 	display_text("Ready?")
 	$Ready.play()
 	$RoundStartTimer.start()
+	$OneTankLeftTimer.stop()
+	$NewRoundTimer.stop()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -75,18 +99,32 @@ func _on_tank_driver_die(player_num):
 	if (round_over):
 		print("Player ", player_num, " has perished, but the round was already over.")
 		return
-	var dead_player = alive_players.find(player_num)
-	alive_players.remove_at(dead_player)
+	alive_players.remove_at(alive_players.find(player_num))
+	unloved_players.remove_at(unloved_players.find(player_num))
 	print("Player ", player_num, " has perished!")
 	if alive_players.size() <= 1:
+		$OneTankLeftTimer.start()
+		
+func _on_tank_driver_loved(player_num):
+	if (round_over):
+		print("Player ", player_num, " received love, but the round was already over.")
+		return
+	print("Player ", player_num, " received love!")
+	unloved_players.remove_at(unloved_players.find(player_num))
+	if unloved_players.size() <= 0:
 		$OneTankLeftTimer.start()
 
 func _on_one_tank_left_timer_timeout():
 	round_over = true
 	if alive_players.size() == 0:
 		display_text("Oh, a tie...")
+	elif unloved_players.size() <= 0 and alive_players.size() >= 2:
+		display_text("Love wins!")
+		for player in alive_players:
+			increment_score("Player" + str(player))
 	else:
 		$Victory.play()
+		assert(alive_players.size() == 1)
 		increment_score("Player" + str(alive_players.front()))
 		display_confetti("Player" + str(alive_players.front()))
 		display_text("Player " + str(alive_players.front()) + " good job!!!")
@@ -111,8 +149,9 @@ func display_confetti(node):
 	$Confetti.emitting = true
 
 func _on_new_round_timer_timeout():
+	select_random_level()	
 	new_round()
-
+	
 func _on_round_start_timer_timeout():
 	display_text("Go!", 1.5)
 	$Go.play()

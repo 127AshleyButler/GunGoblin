@@ -11,7 +11,7 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.117308, 1), 0.0, 0.0, 0, 0, Vector2(0.878846, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_r0dsk"]
+[sub_resource type="CurveTexture" id="CurveTexture_45qcf"]
 curve = SubResource("Curve_ytcu6")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v1cfg"]
@@ -26,21 +26,21 @@ damping_min = 6.452
 damping_max = 6.452
 scale_min = 0.3
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_r0dsk")
+scale_curve = SubResource("CurveTexture_45qcf")
 color = Color(0.729412, 0.729412, 0.729412, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g53ls"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh8sl"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.772549)
 
 [sub_resource type="SphereMesh" id="SphereMesh_wewvq"]
-material = SubResource("StandardMaterial3D_g53ls")
+material = SubResource("StandardMaterial3D_oh8sl")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4due"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrrnf"]
 albedo_color = Color(0.494118, 0.494118, 0.494118, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_26pn0"]
-material = SubResource("StandardMaterial3D_u4due")
+material = SubResource("StandardMaterial3D_jrrnf")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46mfr"]
 height = 3.858
@@ -346,7 +346,7 @@ stream_1/weight = 1.0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0788462, 0.9851), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ebsd3"]
+[sub_resource type="CurveTexture" id="CurveTexture_3f7x8"]
 curve = SubResource("Curve_jocf7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1mfq4"]
@@ -356,19 +356,19 @@ initial_velocity_min = 0.25
 initial_velocity_max = 5.0
 angular_velocity_min = -388.67
 angular_velocity_max = 369.56
-scale_curve = SubResource("CurveTexture_ebsd3")
+scale_curve = SubResource("CurveTexture_3f7x8")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.42
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfpo6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdasb"]
 albedo_color = Color(0.85098, 0.34902, 0.176471, 1)
 metallic = 1.0
 metallic_specular = 0.11
 roughness = 0.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_c1gg4"]
-material = SubResource("StandardMaterial3D_vfpo6")
+material = SubResource("StandardMaterial3D_mdasb")
 left_to_right = 0.0
 size = Vector3(0.205, 0.215, 0.16)
 
@@ -378,7 +378,7 @@ streams_count = 1
 stream_0/stream = ExtResource("4_h4tl2")
 stream_0/weight = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_peupt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quaty"]
 transparency = 1
 albedo_color = Color(0.862745, 0.447059, 0.0705882, 0.772549)
 emission_enabled = true
@@ -387,7 +387,7 @@ emission_energy_multiplier = 3.3
 disable_receive_shadows = true
 
 [sub_resource type="PrismMesh" id="PrismMesh_vdf7u"]
-material = SubResource("StandardMaterial3D_peupt")
+material = SubResource("StandardMaterial3D_quaty")
 
 [node name="tank_bullet" type="CharacterBody3D" groups=["Projectile"]]
 transform = Transform3D(1.40417, 0, 0, 0, 1.40417, 0, 0, 0, 1.40417, 0, 0, 0)
@@ -401,7 +401,7 @@ slide_on_ceiling = false
 script = ExtResource("1_lhq00")
 
 [node name="Bullet" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.139108, 0, 0, 0, -6.0806e-09, -0.139108, 0, 0.139108, -6.0806e-09, 0, 0, 0)
+transform = Transform3D(0.139108, 0, 0, 0, -5.0357e-07, -0.139108, 0, 0.139108, -5.0357e-07, 0, 0, 0)
 mesh = ExtResource("2_plekk")
 skeleton = NodePath("")
 

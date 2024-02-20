@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=55 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
+[ext_resource type="PackedScene" uid="uid://b380wq4ko3hvm" path="res://scenes/tanks/heart_bullet.tscn" id="2_e4da2"]
 [ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="2_umt7d"]
 [ext_resource type="PackedScene" uid="uid://csassjfat0bdr" path="res://scenes/tanks/tank_mine.tscn" id="3_w853r"]
 [ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="4_do5q2"]
@@ -15,8 +16,15 @@
 [ext_resource type="AudioStream" uid="uid://8o40tpyds82d" path="res://sounds/SFX/peasint_tank_die1.wav" id="12_vjth7"]
 [ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_j1keq"]
 [ext_resource type="AudioStream" uid="uid://b7hli3eecmsao" path="res://sounds/SFX/peasint_tank_die2.wav" id="13_m1nb8"]
+[ext_resource type="Texture2D" uid="uid://dyv4gyd0yh5eh" path="res://textures/Tanks/Peasint Faces/Peasint-004.png" id="15_avcgx"]
 [ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="16_nstyx"]
 [ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="17_tw765"]
+[ext_resource type="AudioStream" uid="uid://dshjp34eolguu" path="res://sounds/SFX/Peasint_Tank_Kiss1.wav" id="19_6iiaq"]
+[ext_resource type="AudioStream" uid="uid://c34xk0ol112sl" path="res://sounds/SFX/Peasint_Tank_Kiss2.wav" id="20_tvrdw"]
+[ext_resource type="AudioStream" uid="uid://bgeh1t77y8ant" path="res://sounds/SFX/Peasint_Tank_Kiss3.wav" id="21_ff4t8"]
+[ext_resource type="AudioStream" uid="uid://ii4rgfs7w8tj" path="res://sounds/SFX/Peasint_Tank_Happy1.wav" id="22_o7aql"]
+[ext_resource type="AudioStream" uid="uid://rjmpj7fkfq" path="res://sounds/SFX/Peasint_Tank_Happy2.wav" id="23_oix2h"]
+[ext_resource type="ArrayMesh" uid="uid://cm6q0s4nyfblr" path="res://models/tank/heart_bullet.tres" id="25_bbkcw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
@@ -228,10 +236,38 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_ls5dd"]
+resource_name = "love"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Happy:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HappyParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
 "die": SubResource("Animation_tytrd"),
-"idle": SubResource("Animation_dbl8a")
+"idle": SubResource("Animation_dbl8a"),
+"love": SubResource("Animation_ls5dd")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
@@ -332,6 +368,17 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("13_m1nb8")
 stream_1/weight = 1.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmbju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_avcgx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_eocrc"]
 size = Vector3(1.225, 0.82, 1.865)
 
@@ -347,12 +394,42 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("17_tw765")
 stream_1/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0bmqg"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("19_6iiaq")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("20_tvrdw")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("21_ff4t8")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6ynkm"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("22_o7aql")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("23_oix2h")
+stream_1/weight = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q80m7"]
+particle_flag_rotate_y = true
+emission_shape = 2
+emission_sphere_radius = 1.0
+angular_velocity_min = -334.08
+angular_velocity_max = 115.2
+gravity = Vector3(0, 5, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_j4o2f")
+
 [node name="TankDriver" type="CharacterBody3D" groups=["TankDriver"]]
 collision_layer = 20
 collision_mask = 17
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
 mine_scene = ExtResource("3_w853r")
+heart_bullet_scene = ExtResource("2_e4da2")
 shooting_delay = 0.15
 max_concurrent_mines = 99
 
@@ -365,7 +442,6 @@ shape = SubResource("CapsuleShape3D_dewea")
 [node name="PlayerLabel" type="Label3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 billboard = 1
-alpha_cut = 2
 modulate = Color(1, 1, 1, 0.588235)
 outline_modulate = Color(0, 0, 0, 0.588235)
 text = "P1
@@ -444,6 +520,10 @@ stream = SubResource("AudioStreamRandomizer_brr4j")
 bus = &"SFX"
 doppler_tracking = 2
 
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Debris/Peasint"]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.47573, 0.794939)
+sprite_frames = SubResource("SpriteFrames_bmbju")
+
 [node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
 collision_mask = 13
@@ -474,3 +554,20 @@ shape = SubResource("CylinderShape3D_aujq1")
 stream = SubResource("AudioStreamRandomizer_gst42")
 pitch_scale = 1.2
 bus = &"SFX"
+
+[node name="FireHeart" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0bmqg")
+bus = &"SFX"
+
+[node name="Happy" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_6ynkm")
+bus = &"SFX"
+
+[node name="HappyParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, -0.34714)
+emitting = false
+lifetime = 1.54
+one_shot = true
+explosiveness = 0.83
+process_material = SubResource("ParticleProcessMaterial_q80m7")
+draw_pass_1 = ExtResource("25_bbkcw")
