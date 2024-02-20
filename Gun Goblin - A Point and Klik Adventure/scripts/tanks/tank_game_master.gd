@@ -12,6 +12,7 @@ var player_objects = []
 var round_over = false
 var level_num = 0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DebugTools.next_level.connect(next_level)
@@ -20,20 +21,24 @@ func _ready():
 	select_random_level()
 	new_round()
 
+
 func select_random_level():
 	level_num = randi() % level_scenes.size()
 	select_level(level_num)
 	new_round()
+
 
 func next_level():
 	level_num += 1
 	select_level(level_num)
 	new_round()
 	
+	
 func prev_level():
 	level_num -= 1
 	select_level(level_num)
 	new_round()
+
 
 func select_level(level = 0):
 	if (selected_level):
@@ -47,13 +52,14 @@ func select_level(level = 0):
 	print("Selected level:", selected_level)
 	add_child(selected_level)
 
+
 func initiate_players():
 	player_count = Input.get_connected_joypads().size() + 1 # 1 player will use keyboard
 	print("Player count: ", player_count)
 	for player_num in range(1, player_count + 1):
 		var new_player = tank_driver_scene.instantiate()
 		new_player.player_num = str(player_num)
-		new_player.die.connect(_on_tank_driver_die)
+		new_player.killed.connect(_on_tank_driver_killed)
 		new_player.loved.connect(_on_tank_driver_loved)
 		new_player.name = "Player" + str(player_num)
 		new_player.update_label(str(player_num))
@@ -80,6 +86,7 @@ func respawn_players():
 			print("WARNING: player ", player.name, " was spawned in a default location.")
 		player._ready()
 		
+		
 func new_round():
 	round_over = false
 	$Confetti.restart()
@@ -91,11 +98,13 @@ func new_round():
 	$OneTankLeftTimer.stop()
 	$NewRoundTimer.stop()
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func _on_tank_driver_die(player_num):
+
+func _on_tank_driver_killed(player_num):
 	if (round_over):
 		print("Player ", player_num, " has perished, but the round was already over.")
 		return
@@ -105,6 +114,7 @@ func _on_tank_driver_die(player_num):
 	if alive_players.size() <= 1:
 		$OneTankLeftTimer.start()
 		
+		
 func _on_tank_driver_loved(player_num):
 	if (round_over):
 		print("Player ", player_num, " received love, but the round was already over.")
@@ -113,6 +123,7 @@ func _on_tank_driver_loved(player_num):
 	unloved_players.remove_at(unloved_players.find(player_num))
 	if unloved_players.size() <= 0:
 		$OneTankLeftTimer.start()
+
 
 func _on_one_tank_left_timer_timeout():
 	round_over = true
@@ -131,10 +142,12 @@ func _on_one_tank_left_timer_timeout():
 	$OneTankLeftTimer.stop()
 	$NewRoundTimer.start()
 
+
 func increment_score(playerString):
 	scores[playerString] += 1
 	get_node("Scores/" + playerString).text = get_node("Scores/" + playerString).text.substr(0,4) + str(scores[playerString])
 	print(scores)
+
 
 func display_text(text, duration = 0):
 	$DisplayText.text = text
@@ -142,20 +155,24 @@ func display_text(text, duration = 0):
 		$TextDurationTimer.wait_time = duration
 		$TextDurationTimer.start()
 
+
 func display_confetti(node):
 	$Confetti.restart()
 	$Confetti.position = get_node(node).position
 	$Confetti.position.y += 5
 	$Confetti.emitting = true
 
+
 func _on_new_round_timer_timeout():
 	select_random_level()	
 	new_round()
+	
 	
 func _on_round_start_timer_timeout():
 	display_text("Go!", 1.5)
 	$Go.play()
 	get_tree().call_group("TankDriver", "start_of_round")
+
 
 func _on_text_duration_timer_timeout():
 	display_text("")

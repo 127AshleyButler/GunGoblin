@@ -966,7 +966,7 @@ libraries = {
 
 [node name="DetectionRadius" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 25
+collision_mask = 24
 monitoring = false
 monitorable = false
 

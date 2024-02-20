@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds3hctx353mf0"]
+[gd_scene load_steps=6 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/tank_level_basic.glb" id="1_2s81v"]
+[ext_resource type="Script" path="res://scripts/tanks/tank_level_basic.gd" id="2_m2pmk"]
 [ext_resource type="PackedScene" uid="uid://vrqaov4grcpw" path="res://scenes/tanks/tank_level_basic_2.tscn" id="3_wlsro"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_w86r1"]
+size = Vector3(12, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l1u1h"]
+size = Vector3(12, 1, 3)
+
 [node name="tank_level_basic" instance=ExtResource("1_2s81v")]
+script = ExtResource("2_m2pmk")
 
 [node name="tank_level_basic3" parent="." index="1" instance=ExtResource("3_wlsro")]
 
@@ -25,3 +33,23 @@ size = Vector3(64.3553, 6.18359, 62.3082)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.721453, 0)
+constant_angular_velocity = Vector3(0, 0.261799, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" index="0"]
+shape = SubResource("BoxShape3D_w86r1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D" index="1"]
+mesh = SubResource("BoxMesh_l1u1h")
+
+[node name="Treadmill" type="AnimatableBody3D" parent="." index="9"]
+transform = Transform3D(3.53, 0, 0, 0, 3.53, 0, 0, 0, 3.53, 0, -1.4613, -17.6735)
+constant_linear_velocity = Vector3(5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Treadmill" index="0"]
+shape = SubResource("BoxShape3D_w86r1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Treadmill" index="1"]
+mesh = SubResource("BoxMesh_l1u1h")

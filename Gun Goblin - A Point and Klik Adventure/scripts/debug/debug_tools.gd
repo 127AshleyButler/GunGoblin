@@ -3,6 +3,7 @@ extends Node
 signal next_level
 signal prev_level
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Handle debug inputs

@@ -3,46 +3,77 @@
 [ext_resource type="Script" path="res://scripts/tanks/spike_top.gd" id="1_y2rgp"]
 [ext_resource type="AudioStream" uid="uid://mb3r83agy4qc" path="res://sounds/SFX/682152__henkonen__metallic-clink-1.wav" id="2_pdgkp"]
 
-[sub_resource type="Animation" id="Animation_6bbpr"]
-resource_name = "spinning"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
+[sub_resource type="Animation" id="Animation_mq53d"]
+resource_name = "activation"
+tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Model/BladesCenter:rotation")
+tracks/0/path = NodePath("Model/Top Eye")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
-tracks/1/type = "value"
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0924029, 0, 0.2, 1, 0, 1, 0)
+tracks/1/type = "position_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:is_active")
+tracks/1/path = NodePath("Model/PupilCenter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -1.387, 0, 0.2, 1, 0, 0, 0)
+tracks/2/type = "scale_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/BladesCenter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.1, 0.1, 0.1, 0.2, 1, 1, 1, 1)
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer:current_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spinning"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MetalClink:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/2/type = "value"
+
+[sub_resource type="Animation" id="Animation_uei0l"]
+resource_name = "inactive"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Top Eye")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.297, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/PupilCenter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -1.387, 0)
+tracks/2/type = "scale_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Model:rotation")
+tracks/2/path = NodePath("Model/BladesCenter")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(0.574349, 0.287175, 0.307786),
-"update": 0,
-"values": [Vector3(-0.0174533, 0, 0), Vector3(0.0174533, 0, -0.0174533), Vector3(-0.0174533, 0, 0)]
-}
+tracks/2/keys = PackedFloat32Array(0, 1, 0.1, 0.1, 0.1)
 
 [sub_resource type="Animation" id="Animation_jphmt"]
 resource_name = "slide_backwards"
@@ -96,76 +127,45 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, 0), Vector3(0, 0, -0.261799), Vector3(0.261799, 0, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_uei0l"]
-resource_name = "inactive"
-tracks/0/type = "position_3d"
+[sub_resource type="Animation" id="Animation_6bbpr"]
+resource_name = "spinning"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Model/Top Eye")
+tracks/0/path = NodePath("Model/BladesCenter:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.297, 0)
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Model/PupilCenter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -1.387, 0)
-tracks/2/type = "scale_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Model/BladesCenter")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0.1, 0.1, 0.1)
-
-[sub_resource type="Animation" id="Animation_mq53d"]
-resource_name = "activation"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model/Top Eye")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0924029, 0, 0.2, 1, 0, 1, 0)
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Model/PupilCenter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -1.387, 0, 0.2, 1, 0, 0, 0)
-tracks/2/type = "scale_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Model/BladesCenter")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0.1, 0.1, 0.1, 0.2, 1, 1, 1, 1)
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer:current_animation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"spinning"]
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MetalClink:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.2),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:is_active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.574349, 0.287175, 0.307786),
+"update": 0,
+"values": [Vector3(-0.0174533, 0, 0), Vector3(0.0174533, 0, -0.0174533), Vector3(-0.0174533, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8gtjd"]
@@ -177,6 +177,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cc027"]
+radius = 0.891765
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_h287v"]
 height = 0.602886
@@ -338,7 +339,7 @@ shape = SubResource("CapsuleShape3D_cc027")
 [node name="Hurtbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16112, 0)
 collision_layer = 0
-collision_mask = 31
+collision_mask = 29
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75876, 0)
@@ -346,7 +347,7 @@ shape = SubResource("CylinderShape3D_h287v")
 
 [node name="MetalClink" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s141i")
-volume_db = 5.0
+volume_db = 2.0
 pitch_scale = 1.15
 bus = &"SFX"
 

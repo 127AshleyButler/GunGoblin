@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-signal die(player_num)
+signal killed(player_num)
 signal loved(player_num)
 
 @export var bullet_scene : PackedScene
@@ -33,6 +33,7 @@ var received_love = false # Relates to getting hit with heart bullets
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+
 func _ready():
 	$model/AnimationPlayer.play("Idle")
 	$AnimationPlayer.play("idle")
@@ -48,6 +49,7 @@ func _ready():
 	mine_count = 0
 	$model/PlayerLabel.text[3] = "V"
 	received_love = false
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -93,8 +95,10 @@ func _physics_process(delta):
 	
 	update_timers(delta)
 
+
 func update_timers(delta):
 	current_shooting_delay -= delta
+
 
 func handle_shooting():
 	if (bullet_count >= max_concurrent_bullets):
@@ -113,6 +117,7 @@ func handle_shooting():
 	$Fire.play()
 	reset_charge()
 	
+	
 func handle_mine_laying():
 	if (mine_count >= max_concurrent_mines):
 		$Charging.emitting = false
@@ -129,9 +134,11 @@ func handle_mine_laying():
 	else: # Charged mine, shoot the mine outwards in an arc instead.
 		new_mine.position = $BulletSpawner.position
 		new_mine.airborne = true
+		new_mine.launched = true
 		$FireMine.play()
 	add_child(new_mine)
 	reset_charge()
+	
 	
 func handle_heart_shooting():
 	if (bullet_count >= max_concurrent_bullets):
@@ -150,9 +157,11 @@ func handle_heart_shooting():
 	$FireHeart.play()
 	reset_charge()	
 	
+	
 func hit():
-	die.emit(int(player_num))
+	killed.emit(int(player_num))
 	$AnimationPlayer.play("die")
+	
 	
 func hit_with_love():
 	if not received_love:
@@ -161,10 +170,12 @@ func hit_with_love():
 		$model/PlayerLabel.text[3] = "♡"
 	$AnimationPlayer.play("love")
 
+
 func reset_charge():
 	charge_shot_time = 0
 	charge_tier = 0
 	$Charging.emitting = false
+
 
 func update_charge_shot(delta):
 	charge_shot_time += delta
@@ -176,14 +187,18 @@ func update_charge_shot(delta):
 		charge_tier += 1
 		$ChargeTierIncreasedParticles.emitting = true
 
+
 func decrement_bullet_count():
 	bullet_count -= 1
+
 
 func decrement_mine_count():
 	mine_count -= 1
 
+
 func start_of_round(): # Called by the tank_game_master
 	can_shoot = true
+
 
 func update_label(player_num): # Called by the tank_game_master
 	$model/PlayerLabel.text = "P" + player_num + "\nV"

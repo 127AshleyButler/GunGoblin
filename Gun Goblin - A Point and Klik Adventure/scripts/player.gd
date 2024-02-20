@@ -13,10 +13,12 @@ const HORIZONTAL_WALL_JUMP_SPEED = 50.0
 const MAX_FALLING_SPEED = -50.0
 const HOLDING_DOWN_FALLING_MULTIPLIER = 2.0
 
+
 func _ready():
 	health = 100
 	super._ready()
 	$AnimatedSprite3D.play("idle_l")
+
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -70,6 +72,7 @@ func _physics_process(delta):
 	
 	update_animation_parameters()
 	
+	
 func update_animation_parameters():
 	# For animations that have left/right versions, this is how to let them know which version to play.
 	$AnimationTree["parameters/idle/blend_position"] = facing
@@ -82,6 +85,7 @@ func update_animation_parameters():
 	$AnimationTree["parameters/conditions/holding_down"] = Input.is_action_pressed("move_down")
 	$AnimationTree["parameters/conditions/not_holding_down"] = !Input.is_action_pressed("move_down")
 	$AnimationTree["parameters/conditions/idle"] = (Input.get_axis("move_left", "move_right") == 0) and (is_on_floor())
+	
 	
 func handle_jump():
 	# Handle Jump.
@@ -97,16 +101,19 @@ func handle_jump():
 		air_time = JUMP_GRACE_PERIOD
 		$SFX/jump.play()
 		
+		
 func handle_dive():
 	if (not canDive):
 		return
 	canDive = false
 	velocity.x = facing * DIVE_SPEED
 
+
 func handle_shoot():
 	if canShoot:
 		canShoot = false
 		velocity.y = WALL_SLIDE_VELOCITY
+
 
 func max_speed(speed1, speed2):
 	# Input: 2 speeds represented as signed floats.
@@ -115,6 +122,7 @@ func max_speed(speed1, speed2):
 		return speed1
 	else:
 		return speed2
+	
 	
 func is_touching_wall():
 	if $WallClingRight.is_colliding() and facing == 1 and not Input.is_action_pressed("move_down"):

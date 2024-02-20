@@ -15,7 +15,6 @@ func _ready():
 	$AnimationPlayer2.play("initial")
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not is_active:
@@ -24,16 +23,19 @@ func _process(delta):
 	current_rotation_speed = clampf( lerpf(0, max_rotation_speed, time), 0, max_rotation_speed)
 	$garf.rotate_y(current_rotation_speed * delta)
 	$Pillar.rotate_y(current_rotation_speed * delta)
+	
 	current_fire_timer -= delta
 	if (current_fire_timer <= 0):
 		current_fire_timer += fire_timer
 		shoot_fire()
+
 
 func shoot_fire():
 	var new_fire = fire_projectile.instantiate()
 	new_fire.position = $Pillar/FireSpawn.global_position
 	new_fire.rotation = $garf.rotation
 	add_child(new_fire)
+
 
 func _on_activation_timer_timeout():
 	$Pillar/StoneScraping.play()
