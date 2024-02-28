@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7xxrftfa6qcb"]
+
+[ext_resource type="PackedScene" uid="uid://dreyocyitewe0" path="res://models/tank/levels/level_television.glb" id="1_ot1ng"]
+[ext_resource type="PackedScene" uid="uid://dxg42thl0m2lp" path="res://scenes/tanks/gee_vee_gee_logo.tscn" id="2_c0xqk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh2pr"]
+transparency = 1
+albedo_color = Color(0.309804, 0.309804, 0.309804, 0.219608)
+roughness = 0.0
+
+[node name="level_television" instance=ExtResource("1_ot1ng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.40928)
+
+[node name="Glass" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yh2pr")
+
+[node name="PlayerSpawn1" type="Node3D" parent="." index="10" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.858, 4.25571, 0)
+
+[node name="PlayerSpawn2" type="Node3D" parent="." index="11" groups=["PlayerSpawn"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.118, 4.25571, 0)
+
+[node name="PlayerSpawn3" type="Node3D" parent="." index="12" groups=["PlayerSpawn"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 4.25571, -16.858)
+
+[node name="PlayerSpawn4" type="Node3D" parent="." index="13" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25571, 0.933794)
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152405, 2.0918, 0.0520935)
+size = Vector3(64.3553, 6.18359, 62.3082)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 0.422539, 0.906345, 0, -0.906345, 0.422539, 0, 21.1508, 0)
+
+[node name="GeeVeeGeeLogo" parent="." index="16" instance=ExtResource("2_c0xqk")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -21.1509, 5.22416, -21.3989)

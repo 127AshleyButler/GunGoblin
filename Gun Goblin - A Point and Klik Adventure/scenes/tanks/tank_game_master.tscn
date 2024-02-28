@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bq3mc4atgatic"]
+[gd_scene load_steps=23 format=3 uid="uid://bq3mc4atgatic"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_game_master.gd" id="1_bew4q"]
 [ext_resource type="PackedScene" uid="uid://wywoghw4r2hb" path="res://scenes/tanks/level_simple_geometry.tscn" id="2_yqwkx"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dym73nwkj4utc" path="res://scenes/tanks/level_garf_shrine.tscn" id="5_ueguf"]
 [ext_resource type="PackedScene" uid="uid://dws2ihqass11q" path="res://scenes/tanks/level_babe_laid.tscn" id="6_j4v16"]
 [ext_resource type="Material" uid="uid://p1qych564ct7" path="res://shaders/confetti.tres" id="7_hnlb2"]
+[ext_resource type="PackedScene" uid="uid://c7xxrftfa6qcb" path="res://scenes/tanks/level_television.tscn" id="7_ruh5k"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ap71x"]
 random_pitch = 1.33
@@ -93,7 +94,7 @@ size = Vector3(1, 0.03, 1)
 
 [node name="tank_game_master" type="Node3D"]
 script = ExtResource("1_bew4q")
-level_scenes = Array[PackedScene]([ExtResource("2_yqwkx"), ExtResource("3_ggqq2"), ExtResource("4_lsslv"), ExtResource("5_ueguf"), ExtResource("6_j4v16")])
+level_scenes = Array[PackedScene]([ExtResource("2_yqwkx"), ExtResource("3_ggqq2"), ExtResource("4_lsslv"), ExtResource("5_ueguf"), ExtResource("6_j4v16"), ExtResource("7_ruh5k")])
 tank_driver_scene = ExtResource("5_nhs2n")
 
 [node name="Camera3D" type="Camera3D" parent="."]

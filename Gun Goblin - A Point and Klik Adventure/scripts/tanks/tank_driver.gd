@@ -28,6 +28,7 @@ var charge_shot_time = 0
 var charge_tier = 0
 var bullet_count = 0
 var mine_count = 0
+var mines_layed = 0
 var received_love = false # Relates to getting hit with heart bullets
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -129,6 +130,8 @@ func handle_mine_laying():
 	mine_count += 1
 	var new_mine = mine_scene.instantiate()
 	new_mine.charge_tier = charge_tier
+	mines_layed += 1
+	new_mine.mine_number = mines_layed
 	if charge_tier < 1: # Uncharged, lay mine directly behind tank.
 		new_mine.position = $MineSpawner.position
 	else: # Charged mine, shoot the mine outwards in an arc instead.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://muthdhyr8o8e"]
+[gd_scene load_steps=5 format=3 uid="uid://muthdhyr8o8e"]
 
 [ext_resource type="PackedScene" uid="uid://ceireu513crim" path="res://models/tank/tank_peasint.glb" id="1_jjx24"]
 
@@ -17,9 +17,13 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, -3.2149, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_uybul"]
+resource_name = "shoot"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xfj1n"]
 _data = {
-"die": SubResource("Animation_8jiqm")
+"die": SubResource("Animation_8jiqm"),
+"shoot": SubResource("Animation_uybul")
 }
 
 [node name="tank_peasint" instance=ExtResource("1_jjx24")]

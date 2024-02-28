@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var target_location = Node3D
 @export var backwards_speed = 18.0
 @export var backwards_speed_decay = 0.02
+@export var auto_start = false
 ## Whether or not this spike top is currently active & able to damage players
 var is_active = false
 
@@ -16,7 +17,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
-	$AnimationPlayer.play("inactive")
+	if (auto_start):
+		$AnimationPlayer.play("activation")
+	else:
+		$AnimationPlayer.play("inactive")
 
 
 func _physics_process(delta):
@@ -30,11 +34,11 @@ func _physics_process(delta):
 	elif is_active:
 		var input_dir = target_location.global_position - position
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.z)).normalized()
-
+		#direction.rotated(Vector3(1, 0, 0),  PI/2)
 		if direction:
 			$Model/PupilCenter.look_at(position - direction)
-			velocity.x += direction.x * SPEED
-			velocity.z += direction.z * SPEED
+			velocity.x += direction.x * SPEED + randf_range(-0.05, 0.05)
+			velocity.z += direction.z * SPEED + randf_range(-0.05, 0.05)
 		else:
 			velocity.x += move_toward(velocity.x, 0, SPEED)
 			velocity.z += move_toward(velocity.z, 0, SPEED)

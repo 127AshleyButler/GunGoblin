@@ -11,6 +11,10 @@ const SPEED = 6.0
 var charge_tier = 0
 var charge_tier_speed_bonus = 0
 var charge_tier_height_bonus = 0
+var can_assimilate = true # Determines if mine can absorb other mines
+var can_be_assimilated = true # Used to determine if mine can merge with others
+var mines_assimilated = 0
+var mine_number = 0 # Used to determine priority of mine assimilation; older mines absorb younger ones.
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -45,11 +49,36 @@ func hit():
 	
 	
 func _on_detection_radius_body_entered(body):
-	if mine_active:
+	if not mine_active or body == self:
+		return
+	if body.is_in_group("Mine"):
+		if can_assimilate and body.can_be_assimilated and mine_number < body.mine_number:
+			body.dissolve()
+			increase_scale(body.mines_assimilated + 1)
+	else:
 		get_ready_to_explode()
 		
 		
+func dissolve():
+	can_assimilate = false
+	can_be_assimilated = false
+	mine_active = true
+	$AnimationPlayer.play("dissolve")
+		
+		
+func increase_scale(amount = 1):
+	if mine_about_to_explode:
+		return
+	scale += Vector3(0.1, 0.1, 0.1) * amount
+	mines_assimilated += amount
+	$AnimationPlayer.play("preview_explosion_radius")
+	$Primed.pitch_scale -= 0.05 * amount
+	$Explosion.pitch_scale -= 0.01 * amount
+		
 func get_ready_to_explode():
+	#$AnimationPlayer.speed_scale = 1 / (1 + mines_assimilated)
+	can_assimilate = false
+	can_be_assimilated = false
 	if mine_about_to_explode:
 		return
 	$AnimationPlayer.play("blinking")

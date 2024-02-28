@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://csassjfat0bdr"]
+[gd_scene load_steps=36 format=3 uid="uid://csassjfat0bdr"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_mine.gd" id="1_mluqr"]
 [ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="2_acdfu"]
@@ -24,10 +24,11 @@ height = 1.0
 radial_segments = 10
 rings = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1myl"]
-albedo_color = Color(0.192157, 0.0509804, 0, 1)
-metallic = 1.0
-roughness = 0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr71l"]
+albedo_color = Color(0.882353, 0.0784314, 0.141176, 1)
+roughness = 0.15
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 1.25
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6bqll"]
 random_pitch = 1.54
@@ -76,12 +77,6 @@ roughness = 0.0
 material = SubResource("StandardMaterial3D_1rm8u")
 left_to_right = 0.0
 size = Vector3(0.205, 0.215, 0.16)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr71l"]
-albedo_color = Color(0.882353, 0.0784314, 0.141176, 1)
-roughness = 0.15
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 1.25
 
 [sub_resource type="Animation" id="Animation_abciq"]
 resource_name = "blinking"
@@ -401,6 +396,155 @@ tracks/13/keys = {
 "method": &"decrement_parent_mine_count"
 }]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("AnimationPlayer:speed_scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_322es"]
+resource_name = "dissolve"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hurtbox/Model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionRadius:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExplosionRadius:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExplosionRadius:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExplosionRadius/MeshInstance3D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ExplosionMark:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hurtbox/Model:surface_material_override/0")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"decrement_parent_mine_count"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/10/type = "scale_3d"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Hurtbox")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0.387066, 0.387066, 0.387066, 1, 1, 0.01, 0.01, 0.01)
 
 [sub_resource type="Animation" id="Animation_tuof3"]
 resource_name = "idle"
@@ -605,6 +749,11 @@ tracks/7/keys = {
 "values": [SubResource("StandardMaterial3D_qigkj")]
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1myl"]
+albedo_color = Color(0.192157, 0.0509804, 0, 1)
+metallic = 1.0
+roughness = 0.1
+
 [sub_resource type="Animation" id="Animation_0j3td"]
 resource_name = "landing"
 length = 0.262
@@ -738,6 +887,46 @@ tracks/10/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_7rn61"]
+resource_name = "preview_explosion_radius"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PreviewExplosion:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Primed:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hurtbox/Model:surface_material_override/0")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
 [sub_resource type="Animation" id="Animation_brm27"]
 resource_name = "priming"
 length = 0.35
@@ -832,7 +1021,7 @@ tracks/7/path = NodePath("Hurtbox/Model:surface_material_override/0")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.14043),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [SubResource("StandardMaterial3D_n1myl"), null]
@@ -885,13 +1074,23 @@ tracks/11/keys = {
 _data = {
 "blinking": SubResource("Animation_abciq"),
 "destroy": SubResource("Animation_qsfl3"),
+"dissolve": SubResource("Animation_322es"),
 "idle": SubResource("Animation_tuof3"),
 "idle_unprimed": SubResource("Animation_ws0vb"),
 "landing": SubResource("Animation_0j3td"),
+"preview_explosion_radius": SubResource("Animation_7rn61"),
 "priming": SubResource("Animation_brm27")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8r82i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etttv"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.603922, 0, 0.192157, 0.235294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a3c63"]
+material = SubResource("StandardMaterial3D_etttv")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rpari"]
 
@@ -907,7 +1106,7 @@ material = SubResource("StandardMaterial3D_yxd0l")
 radial_segments = 14
 rings = 4
 
-[node name="Mine" type="CharacterBody3D" groups=["Projectile"]]
+[node name="Mine" type="CharacterBody3D" groups=["Mine", "Projectile"]]
 transform = Transform3D(1.22833, 0, 0, 0, 1.22833, 0, 0, 0, 1.22833, 0, 0, 0)
 top_level = true
 collision_layer = 2
@@ -919,10 +1118,10 @@ transform = Transform3D(0.387066, 0, 0, 0, 0.387066, 0, 0, 0, 0.387066, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ufbg2")
 
 [node name="Model" type="MeshInstance3D" parent="Hurtbox"]
-transform = Transform3D(2.904, 0, 0, 0, 2.139, 0, 0, 0, 2.904, 0, -2.58354, 0)
+transform = Transform3D(3.42851, 0, 0, 0, 3.42851, 0, 0, 0, 3.42851, 0, -2.58354, 0)
 mesh = SubResource("CapsuleMesh_jlwof")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_n1myl")
+surface_material_override/0 = SubResource("StandardMaterial3D_jr71l")
 
 [node name="Shadow" type="Decal" parent="Hurtbox/Model"]
 transform = Transform3D(1.19733, 0, 0, 0, 3.47701, 0, 0, 0, 1.19733, 0, -3.97591, 0)
@@ -966,7 +1165,7 @@ libraries = {
 
 [node name="DetectionRadius" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 24
+collision_mask = 26
 monitoring = false
 monitorable = false
 
@@ -975,8 +1174,14 @@ shape = SubResource("CapsuleShape3D_8r82i")
 
 [node name="ActivationTimer" type="Timer" parent="."]
 
-[node name="ExplosionRadius" type="Area3D" parent="."]
+[node name="PreviewExplosion" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transparency = 1.0
+mesh = SubResource("SphereMesh_a3c63")
+skeleton = NodePath("../ExplosionRadius")
+
+[node name="ExplosionRadius" type="Area3D" parent="."]
+transform = Transform3D(-7.91225, 0, -6.11526, 0, 10, 0, 6.11526, 0, -7.91225, 0, 0, 0)
 visible = false
 collision_mask = 31
 monitoring = false
@@ -987,7 +1192,7 @@ transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
 shape = SubResource("SphereShape3D_rpari")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ExplosionRadius"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_rbxwa")
 

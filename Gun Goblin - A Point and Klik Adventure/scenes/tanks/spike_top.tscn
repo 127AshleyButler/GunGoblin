@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://lffa48far1id"]
+[gd_scene load_steps=23 format=3 uid="uid://lffa48far1id"]
 
 [ext_resource type="Script" path="res://scripts/tanks/spike_top.gd" id="1_y2rgp"]
 [ext_resource type="AudioStream" uid="uid://mb3r83agy4qc" path="res://sounds/SFX/682152__henkonen__metallic-clink-1.wav" id="2_pdgkp"]
+[ext_resource type="PackedScene" uid="uid://c76q5t302enqf" path="res://scenes/tanks/hittable_component.tscn" id="3_tsp70"]
 
 [sub_resource type="Animation" id="Animation_mq53d"]
 resource_name = "activation"
@@ -324,7 +325,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4ofue")
 
-[node name="SpikeTop" type="CharacterBody3D" groups=["SpikeTop"]]
+[node name="SpikeTop" type="CharacterBody3D" groups=["Hittable", "SpikeTop"]]
 collision_layer = 16
 script = ExtResource("1_y2rgp")
 
@@ -383,6 +384,8 @@ skeleton = NodePath("")
 transform = Transform3D(0.909303, 0, 0, 0, 0.909303, 0, 0, 0, 0.909303, 0, 0.297, 0)
 mesh = SubResource("ArrayMesh_y5fbc")
 skeleton = NodePath("")
+
+[node name="HittableComponent" parent="." instance=ExtResource("3_tsp70")]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
