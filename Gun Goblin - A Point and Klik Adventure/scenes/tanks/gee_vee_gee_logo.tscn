@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxg42thl0m2lp"]
+[gd_scene load_steps=7 format=3 uid="uid://dxg42thl0m2lp"]
 
 [ext_resource type="Script" path="res://scripts/tanks/gee_vee_gee_logo.gd" id="1_8f4af"]
 [ext_resource type="Texture2D" uid="uid://bhg8wfsatkgbr" path="res://textures/Tanks/GeeVeeGee.png" id="1_30jxu"]
 [ext_resource type="AudioStream" uid="uid://cq8x5jcydpsno" path="res://sounds/SFX/highpop.wav" id="3_mfqqb"]
+[ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="3_p23u1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kva8d"]
 size = Vector3(3, 1, 2.18158)
@@ -21,6 +22,7 @@ axis_lock_angular_z = true
 script = ExtResource("1_8f4af")
 
 [node name="Logo" type="Sprite3D" parent="."]
+layers = 2
 modulate = Color(0, 0.576471, 1, 1)
 billboard = 1
 texture = ExtResource("1_30jxu")
@@ -28,6 +30,11 @@ texture = ExtResource("1_30jxu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.236328, 0, -0.0479431)
 shape = SubResource("BoxShape3D_kva8d")
+
+[node name="Shadow" type="Decal" parent="CollisionShape3D"]
+transform = Transform3D(1.816, 0, 0, 0, 1.816, 0, 0, 0, 1.816, 0.236328, -1.91526, -0.226469)
+size = Vector3(2, 0.779419, 2)
+texture_albedo = ExtResource("3_p23u1")
 
 [node name="Copies" type="Node3D" parent="."]
 

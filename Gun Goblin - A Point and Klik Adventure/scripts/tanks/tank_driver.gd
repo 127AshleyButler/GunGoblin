@@ -1,7 +1,12 @@
+class_name TankDriver
 extends CharacterBody3D
 
 signal killed(player_num)
 signal loved(player_num)
+signal joined(player_num)
+signal left(player_num)
+
+enum States {ALIVE, DEAD, INVISIBLE}
 
 @export var bullet_scene : PackedScene
 @export var mine_scene : PackedScene
@@ -17,12 +22,21 @@ signal loved(player_num)
 @export_range(1, 99, 1, "or_greater", "or_less") var max_concurrent_mines = 3
 ## The string representing which player controls this. "" For player 1, "2" for player 2, "3" for player 3, etc.
 @export var player_num = ""
+## Whether or not this tank can shoot by default
+@export var can_shoot = false # Players can't shoot until the round has officially started
+## The state this tank starts in
+@export var state = States.ALIVE
+## Whether or not this tank is allowed to revive
+@export var in_lobby = false
+
+
+
 
 const DRIVING_SPEED = 10.0
 const ROTATION_SPEED = 0.08
 const JUMP_VELOCITY = 4.5
 
-var can_shoot = false # Players can't shoot until the round has officially started
+
 var current_shooting_delay = 0
 var charge_shot_time = 0
 var charge_tier = 0
@@ -36,66 +50,83 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
+	match state:
+		States.ALIVE, States.DEAD:
+			%AnimationPlayer.play("idle")
+		States.INVISIBLE:
+			%AnimationPlayer.play("invisible")
 	$model/AnimationPlayer.play("Idle")
-	$AnimationPlayer.play("idle")
 	for projectile in get_children():
 		if projectile.is_in_group("Projectile"):
 			remove_child(projectile)
 			projectile.queue_free()
-	can_shoot = false
 	current_shooting_delay = 0
 	charge_shot_time = 0
 	charge_tier = 0
 	bullet_count = 0
 	mine_count = 0
 	$model/PlayerLabel.text[3] = "V"
-	received_love = false
 
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	match state:
+		States.ALIVE:
+			if can_shoot:
+				# Handle charge shots
+				if Input.is_action_pressed("shoot" + player_num) and current_shooting_delay <= 0:
+					update_charge_shot(delta)
+				# Handle charge mines
+				if Input.is_action_pressed("lay_mine" + player_num) and current_shooting_delay <= 0:
+					update_charge_shot(delta)
+				# Handle charge hearts
+				if Input.is_action_pressed("taunt" + player_num) and current_shooting_delay <= 0:
+					update_charge_shot(delta)
+				# Handle firing.
+				if Input.is_action_just_released("shoot" + player_num):
+					handle_shooting()
+				# Handle mine laying
+				if Input.is_action_just_released("lay_mine" + player_num):
+					handle_mine_laying()
+				# Handle firing heart bullets
+				if Input.is_action_just_released("taunt" + player_num):
+					handle_heart_shooting()
+			elif ( # Player can't shoot yet, so play a cough animation instead.
+						Input.is_action_just_pressed("shoot" + player_num)
+						or Input.is_action_just_pressed("lay_mine" + player_num)
+						or Input.is_action_just_pressed("" + player_num)
+				):
+					%AnimationPlayer.play("cough")
 
-	if can_shoot:
-		# Handle charge shots
-		if Input.is_action_pressed("shoot" + player_num) and current_shooting_delay <= 0:
-			update_charge_shot(delta)
-		# Handle charge mines
-		if Input.is_action_pressed("lay_mine" + player_num) and current_shooting_delay <= 0:
-			update_charge_shot(delta)
-		# Handle charge hearts
-		if Input.is_action_pressed("taunt" + player_num) and current_shooting_delay <= 0:
-			update_charge_shot(delta)
-		# Handle firing.
-		if Input.is_action_just_released("shoot" + player_num):
-			handle_shooting()
-		# Handle mine laying
-		if Input.is_action_just_released("lay_mine" + player_num):
-			handle_mine_laying()
-		# Handle firing heart bullets
-		if Input.is_action_just_released("taunt" + player_num):
-			handle_heart_shooting()
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_axis("move_down" + player_num, "move_up" + player_num)
-	var rotation_dir = Input.get_axis("move_right" + player_num, "move_left" + player_num)
-	var direction
-	if rotation_dir:
-		rotate_y(rotation_dir * ROTATION_SPEED)
-	if input_dir:
-		direction = basis.z * input_dir
-	if direction:
-		velocity.x = direction.x * DRIVING_SPEED
-		velocity.z = direction.z * DRIVING_SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, DRIVING_SPEED)
-		velocity.z = move_toward(velocity.z, 0, DRIVING_SPEED)
-	move_and_slide()
-	
-	update_timers(delta)
-
+			# Get the input direction and handle the movement/deceleration.
+			# As good practice, you should replace UI actions with custom gameplay actions.
+			var input_dir = Input.get_axis("move_down" + player_num, "move_up" + player_num)
+			var rotation_dir = Input.get_axis("move_right" + player_num, "move_left" + player_num)
+			var direction
+			if rotation_dir:
+				rotate_y(rotation_dir * ROTATION_SPEED)
+			if input_dir:
+				direction = basis.z * input_dir
+			if direction:
+				velocity.x = direction.x * DRIVING_SPEED
+				velocity.z = direction.z * DRIVING_SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, DRIVING_SPEED)
+				velocity.z = move_toward(velocity.z, 0, DRIVING_SPEED)
+			move_and_slide()
+			
+			update_timers(delta)
+			
+		States.INVISIBLE:
+			if Input.is_action_just_pressed("join" + player_num):
+				state = States.ALIVE
+				%AnimationPlayer.play("join")
+				joined.emit(int(player_num))
+		
+		States.DEAD:
+			pass
 
 func update_timers(delta):
 	current_shooting_delay -= delta
@@ -104,6 +135,7 @@ func update_timers(delta):
 func handle_shooting():
 	if (bullet_count >= max_concurrent_bullets):
 		$Charging.emitting = false
+		%AnimationPlayer.play("cough")
 		return
 	if (current_shooting_delay > 0):
 		return
@@ -122,6 +154,7 @@ func handle_shooting():
 func handle_mine_laying():
 	if (mine_count >= max_concurrent_mines):
 		$Charging.emitting = false
+		%AnimationPlayer.play("cough")
 		return
 	if (current_shooting_delay > 0):
 		return
@@ -146,6 +179,7 @@ func handle_mine_laying():
 func handle_heart_shooting():
 	if (bullet_count >= max_concurrent_bullets):
 		$Charging.emitting = false
+		%AnimationPlayer.play("cough")
 		return
 	if (current_shooting_delay > 0):
 		return
@@ -162,16 +196,23 @@ func handle_heart_shooting():
 	
 	
 func hit():
-	killed.emit(int(player_num))
-	$AnimationPlayer.play("die")
-	
+	if not in_lobby:
+		killed.emit(int(player_num))
+		%AnimationPlayer.play("die")
+		if state == States.ALIVE:
+			state = States.DEAD
+	else: # in lobby
+		left.emit(int(player_num))
+		%AnimationPlayer.play("leave")
+		state = States.INVISIBLE
+		
 	
 func hit_with_love():
 	if not received_love:
 		received_love = true
 		loved.emit(int(player_num))
 		$model/PlayerLabel.text[3] = "♡"
-	$AnimationPlayer.play("love")
+	%AnimationPlayer.play("love")
 
 
 func reset_charge():
@@ -203,5 +244,6 @@ func start_of_round(): # Called by the tank_game_master
 	can_shoot = true
 
 
-func update_label(player_num): # Called by the tank_game_master
-	$model/PlayerLabel.text = "P" + player_num + "\nV"
+func update_label(p_num): # Called by the tank_game_master
+	$model/PlayerLabel.text = "P" + p_num + "\nV"
+	$model/PlayerLabel.show()

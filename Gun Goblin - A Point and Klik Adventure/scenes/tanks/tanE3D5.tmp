@@ -1,0 +1,926 @@
+[gd_scene load_steps=74 format=3 uid="uid://cj8co8kr1xew8"]
+
+[ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
+[ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
+[ext_resource type="PackedScene" uid="uid://b380wq4ko3hvm" path="res://scenes/tanks/heart_bullet.tscn" id="2_e4da2"]
+[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="2_umt7d"]
+[ext_resource type="PackedScene" uid="uid://csassjfat0bdr" path="res://scenes/tanks/tank_mine.tscn" id="3_w853r"]
+[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="4_do5q2"]
+[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="5_lf5f5"]
+[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="6_xrrrh"]
+[ext_resource type="AudioStream" uid="uid://da6vtde1q8360" path="res://sounds/SFX/blank.wav" id="7_5tk2f"]
+[ext_resource type="AudioStream" uid="uid://4pjcbtx7gqeu" path="res://sounds/SFX/659007__bigdino1995__chargeup.wav" id="7_psfxl"]
+[ext_resource type="AudioStream" uid="uid://nxi3v4wpf564" path="res://sounds/SFX/492027__crinkem__blow-dart.wav" id="8_ymsnc"]
+[ext_resource type="PackedScene" uid="uid://cclwg0q2sbwv2" path="res://models/tank/Debris/Debris_Peasint.glb" id="11_5r7vx"]
+[ext_resource type="PackedScene" uid="uid://byh8e3y4or5x1" path="res://models/tank/Debris/Debris_Tank.glb" id="12_akqab"]
+[ext_resource type="AudioStream" uid="uid://8o40tpyds82d" path="res://sounds/SFX/peasint_tank_die1.wav" id="12_vjth7"]
+[ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_j1keq"]
+[ext_resource type="AudioStream" uid="uid://b7hli3eecmsao" path="res://sounds/SFX/peasint_tank_die2.wav" id="13_m1nb8"]
+[ext_resource type="Texture2D" uid="uid://dyv4gyd0yh5eh" path="res://textures/Tanks/Peasint Faces/Peasint-004.png" id="15_avcgx"]
+[ext_resource type="AudioStream" uid="uid://cqy800kvs8kog" path="res://sounds/SFX/peasint_tank_undie1.wav" id="16_aie4y"]
+[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="16_nstyx"]
+[ext_resource type="AudioStream" uid="uid://crylysqrpqf0l" path="res://sounds/SFX/peasint_tank_undie2.wav" id="17_768je"]
+[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="17_tw765"]
+[ext_resource type="AudioStream" uid="uid://dshjp34eolguu" path="res://sounds/SFX/Peasint_Tank_Kiss1.wav" id="19_6iiaq"]
+[ext_resource type="AudioStream" uid="uid://c34xk0ol112sl" path="res://sounds/SFX/Peasint_Tank_Kiss2.wav" id="20_tvrdw"]
+[ext_resource type="AudioStream" uid="uid://bgeh1t77y8ant" path="res://sounds/SFX/Peasint_Tank_Kiss3.wav" id="21_ff4t8"]
+[ext_resource type="AudioStream" uid="uid://bff5hunyxtqbp" path="res://sounds/SFX/tank_undestroyed1.wav" id="22_4r6ng"]
+[ext_resource type="AudioStream" uid="uid://ii4rgfs7w8tj" path="res://sounds/SFX/Peasint_Tank_Happy1.wav" id="22_o7aql"]
+[ext_resource type="AudioStream" uid="uid://rjmpj7fkfq" path="res://sounds/SFX/Peasint_Tank_Happy2.wav" id="23_oix2h"]
+[ext_resource type="ArrayMesh" uid="uid://cm6q0s4nyfblr" path="res://models/tank/heart_bullet.tres" id="25_bbkcw"]
+[ext_resource type="AudioStream" uid="uid://5e3ymnl15lw0" path="res://sounds/SFX/peasint_cough1.wav" id="26_7scma"]
+[ext_resource type="AudioStream" uid="uid://4uib8x5bhfag" path="res://sounds/SFX/peasint_cough2.wav" id="27_f8364"]
+[ext_resource type="AudioStream" uid="uid://b22i8bf848vgv" path="res://sounds/SFX/peasint_cough3.wav" id="28_bybg3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
+radius = 1.05189
+height = 2.64885
+
+[sub_resource type="Animation" id="Animation_6rvdq"]
+resource_name = "cough"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoughParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cough:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tytrd"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Charging:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Debris/Peasint/Scream:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Destroyed:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_dbl8a"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Debris/Peasint")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Debris/Tank")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Debris/Shaft")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Debris/Peasint:linear_velocity")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 25, 0)]
+}
+tracks/8/type = "rotation_3d"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Debris/Peasint")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Debris/Tank")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Debris/Shaft")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_5je3g"]
+resource_name = "invisible"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Debris:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_gdlsk"]
+resource_name = "join"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChargeTierIncreasedParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("model:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Debris:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_3efcs"]
+resource_name = "leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChargeTierIncreasedParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("model:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ls5dd"]
+resource_name = "love"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Happy:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HappyParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_a765p"]
+resource_name = "revive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Charging:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Debris/Peasint")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Debris/Tank")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/7/type = "position_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Debris/Shaft")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
+_data = {
+"cough": SubResource("Animation_6rvdq"),
+"die": SubResource("Animation_tytrd"),
+"idle": SubResource("Animation_dbl8a"),
+"invisible": SubResource("Animation_5je3g"),
+"join": SubResource("Animation_gdlsk"),
+"leave": SubResource("Animation_3efcs"),
+"love": SubResource("Animation_ls5dd"),
+"revive": SubResource("Animation_a765p")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("4_do5q2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_lf5f5")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_xrrrh")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4xi6g"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_ymsnc")
+stream_0/weight = 1.0
+
+[sub_resource type="Curve" id="Curve_2tdhh"]
+min_value = -10.0
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 3.37595, 0, 1, Vector2(0.578846, 1.95415), 0.0, 0.0, 0, 0, Vector2(0.990385, 9.40401), 0.0, 0.0, 0, 0, Vector2(1, 0), -978.013, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxfe3"]
+curve = SubResource("Curve_2tdhh")
+
+[sub_resource type="Curve" id="Curve_7dx83"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.171154, 0.215094), 0.0, 0.0, 0, 0, Vector2(0.771154, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_j4o2f"]
+curve = SubResource("Curve_7dx83")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v4v88"]
+emission_shape_offset = Vector3(0, 0, 1.755)
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -4.8
+radial_accel_max = -0.5
+radial_accel_curve = SubResource("CurveTexture_yxfe3")
+scale_curve = SubResource("CurveTexture_j4o2f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72usa"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 0.564706, 0.407843)
+grow_amount = 4.465
+
+[sub_resource type="SphereMesh" id="SphereMesh_0fgtc"]
+material = SubResource("StandardMaterial3D_72usa")
+radial_segments = 4
+rings = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p1voy"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("7_5tk2f")
+stream_0/weight = 1.0
+
+[sub_resource type="Curve" id="Curve_yftxa"]
+_data = [Vector2(0, 0), 0.0, 5.04117, 0, 0, Vector2(0.137218, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_12rx7"]
+curve = SubResource("Curve_yftxa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r6t6l"]
+lifetime_randomness = 0.4
+direction = Vector3(0, 1, 0)
+spread = 43.835
+flatness = 0.336
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, 3.5, 0)
+attractor_interaction_enabled = false
+scale_curve = SubResource("CurveTexture_12rx7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnkqy"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.756863)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_gjt8a"]
+material = SubResource("StandardMaterial3D_dnkqy")
+radial_segments = 8
+rings = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wktrw"]
+size = Vector3(1, 0.7, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_brr4j"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("12_vjth7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_m1nb8")
+stream_1/weight = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmbju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_avcgx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o6i8g"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("16_aie4y")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("17_768je")
+stream_1/weight = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eocrc"]
+size = Vector3(1.225, 0.82, 1.865)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aujq1"]
+height = 1.0
+radius = 0.2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gst42"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("16_nstyx")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("17_tw765")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7diaq"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("22_4r6ng")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0bmqg"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("19_6iiaq")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("20_tvrdw")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("21_ff4t8")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6ynkm"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("22_o7aql")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("23_oix2h")
+stream_1/weight = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q80m7"]
+particle_flag_rotate_y = true
+emission_shape = 2
+emission_sphere_radius = 1.0
+angular_velocity_min = -334.08
+angular_velocity_max = 115.2
+gravity = Vector3(0, 5, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_j4o2f")
+
+[sub_resource type="Curve" id="Curve_vw2ku"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.517308, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xn8q2"]
+curve = SubResource("Curve_vw2ku")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w2vya"]
+direction = Vector3(0, 0, 1)
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xn8q2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmue5"]
+transparency = 1
+albedo_color = Color(0.945098, 0.854902, 0.823529, 0.796078)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8xjkt"]
+material = SubResource("StandardMaterial3D_hmue5")
+radial_segments = 8
+rings = 8
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhfjm"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("26_7scma")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("27_f8364")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("28_bybg3")
+stream_2/weight = 1.0
+
+[node name="TankDriver" type="CharacterBody3D" groups=["TankDriver"]]
+collision_layer = 16
+collision_mask = 21
+script = ExtResource("1_nsmu1")
+bullet_scene = ExtResource("2_umt7d")
+mine_scene = ExtResource("3_w853r")
+heart_bullet_scene = ExtResource("2_e4da2")
+shooting_delay = 0.15
+max_concurrent_mines = 99
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
+shape = SubResource("CapsuleShape3D_dewea")
+disabled = true
+
+[node name="model" parent="." instance=ExtResource("2_7jgw6")]
+visible = false
+
+[node name="PlayerLabel" type="Label3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+billboard = 1
+modulate = Color(1, 1, 1, 0.588235)
+outline_modulate = Color(0, 0, 0, 0.588235)
+text = "P1
+V"
+font_size = 137
+outline_size = 82
+
+[node name="BulletSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00637579, 1.54476, 1.84843)
+
+[node name="MineSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_pk1r4")
+}
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_wc2fb")
+bus = &"SFX"
+
+[node name="FireMine" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_4xi6g")
+bus = &"SFX"
+
+[node name="Charging" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, 1.88335)
+emitting = false
+lifetime = 1.54
+speed_scale = 4.8
+process_material = SubResource("ParticleProcessMaterial_v4v88")
+draw_pass_1 = SubResource("SphereMesh_0fgtc")
+
+[node name="ChargeTierIncreased" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_psfxl")
+volume_db = -19.0
+max_db = 0.0
+bus = &"SFX"
+
+[node name="MineLayed" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_p1voy")
+volume_db = -5.0
+pitch_scale = 1.3
+bus = &"SFX"
+
+[node name="ChargeTierIncreasedParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.99
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_r6t6l")
+draw_pass_1 = SubResource("SphereMesh_gjt8a")
+
+[node name="Debris" type="Node3D" parent="."]
+process_mode = 3
+visible = false
+
+[node name="Peasint" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 25
+linear_velocity = Vector3(0, 25, 0)
+angular_velocity = Vector3(0, 0.261799, 0.523599)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Peasint"]
+transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 1.53671, 0)
+shape = SubResource("BoxShape3D_wktrw")
+
+[node name="Debris_Peasint" parent="Debris/Peasint" instance=ExtResource("11_5r7vx")]
+
+[node name="Scream" type="AudioStreamPlayer3D" parent="Debris/Peasint"]
+stream = SubResource("AudioStreamRandomizer_brr4j")
+bus = &"SFX"
+doppler_tracking = 2
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Debris/Peasint"]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.47573, 0.794939)
+sprite_frames = SubResource("SpriteFrames_bmbju")
+
+[node name="maercS" type="AudioStreamPlayer3D" parent="Debris/Peasint"]
+stream = SubResource("AudioStreamRandomizer_o6i8g")
+bus = &"SFX"
+doppler_tracking = 2
+
+[node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 29
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+linear_velocity = Vector3(0, 10, 0)
+angular_velocity = Vector3(0, 0, 0.261799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Tank"]
+transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 0.469671, 0)
+shape = SubResource("BoxShape3D_eocrc")
+
+[node name="Debris_Tank" parent="Debris/Tank" instance=ExtResource("12_akqab")]
+
+[node name="Shaft" type="RigidBody3D" parent="Debris" groups=["Debris"]]
+collision_layer = 8
+collision_mask = 25
+linear_velocity = Vector3(0, 10, 0)
+angular_velocity = Vector3(0, 0, 0.261799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Shaft"]
+transform = Transform3D(1.3898, 0, 0, 0, -6.07501e-08, -1.3898, 0, 1.3898, -6.07501e-08, 0, 1.48982, 1.35004)
+shape = SubResource("CylinderShape3D_aujq1")
+
+[node name="Debris_Shaft" parent="Debris/Shaft" instance=ExtResource("13_j1keq")]
+
+[node name="Destroyed" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_gst42")
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="deyortseD" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7diaq")
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="FireHeart" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0bmqg")
+bus = &"SFX"
+
+[node name="Happy" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_6ynkm")
+bus = &"SFX"
+
+[node name="HappyParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47738, -0.34714)
+emitting = false
+lifetime = 1.54
+one_shot = true
+explosiveness = 0.83
+process_material = SubResource("ParticleProcessMaterial_q80m7")
+draw_pass_1 = ExtResource("25_bbkcw")
+
+[node name="CoughParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49129, 1.83519)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_w2vya")
+draw_pass_1 = SubResource("SphereMesh_8xjkt")
+
+[node name="Cough" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhfjm")

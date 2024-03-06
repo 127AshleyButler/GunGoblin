@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=71 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_j1keq"]
 [ext_resource type="AudioStream" uid="uid://b7hli3eecmsao" path="res://sounds/SFX/peasint_tank_die2.wav" id="13_m1nb8"]
 [ext_resource type="Texture2D" uid="uid://dyv4gyd0yh5eh" path="res://textures/Tanks/Peasint Faces/Peasint-004.png" id="15_avcgx"]
+[ext_resource type="AudioStream" uid="uid://cmfxm57f41f6l" path="res://sounds/SFX/peasint_vanish.wav" id="16_gai2h"]
 [ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="16_nstyx"]
 [ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="17_tw765"]
 [ext_resource type="AudioStream" uid="uid://dshjp34eolguu" path="res://sounds/SFX/Peasint_Tank_Kiss1.wav" id="19_6iiaq"]
@@ -25,10 +26,41 @@
 [ext_resource type="AudioStream" uid="uid://ii4rgfs7w8tj" path="res://sounds/SFX/Peasint_Tank_Happy1.wav" id="22_o7aql"]
 [ext_resource type="AudioStream" uid="uid://rjmpj7fkfq" path="res://sounds/SFX/Peasint_Tank_Happy2.wav" id="23_oix2h"]
 [ext_resource type="ArrayMesh" uid="uid://cm6q0s4nyfblr" path="res://models/tank/heart_bullet.tres" id="25_bbkcw"]
+[ext_resource type="AudioStream" uid="uid://5e3ymnl15lw0" path="res://sounds/SFX/peasint_cough1.wav" id="26_7scma"]
+[ext_resource type="AudioStream" uid="uid://4uib8x5bhfag" path="res://sounds/SFX/peasint_cough2.wav" id="27_f8364"]
+[ext_resource type="AudioStream" uid="uid://b22i8bf848vgv" path="res://sounds/SFX/peasint_cough3.wav" id="28_bybg3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
 height = 2.64885
+
+[sub_resource type="Animation" id="Animation_6rvdq"]
+resource_name = "cough"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoughParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cough:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_tytrd"]
 resource_name = "die"
@@ -80,51 +112,37 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("Charging:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [false],
-"method": &"set_physics_process"
-}]
+"update": 1,
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Charging:emitting")
+tracks/5/path = NodePath("Debris/Peasint/Scream:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Debris/Peasint/Scream:playing")
+tracks/6/path = NodePath("Destroyed:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Destroyed:playing")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -236,6 +254,195 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_5je3g"]
+resource_name = "invisible"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Debris:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_gdlsk"]
+resource_name = "join"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChargeTierIncreasedParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("model:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Debris:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Happy:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3efcs"]
+resource_name = "leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChargeTierIncreasedParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("model:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Vanish:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_ls5dd"]
 resource_name = "love"
 tracks/0/type = "value"
@@ -263,11 +470,100 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_a765p"]
+resource_name = "revive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Debris:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Debris:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Charging:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Debris/Peasint")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Debris/Tank")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/7/type = "position_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Debris/Shaft")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
+"cough": SubResource("Animation_6rvdq"),
 "die": SubResource("Animation_tytrd"),
 "idle": SubResource("Animation_dbl8a"),
-"love": SubResource("Animation_ls5dd")
+"invisible": SubResource("Animation_5je3g"),
+"join": SubResource("Animation_gdlsk"),
+"leave": SubResource("Animation_3efcs"),
+"love": SubResource("Animation_ls5dd"),
+"revive": SubResource("Animation_a765p")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
@@ -394,6 +690,12 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("17_tw765")
 stream_1/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o6i8g"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("16_gai2h")
+stream_0/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0bmqg"]
 random_pitch = 1.1
 streams_count = 3
@@ -423,9 +725,48 @@ scale_min = 2.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_j4o2f")
 
+[sub_resource type="Curve" id="Curve_vw2ku"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.517308, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xn8q2"]
+curve = SubResource("Curve_vw2ku")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w2vya"]
+direction = Vector3(0, 0, 1)
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xn8q2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmue5"]
+transparency = 1
+albedo_color = Color(0.945098, 0.854902, 0.823529, 0.796078)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8xjkt"]
+material = SubResource("StandardMaterial3D_hmue5")
+radial_segments = 8
+rings = 8
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhfjm"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("26_7scma")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("27_f8364")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("28_bybg3")
+stream_2/weight = 1.0
+
 [node name="TankDriver" type="CharacterBody3D" groups=["TankDriver"]]
-collision_layer = 20
-collision_mask = 17
+collision_layer = 16
+collision_mask = 21
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")
 mine_scene = ExtResource("3_w853r")
@@ -441,6 +782,7 @@ shape = SubResource("CapsuleShape3D_dewea")
 
 [node name="PlayerLabel" type="Label3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
 billboard = 1
 modulate = Color(1, 1, 1, 0.588235)
 outline_modulate = Color(0, 0, 0, 0.588235)
@@ -456,6 +798,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00637579, 1.54476, 1.84843)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_pk1r4")
 }
@@ -505,7 +848,7 @@ visible = false
 
 [node name="Peasint" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
-collision_mask = 9
+collision_mask = 25
 linear_velocity = Vector3(0, 25, 0)
 angular_velocity = Vector3(0, 0.261799, 0.523599)
 
@@ -526,7 +869,7 @@ sprite_frames = SubResource("SpriteFrames_bmbju")
 
 [node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
-collision_mask = 13
+collision_mask = 29
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 linear_velocity = Vector3(0, 10, 0)
@@ -540,7 +883,7 @@ shape = SubResource("BoxShape3D_eocrc")
 
 [node name="Shaft" type="RigidBody3D" parent="Debris" groups=["Debris"]]
 collision_layer = 8
-collision_mask = 9
+collision_mask = 25
 linear_velocity = Vector3(0, 10, 0)
 angular_velocity = Vector3(0, 0, 0.261799)
 
@@ -554,6 +897,11 @@ shape = SubResource("CylinderShape3D_aujq1")
 stream = SubResource("AudioStreamRandomizer_gst42")
 pitch_scale = 1.2
 bus = &"SFX"
+
+[node name="Vanish" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_o6i8g")
+bus = &"SFX"
+doppler_tracking = 2
 
 [node name="FireHeart" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0bmqg")
@@ -571,3 +919,15 @@ one_shot = true
 explosiveness = 0.83
 process_material = SubResource("ParticleProcessMaterial_q80m7")
 draw_pass_1 = ExtResource("25_bbkcw")
+
+[node name="CoughParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49129, 1.83519)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_w2vya")
+draw_pass_1 = SubResource("SphereMesh_8xjkt")
+
+[node name="Cough" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhfjm")

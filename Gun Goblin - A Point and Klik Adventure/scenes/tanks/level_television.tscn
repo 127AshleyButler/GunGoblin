@@ -7,6 +7,9 @@
 transparency = 1
 albedo_color = Color(0.309804, 0.309804, 0.309804, 0.219608)
 roughness = 0.0
+emission_enabled = true
+emission = Color(0.12549, 0.12549, 0.12549, 1)
+subsurf_scatter_strength = 1.0
 
 [node name="level_television" instance=ExtResource("1_ot1ng")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.40928)

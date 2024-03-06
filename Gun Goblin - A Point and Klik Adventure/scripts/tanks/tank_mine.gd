@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export_category("Mine Properties")
 ## How long after placement until the mine will detect tanks driving over it
 @export_range(0, 20, 0.5, "or_greater", "or_less") var mine_activation_time = 1
+## How large the mine grows with each mine assimilated
+@export var mine_growth_factor = 0.25
 var mine_active = false
 var mine_about_to_explode = false
 var airborne = true
@@ -19,6 +21,7 @@ var mine_number = 0 # Used to determine priority of mine assimilation; older min
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var base_scale = scale
 
 func _ready():
 	$ActivationTimer.wait_time = mine_activation_time
@@ -69,8 +72,9 @@ func dissolve():
 func increase_scale(amount = 1):
 	if mine_about_to_explode:
 		return
-	scale += Vector3(0.1, 0.1, 0.1) * amount
+	#scale += Vector3(0.4, 0.4, 0.4) * amount
 	mines_assimilated += amount
+	scale = base_scale + (Vector3.ONE * mines_assimilated * mine_growth_factor)
 	$AnimationPlayer.play("preview_explosion_radius")
 	$Primed.pitch_scale -= 0.05 * amount
 	$Explosion.pitch_scale -= 0.01 * amount

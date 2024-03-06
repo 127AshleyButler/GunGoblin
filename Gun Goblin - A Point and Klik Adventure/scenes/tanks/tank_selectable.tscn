@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdx66awewgsh6"]
+
+[ext_resource type="Script" path="res://scripts/tanks/TankSelectable.gd" id="1_e06qw"]
+[ext_resource type="AudioStream" uid="uid://b5x2br3fqtyed" path="res://scenes/483450__pappabert__stone-creek.wav" id="2_0tsdw"]
+
+[sub_resource type="Gradient" id="Gradient_7jre7"]
+colors = PackedColorArray(0.255659, 0.255659, 0.255659, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_soikn"]
+gradient = SubResource("Gradient_7jre7")
+
+[sub_resource type="Curve" id="Curve_ym5y4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.251923, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_etrn6"]
+curve = SubResource("Curve_ym5y4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vg8eb"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 5.0
+gravity = Vector3(0, -1.1, 0)
+scale_curve = SubResource("CurveTexture_etrn6")
+color_initial_ramp = SubResource("GradientTexture1D_soikn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbeko"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_g44wx"]
+material = SubResource("StandardMaterial3D_wbeko")
+radial_segments = 4
+rings = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g32pm"]
+height = 12.0
+radius = 3.9925
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fah32"]
+height = 14.0
+radius = 5.14587
+
+[node name="TankSelectable" type="Node3D"]
+script = ExtResource("1_e06qw")
+color_override = Color(0.227451, 0.321569, 0.72549, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 16
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_vg8eb")
+draw_pass_1 = SubResource("SphereMesh_g44wx")
+
+[node name="Icon" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="Icon"]
+billboard = 1
+text = "P1
+V"
+font_size = 137
+outline_size = 82
+
+[node name="EnterHitbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnterHitbox"]
+shape = SubResource("CylinderShape3D_g32pm")
+
+[node name="ExitHitbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitHitbox"]
+shape = SubResource("CylinderShape3D_fah32")
+
+[node name="Sliding" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_0tsdw")
+volume_db = -11.94
+pitch_scale = 1.27
+
+[connection signal="body_entered" from="EnterHitbox" to="." method="_on_enter_hitbox_body_entered"]
+[connection signal="body_exited" from="ExitHitbox" to="." method="_on_exit_hitbox_body_exited"]

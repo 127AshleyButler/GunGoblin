@@ -1,0 +1,324 @@
+[gd_scene load_steps=32 format=3 uid="uid://d07580we6kkox"]
+
+[ext_resource type="PackedScene" uid="uid://bamoput0j3nkx" path="res://models/tank/levels/level_controls.glb" id="1_s1n5o"]
+[ext_resource type="Script" path="res://scripts/tanks/level_controls.gd" id="2_h7it7"]
+[ext_resource type="Texture2D" uid="uid://cb475x1x61tr2" path="res://models/tank/levels/keycaps.png" id="2_m44g7"]
+[ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="2_slf7j"]
+[ext_resource type="PackedScene" uid="uid://cdx66awewgsh6" path="res://scenes/tanks/tank_selectable.tscn" id="3_7d5tu"]
+[ext_resource type="Texture2D" uid="uid://biijyt84qyxja" path="res://textures/Tanks/startingMatchText.png" id="5_6hbbq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l4g3"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vwn5"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lywo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6ituf"]
+material = SubResource("StandardMaterial3D_2lywo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22gx5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_nsjmp"]
+material = SubResource("StandardMaterial3D_22gx5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_toqeg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_w6ggh"]
+material = SubResource("StandardMaterial3D_toqeg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mv3op"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_03kgd"]
+material = SubResource("StandardMaterial3D_mv3op")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmf5y"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ct6s"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxbjx"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yl34q"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6y8dq"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85ofi"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kfvb"]
+albedo_texture = ExtResource("2_m44g7")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhodm"]
+atlas = ExtResource("5_6hbbq")
+region = Rect2(0, 0, 237, 115)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efq3f"]
+atlas = ExtResource("5_6hbbq")
+region = Rect2(237, 0, 237, 115)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hmvq"]
+atlas = ExtResource("5_6hbbq")
+region = Rect2(0, 115, 237, 115)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl76j"]
+atlas = ExtResource("5_6hbbq")
+region = Rect2(237, 115, 237, 115)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5u2pr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhodm")
+}],
+"loop": true,
+"name": &"1...",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efq3f")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hmvq")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl76j")
+}],
+"loop": true,
+"name": &"Starting Match in",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_3nasc"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Countdown:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5to2f"]
+resource_name = "countdown"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Countdown:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Countdown:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [&"Starting Match in", &"3", &"2", &"1..."]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_finish_countdown"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7toff"]
+_data = {
+"countdown": SubResource("Animation_5to2f"),
+"idle": SubResource("Animation_3nasc")
+}
+
+[node name="level_controls" node_paths=PackedStringArray("tank_drivers", "pillars") instance=ExtResource("1_s1n5o")]
+script = ExtResource("2_h7it7")
+tank_drivers = [NodePath("TankDriver"), NodePath("TankDriver2"), NodePath("TankDriver3"), NodePath("TankDriver4"), NodePath("TankDriver5")]
+pillars = [NodePath("P1Select"), NodePath("P2Select"), NodePath("P3Select"), NodePath("P4Select")]
+
+[node name="Pillar Text" parent="." index="7"]
+visible = false
+
+[node name="KeyboardDriveUp" parent="." index="10"]
+material_override = SubResource("StandardMaterial3D_3l4g3")
+
+[node name="KeyboardShoot" parent="." index="11"]
+material_override = SubResource("StandardMaterial3D_8vwn5")
+
+[node name="TankDriver" parent="." index="12" instance=ExtResource("2_slf7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, -18.4436)
+player_num = "1"
+can_shoot = true
+state = 2
+in_lobby = true
+
+[node name="TankDriver2" parent="." index="13" instance=ExtResource("2_slf7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6993, 0.486996, -18.4436)
+player_num = "2"
+can_shoot = true
+state = 2
+in_lobby = true
+
+[node name="TankDriver3" parent="." index="14" instance=ExtResource("2_slf7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6993, 0.486996, -13.4436)
+player_num = "3"
+can_shoot = true
+state = 2
+in_lobby = true
+
+[node name="TankDriver4" parent="." index="15" instance=ExtResource("2_slf7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3986, 0.973992, -12.8872)
+player_num = "4"
+can_shoot = true
+state = 2
+in_lobby = true
+
+[node name="TankDriver5" parent="." index="16" instance=ExtResource("2_slf7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0979, 0.920545, -7.3308)
+player_num = "5"
+can_shoot = true
+state = 2
+in_lobby = true
+
+[node name="Camera3D" type="Camera3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, 0.682152, 0.731211, 0, -0.731211, 0.682152, 0, 18.85, 15.868)
+projection = 1
+current = true
+fov = 118.125
+size = 40.18
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="18"]
+transform = Transform3D(1, 0, 0, 0, 0.575176, 0.818029, 0, -0.818029, 0.575176, -2.11707, 0, 0)
+
+[node name="P1Select" parent="." index="19" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 6.52, 21.594)
+color_override = Color(0.254902, 0.815686, 0.996078, 1)
+text_override = "☃
+V"
+particle_mesh_override = SubResource("SphereMesh_6ituf")
+model = NodePath("../P1 Pillar")
+
+[node name="P2Select" parent="." index="20" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6.52, 21.594)
+color_override = Color(0.980392, 0.733333, 0.380392, 1)
+text_override = "🎃
+V"
+particle_mesh_override = SubResource("SphereMesh_nsjmp")
+model = NodePath("../P2 Pillar")
+
+[node name="P3Select" parent="." index="21" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6.52, 21.594)
+color_override = Color(0.203922, 0.988235, 0.262745, 1)
+text_override = "🍀
+V"
+particle_mesh_override = SubResource("SphereMesh_w6ggh")
+model = NodePath("../P3 Pillar")
+
+[node name="P4Select" parent="." index="22" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 6.52, 21.594)
+color_override = Color(0.980392, 0.266667, 0.541176, 1)
+text_override = "💓
+V"
+particle_mesh_override = SubResource("SphereMesh_03kgd")
+model = NodePath("../P4 Pillar")
+
+[node name="KeyboardMine" parent="." index="23"]
+material_override = SubResource("StandardMaterial3D_mmf5y")
+
+[node name="KeyboardLove" parent="." index="24"]
+material_override = SubResource("StandardMaterial3D_0ct6s")
+
+[node name="KeyboardDriveDown" parent="." index="25"]
+material_override = SubResource("StandardMaterial3D_bxbjx")
+
+[node name="KeyboardDriveLeft" parent="." index="26"]
+material_override = SubResource("StandardMaterial3D_yl34q")
+
+[node name="KeyboardDriveRight" parent="." index="27"]
+material_override = SubResource("StandardMaterial3D_6y8dq")
+
+[node name="KeyboardJoin" parent="." index="28"]
+material_override = SubResource("StandardMaterial3D_85ofi")
+
+[node name="Controller Join" parent="." index="32"]
+material_override = SubResource("StandardMaterial3D_0kfvb")
+
+[node name="Controller Mine" parent="." index="35"]
+transform = Transform3D(-7.89575e-08, 0, 1.93536, 0, 1.536, 0, -1.80634, 0, -8.45973e-08, 11.6285, 0.2, -3)
+
+[node name="Controller Love" parent="." index="36"]
+transform = Transform3D(-7.89575e-08, 0, 1.93536, 0, 1.536, 0, -1.80634, 0, -8.45973e-08, 11.6285, 0.2, 2)
+
+[node name="Countdown" type="AnimatedSprite3D" parent="." index="44"]
+transform = Transform3D(8.35375, 0, 0, 0, 8.35375, 0, 0, 0, 8.35375, 0, 3.11842, 10.5671)
+billboard = 1
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_5u2pr")
+animation = &"Starting Match in"
+
+[node name="CountdownAnimation" type="AnimationPlayer" parent="." index="45"]
+root_node = NodePath("../Pillar Text")
+libraries = {
+"": SubResource("AnimationLibrary_7toff")
+}
