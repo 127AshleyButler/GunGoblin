@@ -161,8 +161,9 @@ bus = &"SFX"
 
 [node name="Scores" type="Node3D" parent="."]
 
-[node name="Player1" type="Label3D" parent="Scores"]
+[node name="UnusedPlayer1" type="Label3D" parent="Scores"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.039, 12.649, -10.295)
+visible = false
 billboard = 1
 modulate = Color(0, 0.686275, 0.686275, 1)
 outline_modulate = Color(0, 0.29, 0.29, 1)
@@ -171,8 +172,9 @@ text = "P1:
 font_size = 287
 outline_size = 122
 
-[node name="Player2" type="Label3D" parent="Scores"]
+[node name="UnusedPlayer2" type="Label3D" parent="Scores"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.039, 12.649, -10.295)
+visible = false
 billboard = 1
 modulate = Color(1, 0.498039, 0.219608, 1)
 outline_modulate = Color(0.47, 0.23171, 0.1034, 1)
@@ -181,8 +183,9 @@ text = "P2:
 font_size = 287
 outline_size = 122
 
-[node name="Player3" type="Label3D" parent="Scores"]
+[node name="UnusedPlayer3" type="Label3D" parent="Scores"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.039, 12.649, 37.815)
+visible = false
 billboard = 1
 modulate = Color(0.299796, 0.784014, 3.85046e-07, 1)
 outline_modulate = Color(0.145667, 0.38, 0, 1)
@@ -191,8 +194,9 @@ text = "P3:
 font_size = 287
 outline_size = 122
 
-[node name="Player4" type="Label3D" parent="Scores"]
+[node name="UnusedPlayer4" type="Label3D" parent="Scores"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.039, 12.649, 37.815)
+visible = false
 billboard = 1
 modulate = Color(1, 0.451692, 0.608902, 1)
 outline_modulate = Color(0.6, 0.27, 0.3635, 1)

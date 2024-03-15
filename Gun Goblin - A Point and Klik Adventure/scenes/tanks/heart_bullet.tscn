@@ -417,3 +417,5 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_ki4iv")
 }
+
+[connection signal="timeout" from="ExpirationTimer" to="." method="_on_expiration_timer_timeout"]

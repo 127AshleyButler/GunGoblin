@@ -4,8 +4,8 @@
 class_name TankSelectable
 extends Node3D
 
-signal selected(player_num)
-signal unselected(player_num)
+signal selected(player : TankDriver)
+signal unselected(player : TankDriver)
 
 @export var color_override : Color
 @export_multiline var text_override : String
@@ -13,6 +13,8 @@ signal unselected(player_num)
 @export var model : Node3D
 ## How far this pillar extracts when selected
 @export var extracted_length = 5
+## Whether or not this pillar should update the player's name tag
+@export var name_tag_setter = true
 
 var selected_by
 var extraction_speed = 0.5
@@ -51,10 +53,13 @@ func _physics_process(delta):
 func _on_enter_hitbox_body_entered(body):
 	if not selected_by:
 		selected_by = body
-		selected.emit(int(body.player_num))
+		selected.emit(body)
+		if name_tag_setter and body is TankDriver:
+			body.update_label(text_override)
+			body.update_color(color_override)
 
 
 func _on_exit_hitbox_body_exited(body):
 	if body == selected_by:
 		selected_by = null
-		unselected.emit(int(body.player_num))
+		unselected.emit(body)

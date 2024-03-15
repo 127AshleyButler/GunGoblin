@@ -52,9 +52,13 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	match state:
 		States.ALIVE, States.DEAD:
+			state = States.ALIVE
 			%AnimationPlayer.play("idle")
+			can_shoot = false
+			%PlayerLabel.show()
 		States.INVISIBLE:
 			%AnimationPlayer.play("invisible")
+			can_shoot = true
 	$model/AnimationPlayer.play("Idle")
 	for projectile in get_children():
 		if projectile.is_in_group("Projectile"):
@@ -65,7 +69,10 @@ func _ready():
 	charge_tier = 0
 	bullet_count = 0
 	mine_count = 0
-	$model/PlayerLabel.text[3] = "V"
+	if received_love:
+		received_love = false
+		%PlayerLabel.text[%PlayerLabel.text.find("♡")] = "V"
+	
 
 
 func _physics_process(delta):
@@ -96,7 +103,7 @@ func _physics_process(delta):
 			elif ( # Player can't shoot yet, so play a cough animation instead.
 						Input.is_action_just_pressed("shoot" + player_num)
 						or Input.is_action_just_pressed("lay_mine" + player_num)
-						or Input.is_action_just_pressed("" + player_num)
+						or Input.is_action_just_pressed("taunt" + player_num)
 				):
 					%AnimationPlayer.play("cough")
 
@@ -211,8 +218,15 @@ func hit_with_love():
 	if not received_love:
 		received_love = true
 		loved.emit(int(player_num))
-		$model/PlayerLabel.text[3] = "♡"
+		%PlayerLabel.text[%PlayerLabel.text.find("V")] = "♡"
 	%AnimationPlayer.play("love")
+
+
+func out_of_bounds():
+	if state == States.ALIVE:
+		position = Vector3.ZERO
+		print(name, "fell out of bounds!")
+		hit()
 
 
 func reset_charge():
@@ -242,8 +256,17 @@ func decrement_mine_count():
 
 func start_of_round(): # Called by the tank_game_master
 	can_shoot = true
+	in_lobby = false
 
 
-func update_label(p_num): # Called by the tank_game_master
-	$model/PlayerLabel.text = "P" + p_num + "\nV"
-	$model/PlayerLabel.show()
+func update_label(text): # Called by the tank_game_master & tank_selectable
+	%PlayerLabel.text = text
+	
+
+func update_color(color): # Called by tank_selectable
+	%PlayerLabel.modulate = color
+	%PlayerLabel.outline_modulate = color.darkened(0.5)
+
+
+func get_label():
+	return %PlayerLabel

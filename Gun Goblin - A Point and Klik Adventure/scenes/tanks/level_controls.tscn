@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d07580we6kkox"]
+[gd_scene load_steps=33 format=3 uid="uid://d07580we6kkox"]
 
 [ext_resource type="PackedScene" uid="uid://bamoput0j3nkx" path="res://models/tank/levels/level_controls.glb" id="1_s1n5o"]
 [ext_resource type="Script" path="res://scripts/tanks/level_controls.gd" id="2_h7it7"]
@@ -105,33 +105,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_3nasc"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Countdown:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_5to2f"]
 resource_name = "countdown"
 length = 4.0
@@ -186,11 +159,41 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_3nasc"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Countdown:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7toff"]
 _data = {
 "countdown": SubResource("Animation_5to2f"),
 "idle": SubResource("Animation_3nasc")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gosxy"]
+size = Vector3(214.295, 17.0717, 198.341)
 
 [node name="level_controls" node_paths=PackedStringArray("tank_drivers", "pillars") instance=ExtResource("1_s1n5o")]
 script = ExtResource("2_h7it7")
@@ -207,7 +210,7 @@ material_override = SubResource("StandardMaterial3D_3l4g3")
 material_override = SubResource("StandardMaterial3D_8vwn5")
 
 [node name="TankDriver" parent="." index="12" instance=ExtResource("2_slf7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, -18.4436)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, 4.87707)
 player_num = "1"
 can_shoot = true
 state = 2
@@ -221,10 +224,9 @@ state = 2
 in_lobby = true
 
 [node name="TankDriver3" parent="." index="14" instance=ExtResource("2_slf7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6993, 0.486996, -13.4436)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6993, 21.7967, 19.2742)
 player_num = "3"
 can_shoot = true
-state = 2
 in_lobby = true
 
 [node name="TankDriver4" parent="." index="15" instance=ExtResource("2_slf7j")]
@@ -322,3 +324,13 @@ root_node = NodePath("../Pillar Text")
 libraries = {
 "": SubResource("AnimationLibrary_7toff")
 }
+
+[node name="OutOfBounds" type="Area3D" parent="." index="46"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OutOfBounds" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.63197, -19.7579, 10.2441)
+shape = SubResource("BoxShape3D_gosxy")
+
+[connection signal="body_entered" from="OutOfBounds" to="." method="_on_out_of_bounds_body_entered"]

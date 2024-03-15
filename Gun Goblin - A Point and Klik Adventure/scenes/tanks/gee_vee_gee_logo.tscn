@@ -1,20 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxg42thl0m2lp"]
+[gd_scene load_steps=10 format=3 uid="uid://dxg42thl0m2lp"]
 
 [ext_resource type="Script" path="res://scripts/tanks/gee_vee_gee_logo.gd" id="1_8f4af"]
 [ext_resource type="Texture2D" uid="uid://bhg8wfsatkgbr" path="res://textures/Tanks/GeeVeeGee.png" id="1_30jxu"]
-[ext_resource type="AudioStream" uid="uid://cq8x5jcydpsno" path="res://sounds/SFX/highpop.wav" id="3_mfqqb"]
 [ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="3_p23u1"]
+[ext_resource type="AudioStream" uid="uid://snkcg4yryg7n" path="res://sounds/SFX/637511__kyles__electric-crackle-buzz-high-tension-powerline-hydro-dam.wav" id="4_5kyke"]
+[ext_resource type="AudioStream" uid="uid://ckcejjexnfc4y" path="res://sounds/SFX/637511__kyles__electric-crackle-buzz-high-tension-powerline-hydro-dam2.wav" id="5_kkacp"]
+[ext_resource type="AudioStream" uid="uid://rggdippiu81j" path="res://sounds/SFX/637511__kyles__electric-crackle-buzz-high-tension-powerline-hydro-dam3.wav" id="6_1ax88"]
+[ext_resource type="AudioStream" uid="uid://be5htb4sfhpvr" path="res://sounds/SFX/553075__nox_sound__foley_mechanism_light_buzz_short_loop_mono_dr05.wav" id="7_h87pq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kva8d"]
 size = Vector3(3, 1, 2.18158)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jwfoy"]
 random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("3_mfqqb")
+streams_count = 3
+stream_0/stream = ExtResource("4_5kyke")
 stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_kkacp")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_1ax88")
+stream_2/weight = 1.0
 
 [node name="GeeVeeGeeLogo" type="CharacterBody3D"]
+collision_layer = 0
 collision_mask = 19
 axis_lock_linear_y = true
 axis_lock_angular_x = true
@@ -64,5 +72,14 @@ texture = ExtResource("1_30jxu")
 
 [node name="Plink" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_jwfoy")
-volume_db = -5.0
-pitch_scale = 1.74
+volume_db = 10.0
+pitch_scale = 1.68
+bus = &"SFX"
+
+[node name="ElectricHum" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_h87pq")
+autoplay = true
+bus = &"SFX"
+doppler_tracking = 2
+
+[connection signal="finished" from="ElectricHum" to="." method="_on_electric_hum_finished"]

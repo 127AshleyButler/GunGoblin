@@ -303,6 +303,7 @@ spot_angle = 23.4263
 [node name="Top Center" type="Node3D" parent="." index="13"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Top Center" index="0"]
+visible = false
 mesh = SubResource("PrismMesh_3i4bh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="14"]

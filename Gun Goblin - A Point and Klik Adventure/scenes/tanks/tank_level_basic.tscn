@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds3hctx353mf0"]
+[gd_scene load_steps=7 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/tank_level_basic.glb" id="1_2s81v"]
 [ext_resource type="Script" path="res://scripts/tanks/tank_level_basic.gd" id="2_m2pmk"]
@@ -7,7 +7,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_w86r1"]
 size = Vector3(12, 1, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4m3e8"]
+albedo_color = Color(0.364706, 0.364706, 0.364706, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_l1u1h"]
+material = SubResource("StandardMaterial3D_4m3e8")
 size = Vector3(12, 1, 3)
 
 [node name="tank_level_basic" instance=ExtResource("1_2s81v")]
@@ -53,3 +57,7 @@ shape = SubResource("BoxShape3D_w86r1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Treadmill" index="1"]
 mesh = SubResource("BoxMesh_l1u1h")
+
+[node name="Label3D" type="Label3D" parent="." index="10"]
+transform = Transform3D(11.3023, 0, 0, 0, 11.3023, 0, 0, 0, 11.3023, 0, 2.73997, -24.2023)
+text = "Don't mind me, just testing the Animatable Body node"

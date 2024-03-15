@@ -45,3 +45,7 @@ func update_copies():
 	for copy in range(copy_count):
 		current_copy_node = get_node("Copies/Copy" + str(copy))
 		current_copy_node.transparency += 0.2
+
+
+func _on_electric_hum_finished():
+	$ElectricHum.play()

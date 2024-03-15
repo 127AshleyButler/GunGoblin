@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctg50wuy2e625"]
+
+[ext_resource type="Script" path="res://scripts/tanks/tank_mode_switcher.gd" id="1_c1t6n"]
+[ext_resource type="PackedScene" uid="uid://d07580we6kkox" path="res://scenes/tanks/level_controls.tscn" id="2_eme8h"]
+[ext_resource type="PackedScene" uid="uid://bq3mc4atgatic" path="res://scenes/tanks/tank_game_master.tscn" id="3_kbcpj"]
+
+[node name="tank_mode_switcher" type="Node"]
+script = ExtResource("1_c1t6n")
+initial_scene = ExtResource("2_eme8h")
+controls_scene = ExtResource("2_eme8h")
+pvp_scene = ExtResource("3_kbcpj")
