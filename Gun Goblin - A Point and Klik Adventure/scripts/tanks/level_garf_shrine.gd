@@ -17,6 +17,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#$SpinnyNode.rotate_x(-0.02 * delta)
 	if not is_active:
 		return
 	time += delta * 0.005

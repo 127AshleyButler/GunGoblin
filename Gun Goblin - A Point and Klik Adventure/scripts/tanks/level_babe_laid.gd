@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$SpinnyNode.rotate_y(0.03 * delta)
 
 
 func _on_spike_activation_timer_timeout():

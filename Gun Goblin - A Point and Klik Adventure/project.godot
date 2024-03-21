@@ -28,6 +28,10 @@ window/size/mode=2
 
 project/assembly_name="Gun Goblin - A Point and Klik Adventure"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/artis/OneDrive/Documents/Godot 4.1/Recordings/gameplay.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")

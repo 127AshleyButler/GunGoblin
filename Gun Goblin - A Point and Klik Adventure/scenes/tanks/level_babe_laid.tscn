@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dws2ihqass11q"]
+[gd_scene load_steps=18 format=3 uid="uid://dws2ihqass11q"]
 
 [ext_resource type="PackedScene" uid="uid://dreq6g3c0niyr" path="res://models/tank/levels/level_garf_shrine.glb" id="1_m3ixt"]
 [ext_resource type="PackedScene" uid="uid://lffa48far1id" path="res://scenes/tanks/spike_top.tscn" id="2_7guwd"]
@@ -219,6 +219,35 @@ _data = {
 "initial": SubResource("Animation_l751b")
 }
 
+[sub_resource type="Curve" id="Curve_pdpl4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.259615, 0.329513), 0.0, 0.0, 0, 0, Vector2(0.786538, 0.210315), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_b1u36"]
+curve = SubResource("Curve_pdpl4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kxj4q"]
+lifetime_randomness = 0.29
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 20)
+spread = 155.18
+initial_velocity_max = 2.0
+gravity = Vector3(0, -0.8, 0)
+linear_accel_min = -0.5
+linear_accel_max = 0.5
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_b1u36")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xou2"]
+emission_enabled = true
+emission = Color(0.639216, 0.92549, 0.811765, 1)
+emission_energy_multiplier = 2.74
+
+[sub_resource type="SphereMesh" id="SphereMesh_kg1my"]
+material = SubResource("StandardMaterial3D_4xou2")
+radial_segments = 5
+rings = 3
+
 [node name="level_babe_laid" groups=["Cavernous"] instance=ExtResource("1_m3ixt")]
 script = ExtResource("2_okrxt")
 
@@ -324,5 +353,24 @@ libraries = {
 
 [node name="SpikeActivationTimer" type="Timer" parent="." index="17"]
 wait_time = 10.0
+
+[node name="SpinnyNode" type="Node3D" parent="." index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.47602, -0.556683)
+
+[node name="Camera3D" type="Camera3D" parent="SpinnyNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.891007, 0.453991, 0, -0.453991, 0.891007, 0, 4.675, 24.698)
+visible = false
+
+[node name="CaveParticles" type="GPUParticles3D" parent="." index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.6714, 0)
+amount = 50
+amount_ratio = 0.8
+lifetime = 5.0
+preprocess = 1.0
+speed_scale = 0.5
+randomness = 1.0
+visibility_aabb = AABB(-17, -4, -15, 34, 8, 30)
+process_material = SubResource("ParticleProcessMaterial_kxj4q")
+draw_pass_1 = SubResource("SphereMesh_kg1my")
 
 [connection signal="timeout" from="SpikeActivationTimer" to="." method="_on_spike_activation_timer_timeout"]

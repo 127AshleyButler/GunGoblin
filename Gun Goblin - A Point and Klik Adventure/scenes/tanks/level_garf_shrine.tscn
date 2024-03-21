@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dym73nwkj4utc"]
+[gd_scene load_steps=15 format=3 uid="uid://dym73nwkj4utc"]
 
 [ext_resource type="PackedScene" uid="uid://dreq6g3c0niyr" path="res://models/tank/levels/level_garf_shrine.glb" id="1_80u1u"]
 [ext_resource type="Script" path="res://scripts/tanks/level_garf_shrine.gd" id="2_cq6p8"]
@@ -110,10 +110,20 @@ _data = {
 height = 0.88
 radius = 0.994
 
+[sub_resource type="Gradient" id="Gradient_48ikl"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0475682, 0.00981322, 0.168877, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vtgco"]
+gradient = SubResource("Gradient_48ikl")
+fill_from = Vector2(0.4, 0.1)
+fill_to = Vector2(0.5, 0.9)
+metadata/_snap_enabled = true
+
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ndwpl"]
 sun_disk_scale = 21.87
 ground_color = Color(0.262745, 0.2, 0.12549, 1)
-energy_multiplier = 1.8
+energy_multiplier = 0.9
+night_sky = SubResource("GradientTexture2D_vtgco")
 
 [sub_resource type="Sky" id="Sky_b1ms4"]
 sky_material = SubResource("PhysicalSkyMaterial_ndwpl")
@@ -190,6 +200,11 @@ light_energy = 0.0
 light_size = 0.055
 omni_range = 34.598
 omni_attenuation = 0.225313
+
+[node name="SpinnyNode" type="Node3D" parent="." index="15"]
+
+[node name="Camera3D" type="Camera3D" parent="SpinnyNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.987688, -0.156434, 0, 0.156434, 0.987688, 0, 5.79, 17.98)
 
 [connection signal="finished" from="Pillar/StoneScraping" to="." method="_on_stone_scraping_finished"]
 [connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]

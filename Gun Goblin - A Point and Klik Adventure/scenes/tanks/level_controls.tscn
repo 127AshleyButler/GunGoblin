@@ -210,7 +210,7 @@ material_override = SubResource("StandardMaterial3D_3l4g3")
 material_override = SubResource("StandardMaterial3D_8vwn5")
 
 [node name="TankDriver" parent="." index="12" instance=ExtResource("2_slf7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, 4.87707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, -18.1229)
 player_num = "1"
 can_shoot = true
 state = 2
@@ -224,9 +224,10 @@ state = 2
 in_lobby = true
 
 [node name="TankDriver3" parent="." index="14" instance=ExtResource("2_slf7j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6993, 21.7967, 19.2742)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.699, 0.921, -13.4824)
 player_num = "3"
 can_shoot = true
+state = 2
 in_lobby = true
 
 [node name="TankDriver4" parent="." index="15" instance=ExtResource("2_slf7j")]
@@ -332,5 +333,10 @@ collision_mask = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OutOfBounds" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.63197, -19.7579, 10.2441)
 shape = SubResource("BoxShape3D_gosxy")
+
+[node name="TrailerCam" type="Camera3D" parent="." index="47"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.301, 1.287, 15.868)
+fov = 38.4
+size = 40.18
 
 [connection signal="body_entered" from="OutOfBounds" to="." method="_on_out_of_bounds_body_entered"]
