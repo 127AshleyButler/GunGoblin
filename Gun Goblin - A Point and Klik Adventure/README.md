@@ -44,3 +44,7 @@ All of these programs are free, too! Highly recommend checkin' them out if you'r
     - "Snowball Smash 1" by Bricklover
 - Other
     - "sr_pelo_boom" by Sr. Pelo on Youtube
+
+### Blender Assets Used
+- PolyHaven
+    - Sakura Bark by Charlotte Baglioni

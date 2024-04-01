@@ -1,7 +1,6 @@
-[gd_scene load_steps=71 format=3 uid="uid://cj8co8kr1xew8"]
+[gd_scene load_steps=72 format=3 uid="uid://cj8co8kr1xew8"]
 
 [ext_resource type="Script" path="res://scripts/tanks/tank_driver.gd" id="1_nsmu1"]
-[ext_resource type="PackedScene" uid="uid://muthdhyr8o8e" path="res://scenes/tanks/tank_peasint.tscn" id="2_7jgw6"]
 [ext_resource type="PackedScene" uid="uid://b380wq4ko3hvm" path="res://scenes/tanks/heart_bullet.tscn" id="2_e4da2"]
 [ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="2_umt7d"]
 [ext_resource type="PackedScene" uid="uid://csassjfat0bdr" path="res://scenes/tanks/tank_mine.tscn" id="3_w853r"]
@@ -29,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://5e3ymnl15lw0" path="res://sounds/SFX/peasint_cough1.wav" id="26_7scma"]
 [ext_resource type="AudioStream" uid="uid://4uib8x5bhfag" path="res://sounds/SFX/peasint_cough2.wav" id="27_f8364"]
 [ext_resource type="AudioStream" uid="uid://b22i8bf848vgv" path="res://sounds/SFX/peasint_cough3.wav" id="28_bybg3"]
+[ext_resource type="PackedScene" uid="uid://eoix351rmxt3" path="res://scenes/tanks/tank_peasint_2.tscn" id="29_rnw2k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dewea"]
 radius = 1.05189
@@ -554,6 +554,24 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
+[sub_resource type="Animation" id="Animation_joy07"]
+resource_name = "shoot"
+length = 0.001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["shoot"],
+"method": &"play_animation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
 "cough": SubResource("Animation_6rvdq"),
@@ -563,7 +581,8 @@ _data = {
 "join": SubResource("Animation_gdlsk"),
 "leave": SubResource("Animation_3efcs"),
 "love": SubResource("Animation_ls5dd"),
-"revive": SubResource("Animation_a765p")
+"revive": SubResource("Animation_a765p"),
+"shoot": SubResource("Animation_joy07")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
@@ -778,20 +797,6 @@ max_concurrent_mines = 99
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
 shape = SubResource("CapsuleShape3D_dewea")
 
-[node name="model" parent="." instance=ExtResource("2_7jgw6")]
-
-[node name="PlayerLabel" type="Label3D" parent="model"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-visible = false
-billboard = 1
-modulate = Color(1, 1, 1, 0.588235)
-outline_modulate = Color(0, 0, 0, 0.588235)
-text = "P1
-V"
-font_size = 137
-outline_size = 82
-
 [node name="BulletSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00637579, 1.54476, 1.84843)
 
@@ -933,3 +938,17 @@ draw_pass_1 = SubResource("SphereMesh_8xjkt")
 [node name="Cough" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_vhfjm")
 bus = &"SFX"
+
+[node name="model" parent="." instance=ExtResource("29_rnw2k")]
+
+[node name="PlayerLabel" type="Label3D" parent="model"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+billboard = 1
+modulate = Color(1, 1, 1, 0.588235)
+outline_modulate = Color(0, 0, 0, 0.588235)
+text = "P1
+V"
+font_size = 137
+outline_size = 82

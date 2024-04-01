@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://eoix351rmxt3"]
+
+[ext_resource type="PackedScene" uid="uid://dc4di1pjcfkhb" path="res://models/tank/Players/peasint_tank_animations.glb" id="1_tcxa3"]
+[ext_resource type="Script" path="res://scripts/tanks/tank_peasint_2.gd" id="2_qfxts"]
+
+[node name="peasint_tank_animations" instance=ExtResource("1_tcxa3")]
+script = ExtResource("2_qfxts")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/4/rotation = Quaternion(0.100303, 0.0270802, -0.00758274, 0.994559)
+bones/5/rotation = Quaternion(0.292853, 6.92656e-08, -0.00501144, 0.956144)
+bones/6/position = Vector3(-2.83357e-08, 0.472165, 0.827767)

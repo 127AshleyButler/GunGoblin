@@ -156,6 +156,7 @@ func handle_shooting():
 	add_child(new_bullet)
 	$Fire.play()
 	reset_charge()
+	%AnimationPlayer.play("shoot")
 	
 	
 func handle_mine_laying():

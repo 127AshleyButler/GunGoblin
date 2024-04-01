@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrnr8f1olomj"]
+
+[ext_resource type="Script" path="res://scripts/tanks/bullet_emitter.gd" id="1_b3vee"]
+
+[node name="BulletEmitter" type="Node3D"]
+script = ExtResource("1_b3vee")
+
+[node name="ShotDelayTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="ShotDelayTimer" to="." method="_on_shot_delay_timer_timeout"]
