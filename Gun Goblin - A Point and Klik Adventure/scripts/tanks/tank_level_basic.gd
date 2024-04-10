@@ -6,5 +6,6 @@ func _ready():
 	pass
 	
 func _physics_process(delta):
-	$AnimatableBody3D.rotate_y(15 * delta)
+	pass
+	#$AnimatableBody3D.rotate_y(15 * delta)
 

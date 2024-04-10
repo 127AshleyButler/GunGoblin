@@ -54,11 +54,9 @@ func _ready():
 		States.ALIVE, States.DEAD:
 			state = States.ALIVE
 			%AnimationPlayer.play("idle")
-			can_shoot = false
 			%PlayerLabel.show()
 		States.INVISIBLE:
 			%AnimationPlayer.play("invisible")
-			can_shoot = true
 	$model/AnimationPlayer.play("Idle")
 	for projectile in get_children():
 		if projectile.is_in_group("Projectile"):
@@ -258,6 +256,10 @@ func decrement_mine_count():
 func start_of_round(): # Called by the tank_game_master
 	can_shoot = true
 	in_lobby = false
+
+
+func disable_shooting():
+	can_shoot = false
 
 
 func update_label(text): # Called by the tank_game_master & tank_selectable

@@ -201,10 +201,5 @@ light_size = 0.055
 omni_range = 34.598
 omni_attenuation = 0.225313
 
-[node name="SpinnyNode" type="Node3D" parent="." index="15"]
-
-[node name="Camera3D" type="Camera3D" parent="SpinnyNode" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.987688, -0.156434, 0, 0.156434, 0.987688, 0, 5.79, 17.98)
-
 [connection signal="finished" from="Pillar/StoneScraping" to="." method="_on_stone_scraping_finished"]
 [connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]

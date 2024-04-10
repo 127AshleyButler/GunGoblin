@@ -115,6 +115,7 @@ func respawn_players():
 		else: # Couldn't find a spawn point for this player.
 			print("WARNING: player ", player.name, " was spawned in a default location.")
 		player._ready()
+		player.disable_shooting()
 		
 		
 func new_round():

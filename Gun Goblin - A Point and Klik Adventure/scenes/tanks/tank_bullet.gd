@@ -64,7 +64,8 @@ func calculate_charge_tier_stat_bonus():
 
 
 func decrement_parent_bullet_count():
-	get_parent().decrement_bullet_count()
+	if get_parent().has_method("decrement_bullet_count"):
+		get_parent().decrement_bullet_count()
 
 
 func _on_expiration_timer_timeout(): # Bullet likely escaped level bounds, destroy it as a failsafe.

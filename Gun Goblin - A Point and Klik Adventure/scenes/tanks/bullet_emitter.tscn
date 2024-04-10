@@ -7,6 +7,7 @@ script = ExtResource("1_b3vee")
 
 [node name="ShotDelayTimer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="ShotDelayTimer" to="." method="_on_shot_delay_timer_timeout"]

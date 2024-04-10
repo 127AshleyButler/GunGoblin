@@ -571,6 +571,18 @@ tracks/0/keys = {
 "method": &"play_animation"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fire:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
@@ -783,7 +795,7 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("28_bybg3")
 stream_2/weight = 1.0
 
-[node name="TankDriver" type="CharacterBody3D" groups=["TankDriver"]]
+[node name="TankDriver" type="CharacterBody3D" groups=["Player", "TankDriver"]]
 collision_layer = 16
 collision_mask = 21
 script = ExtResource("1_nsmu1")
