@@ -14,6 +14,8 @@ var _is_active = false
 var _current_target : TankDriver
 ## Whether or not this tank is waiting before it can find a new target
 var _on_new_target_cooldown := false
+## Whether or not this tank's muzzle is obscured by terrain (making shooting too dangerous)
+var _is_safe_to_shoot := true
 
 
 const DRIVING_SPEED = 10.0
@@ -22,10 +24,16 @@ const ROTATION_SPEED = 0.08
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$ActivationTimer.start(activation_time)
-
+	
+	navigation_agent.path_desired_distance = 0.5
+	navigation_agent.target_desired_distance = 0.5
+	
+	# Make sure to not await during _ready.
+	call_deferred("_actor_setup")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,13 +49,29 @@ func _process(delta):
 			_update_target()
 			if _current_target:
 				if _has_line_of_sight(_current_target):
+					navigation_agent.set_target_position(_current_target.position)
 					_rotate_towards(_current_target)
 					_handle_shooting()
-				else: # Can't directly see the target, wander around a bit.
-					_handle_wandering()
+					$model/Label3D.text = "Firing"
+				else: # Can't directly see the target, pathfind around a bit.
+					$model/Label3D.text = "Tracking"
+					if navigation_agent.is_navigation_finished():
+						$model/Label3D.text = "Wandering"
+						_handle_wandering()
+					else:
+						var current_agent_position: Vector3 = global_position
+						var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
+						velocity = current_agent_position.direction_to(next_path_position) * DRIVING_SPEED
+						#_rotate_towards(next_path_position)
 			else:
+				$model/Label3D.text = "Wandering"
 				_handle_wandering()
 			move_and_slide()
+
+func _actor_setup():
+	
+	$ActivationTimer.start(activation_time)
 
 func hit():
 	%AnimationPlayer.play("die")
@@ -59,7 +83,7 @@ func _on_activation_timer_timeout():
 	_is_active = true
 	
 	
-func _rotate_towards(target):
+func _rotate_towards(target: Node3D):
 	# Based on: https://forum.godotengine.org/t/how-to-slowly-rotate-object-towards-another-object/18133/3
 	var global_pos = global_transform.origin
 	var target_pos = target.global_transform.origin
@@ -69,6 +93,8 @@ func _rotate_towards(target):
 
 
 func _handle_shooting():
+	if not _is_safe_to_shoot:
+		return
 	# Try shooting
 	if ($BulletEmitter.shoot()):
 		%AnimationPlayer.play("shoot")
@@ -119,6 +145,7 @@ func _handle_wandering():
 		if not collision:
 			_on_new_target_cooldown = true
 			$NewTargetTimer.start(new_target_cooldown)
+			navigation_agent.set_target_position(_current_target.position)
 	else:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
@@ -128,11 +155,31 @@ func _handle_wandering():
 		#if rotation_dir:
 			#rotate_y(rotation_dir * ROTATION_SPEED)
 		_rotate_towards($WanderRaycast/End)
-		if input_dir:
-			direction = basis.z * input_dir
-		if direction:
-			velocity.x = direction.x * DRIVING_SPEED
-			velocity.z = direction.z * DRIVING_SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, DRIVING_SPEED)
-			velocity.z = move_toward(velocity.z, 0, DRIVING_SPEED)
+		var current_agent_position: Vector3 = global_position
+		var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
+		velocity = current_agent_position.direction_to(next_path_position) * DRIVING_SPEED
+		#if input_dir:
+			#direction = basis.z * input_dir
+		#if direction:
+			#velocity.x = direction.x * DRIVING_SPEED
+			#velocity.z = direction.z * DRIVING_SPEED
+		#else:
+			#velocity.x = move_toward(velocity.x, 0, DRIVING_SPEED)
+			#velocity.z = move_toward(velocity.z, 0, DRIVING_SPEED)
+
+
+func _on_shooting_danger_zone_area_entered(area):
+	_is_safe_to_shoot = false
+
+
+func _on_shooting_danger_zone_area_exited(area):
+	_is_safe_to_shoot = true
+
+
+func _on_shooting_danger_zone_body_entered(body):
+	_is_safe_to_shoot = false
+
+
+func _on_shooting_danger_zone_body_exited(body):
+	_is_safe_to_shoot = true

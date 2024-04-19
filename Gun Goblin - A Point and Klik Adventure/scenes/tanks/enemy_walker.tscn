@@ -1,22 +1,16 @@
-[gd_scene load_steps=35 format=3 uid="uid://djq3vhqqp0yr0"]
+[gd_scene load_steps=23 format=3 uid="uid://cravqpq0hp4ng"]
 
-[ext_resource type="Script" path="res://scripts/tanks/ai_driver.gd" id="1_ko2uc"]
-[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/tanks/bullet_emitter.tscn" id="2_vc51c"]
-[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="3_o1ysx"]
-[ext_resource type="PackedScene" uid="uid://eoix351rmxt3" path="res://scenes/tanks/tank_peasint_2.tscn" id="4_xcqgy"]
-[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="5_48fmw"]
-[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="6_ro0bt"]
-[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="7_qv7ss"]
-[ext_resource type="PackedScene" uid="uid://cclwg0q2sbwv2" path="res://models/tank/Debris/Debris_Peasint.glb" id="8_troav"]
-[ext_resource type="AudioStream" uid="uid://8o40tpyds82d" path="res://sounds/SFX/peasint_tank_die1.wav" id="9_1v654"]
-[ext_resource type="AudioStream" uid="uid://b7hli3eecmsao" path="res://sounds/SFX/peasint_tank_die2.wav" id="10_trl2p"]
-[ext_resource type="Texture2D" uid="uid://dyv4gyd0yh5eh" path="res://textures/Tanks/Peasint Faces/Peasint-004.png" id="11_sw1uc"]
-[ext_resource type="PackedScene" uid="uid://byh8e3y4or5x1" path="res://models/tank/Debris/Debris_Tank.glb" id="12_fwt2f"]
-[ext_resource type="PackedScene" uid="uid://jy1msv41kyq3" path="res://models/tank/Debris/Debris_Shaft.glb" id="13_qrf3j"]
-[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="14_hesrd"]
-[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="15_jpd1q"]
+[ext_resource type="Script" path="res://scripts/tanks/enemy_walker.gd" id="1_73qq7"]
+[ext_resource type="PackedScene" uid="uid://eoix351rmxt3" path="res://scenes/tanks/tank_peasint_2.tscn" id="1_ti6uq"]
+[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/tanks/bullet_emitter.tscn" id="3_k276v"]
+[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="4_msq12"]
+[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="5_7qaly"]
+[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="6_7swut"]
+[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="7_vxmnh"]
+[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="8_7vjky"]
+[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="9_jq44l"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t7eiq"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k8kce"]
 radius = 1.05189
 height = 2.64885
 
@@ -583,75 +577,33 @@ _data = {
 "shoot": SubResource("Animation_joy07")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nrxxg"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8e1fm"]
 random_pitch = 1.1
 streams_count = 3
-stream_0/stream = ExtResource("5_48fmw")
+stream_0/stream = ExtResource("5_7qaly")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("6_ro0bt")
+stream_1/stream = ExtResource("6_7swut")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("7_qv7ss")
+stream_2/stream = ExtResource("7_vxmnh")
 stream_2/weight = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3g1pd"]
-size = Vector3(1, 0.7, 1)
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tfe3x"]
-random_pitch = 1.1
-streams_count = 2
-stream_0/stream = ExtResource("9_1v654")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("10_trl2p")
-stream_1/weight = 1.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_aj46m"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_sw1uc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_riy0j"]
-size = Vector3(1.225, 0.82, 1.865)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_j0d71"]
-height = 1.0
-radius = 0.2
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_18d7r"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vg773"]
 random_pitch = 1.2
 streams_count = 2
-stream_0/stream = ExtResource("14_hesrd")
+stream_0/stream = ExtResource("8_7vjky")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("15_jpd1q")
+stream_1/stream = ExtResource("9_jq44l")
 stream_1/weight = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_45u7h"]
-size = Vector3(2.46582, 2, 1.29285)
-
-[node name="AIDriver" type="CharacterBody3D"]
-collision_layer = 16
-collision_mask = 21
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-script = ExtResource("1_ko2uc")
-
-[node name="BulletEmitter" parent="." node_paths=PackedStringArray("emission_position") instance=ExtResource("2_vc51c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.369)
-bullet_scene = ExtResource("3_o1ysx")
-max_concurrent_bullets = 3
-shooting_delay = 0.25
-emission_position = NodePath("../BulletSpawnPosition")
+[node name="enemy_walker" type="CharacterBody3D"]
+script = ExtResource("1_73qq7")
+line_of_sight_max_distance = 45
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
-shape = SubResource("CapsuleShape3D_t7eiq")
+shape = SubResource("CapsuleShape3D_k8kce")
 
-[node name="model" parent="." instance=ExtResource("4_xcqgy")]
+[node name="model" parent="." instance=ExtResource("1_ti6uq")]
 
 [node name="Label3D" type="Label3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -661,118 +613,39 @@ text = "😈"
 font_size = 112
 outline_size = 57
 
-[node name="ActivationTimer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_pk1r4")
 }
 
-[node name="Fire" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_nrxxg")
-bus = &"SFX"
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 1.5
+max_neighbors = 5
 
-[node name="Debris" type="Node3D" parent="."]
-process_mode = 4
-visible = false
-
-[node name="Peasint" type="RigidBody3D" parent="Debris" groups=["Debris"]]
-collision_layer = 8
-collision_mask = 25
-linear_velocity = Vector3(0, 25, 0)
-angular_velocity = Vector3(0, 0.261799, 0.523599)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Peasint"]
-transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 1.53671, 0)
-shape = SubResource("BoxShape3D_3g1pd")
-
-[node name="Debris_Peasint" parent="Debris/Peasint" instance=ExtResource("8_troav")]
-
-[node name="Scream" type="AudioStreamPlayer3D" parent="Debris/Peasint"]
-stream = SubResource("AudioStreamRandomizer_tfe3x")
-bus = &"SFX"
-doppler_tracking = 2
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Debris/Peasint"]
-transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 1.47573, 0.794939)
-sprite_frames = SubResource("SpriteFrames_aj46m")
-
-[node name="Tank" type="RigidBody3D" parent="Debris" groups=["Debris"]]
-collision_layer = 8
-collision_mask = 29
-axis_lock_angular_x = true
-axis_lock_angular_z = true
-linear_velocity = Vector3(0, 10, 0)
-angular_velocity = Vector3(0, 0, 0.261799)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Tank"]
-transform = Transform3D(1.3898, 0, 0, 0, 1.3898, 0, 0, 0, 1.3898, 0, 0.469671, 0)
-shape = SubResource("BoxShape3D_riy0j")
-
-[node name="Debris_Tank" parent="Debris/Tank" instance=ExtResource("12_fwt2f")]
-
-[node name="Shaft" type="RigidBody3D" parent="Debris" groups=["Debris"]]
-collision_layer = 8
-collision_mask = 25
-linear_velocity = Vector3(0, 10, 0)
-angular_velocity = Vector3(0, 0, 0.261799)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris/Shaft"]
-transform = Transform3D(1.3898, 0, 0, 0, -6.07501e-08, -1.3898, 0, 1.3898, -6.07501e-08, 0, 1.48982, 1.35004)
-shape = SubResource("CylinderShape3D_j0d71")
-
-[node name="Debris_Shaft" parent="Debris/Shaft" instance=ExtResource("13_qrf3j")]
-
-[node name="Destroyed" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_18d7r")
-pitch_scale = 1.2
-bus = &"SFX"
-
-[node name="BulletSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47865, 1.86098)
-
-[node name="NewTargetTimer" type="Timer" parent="."]
+[node name="ActivationTimer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
 
-[node name="VisionRaycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46102, 0)
-top_level = true
-target_position = Vector3(0, 0, -40)
-collision_mask = 17
-collide_with_areas = true
-debug_shape_custom_color = Color(0.854902, 0.105882, 0.556863, 1)
-debug_shape_thickness = 1
+[node name="AttackCooldown" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
-[node name="WanderRaycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656342, 0)
-top_level = true
-target_position = Vector3(0, 0, -10)
-debug_shape_custom_color = Color(0, 1, 0, 1)
-debug_shape_thickness = 5
+[node name="BulletEmitter" parent="." instance=ExtResource("3_k276v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18248, 1.57294)
+bullet_scene = ExtResource("4_msq12")
+max_concurrent_bullets = 10
+shooting_delay = 0.25
 
-[node name="End" type="Node3D" parent="WanderRaycast"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8e1fm")
+bus = &"SFX"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 3.0
-radius = 1.0
-
-[node name="ShootingDangerZone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.12539)
-collision_layer = 0
-input_ray_pickable = false
-
-[node name="CollisionShape" type="CollisionShape3D" parent="ShootingDangerZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77191, -0.00999999)
-shape = SubResource("BoxShape3D_45u7h")
+[node name="Destroyed" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vg773")
+pitch_scale = 1.2
+bus = &"SFX"
 
 [connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
-[connection signal="timeout" from="NewTargetTimer" to="." method="_on_new_target_timer_timeout"]
-[connection signal="area_entered" from="ShootingDangerZone" to="." method="_on_shooting_danger_zone_area_entered"]
-[connection signal="area_exited" from="ShootingDangerZone" to="." method="_on_shooting_danger_zone_area_exited"]
-[connection signal="body_entered" from="ShootingDangerZone" to="." method="_on_shooting_danger_zone_body_entered"]
-[connection signal="body_exited" from="ShootingDangerZone" to="." method="_on_shooting_danger_zone_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
