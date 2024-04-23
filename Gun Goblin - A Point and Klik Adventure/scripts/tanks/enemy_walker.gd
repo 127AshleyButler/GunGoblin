@@ -44,6 +44,8 @@ func _ready():
 	navigation_agent.target_desired_distance = 0.5
 	# Make sure to not await during _ready.
 	call_deferred("_actor_setup")
+	
+	$model.play_animation("Idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -96,7 +98,6 @@ func _get_nearest_player() -> TankDriver:
 	var nearest_player = null
 	var nearest_player_distance = INF
 	for player in players:
-		print("checking player:", player.name)
 		if player.state == TankDriver.States.ALIVE and _has_line_of_sight(player):
 			var player_distance = position.distance_squared_to(player.position)
 			if player_distance < nearest_player_distance:
@@ -154,6 +155,7 @@ func _handle_tracking():
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	_rotate_towards(next_path_position.rotated(Vector3(0, 1, 0), 2*PI))
 	velocity = current_agent_position.direction_to(next_path_position) * DRIVING_SPEED
+	$model.play_animation("Run")
 	
 func _handle_attacking():
 	_rotate_towards(_current_target.position.rotated(Vector3(0, 1, 0), 2*PI))
