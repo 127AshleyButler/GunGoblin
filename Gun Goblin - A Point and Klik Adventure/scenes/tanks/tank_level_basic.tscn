@@ -106,10 +106,19 @@ mesh = SubResource("BoxMesh_l1u1h")
 skeleton = NodePath("../..")
 
 [node name="enemy_walker" parent="." index="15" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4148, 21.8712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4148, 24.8712)
 
 [node name="enemy_walker2" parent="." index="16" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.10617, 21.8712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78624, 1.1283, 24.7711)
 
 [node name="enemy_walker3" parent="." index="17" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.9822, 21.8712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.37663, 1.80403, 24.734)
+
+[node name="enemy_walker4" parent="." index="18" instance=ExtResource("5_0qd86")]
+transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1210.11, -10.996)
+
+[node name="enemy_walker5" parent="." index="19" instance=ExtResource("5_0qd86")]
+transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1225.29, -10.996)
+
+[node name="enemy_walker6" parent="." index="20" instance=ExtResource("5_0qd86")]
+transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1246.03, -10.996)

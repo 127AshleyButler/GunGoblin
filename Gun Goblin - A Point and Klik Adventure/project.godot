@@ -301,7 +301,9 @@ taunt5={
 3d_physics/layer_2="Mine"
 3d_physics/layer_3="Bullet"
 3d_physics/layer_4="Debris"
-3d_physics/layer_5="Players"
+3d_physics/layer_5="Characters"
+3d_physics/layer_6="Players"
+3d_physics/layer_7="Enemies"
 
 [physics]
 

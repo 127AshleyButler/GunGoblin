@@ -796,7 +796,7 @@ stream_2/stream = ExtResource("28_bybg3")
 stream_2/weight = 1.0
 
 [node name="TankDriver" type="CharacterBody3D" groups=["Player", "TankDriver"]]
-collision_layer = 16
+collision_layer = 48
 collision_mask = 21
 script = ExtResource("1_nsmu1")
 bullet_scene = ExtResource("2_umt7d")

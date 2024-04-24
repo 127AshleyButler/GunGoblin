@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 enum States {ALIVE, DEAD}
-enum Behaviours {IDLE, WANDERING, TRACKING, ATTACKING, ATTACK_COOLDOWN}
+enum Behaviours {IDLE, WANDERING, TRACKING, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
 ## How long from spawning in until this tank will start fighting
 @export var activation_time := 3.0
@@ -13,8 +13,14 @@ enum Behaviours {IDLE, WANDERING, TRACKING, ATTACKING, ATTACK_COOLDOWN}
 @export var line_of_sight_max_distance := 30
 ## How close this wants to get to its target before initiating an attack
 @export var attack_range := 15
+## The startup time before this AI releases its attack
+@export var attack_startup := 0.5
+## How long this attack lasts before it goes into cooldown
+@export var attack_duration := 0.7
 ## How long this has to wait after an attack before it can perform other actions
 @export var attack_cooldown := 2.0
+## Distance until an attack has considered to have reached its target
+@export var min_attack_distance := 2.0
 
 ## Whether or not this is currently active or still waiting for ActivationTimer to end
 var _is_active := false
@@ -22,10 +28,13 @@ var _is_active := false
 var _current_target : TankDriver
 ## The current behaviour of this character
 var _behaviour := Behaviours.WANDERING
+## Direction this AI is attacking at if it is in the attacking state
+var _attack_direction : Vector3
 
 
 
 const DRIVING_SPEED = 10.0
+const ATTACK_SPEED = 20.0
 const ROTATION_SPEED = 0.08
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -66,6 +75,8 @@ func _process(delta):
 						_handle_wandering()
 					Behaviours.TRACKING:
 						_handle_tracking()
+					Behaviours.ATTACK_START:
+						_rotate_towards((position + _attack_direction).rotated(Vector3(0, 1, 0), 2*PI))
 					Behaviours.ATTACKING:
 						_handle_attacking()
 	move_and_slide()
@@ -90,7 +101,9 @@ func _rotate_towards(target: Vector3):
 	var target_pos = target
 	var wtransform = global_transform.looking_at(Vector3(target_pos.x,global_pos.y,target_pos.z),Vector3(0,1,0)).rotated(Vector3(0,1,0), PI)
 	var wrotation = Quaternion(global_transform.basis).slerp(Quaternion(wtransform.basis), ROTATION_SPEED)
+	#var _this_scale = scale
 	global_transform = Transform3D(Basis(wrotation), global_transform.origin)
+	#scale = _this_scale
 
 
 func _get_nearest_player() -> TankDriver:
@@ -119,15 +132,12 @@ func _update_target():
 			else: # has line of sight, check if close enough to be in attacking range
 				if _behaviour == Behaviours.TRACKING \
 						and (position.distance_to(_current_target.position) < attack_range):
-					_behaviour = Behaviours.ATTACKING
+					_start_attack()
 	if not _current_target:
 		_current_target = _get_nearest_player()
 		if _current_target and _behaviour == Behaviours.WANDERING:
 			_set_movement_target(_current_target.position)
 			_behaviour = Behaviours.TRACKING
-		#_on_new_target_cooldown = true
-		#$NewTargetTimer.start(new_target_cooldown)
-
 
 
 func _has_line_of_sight(target) -> bool:
@@ -149,24 +159,65 @@ func _handle_wandering():
 
 func _handle_tracking():
 	if navigation_agent.is_navigation_finished():
-		_set_movement_target(_current_target.position)
+		if (_current_target):
+			_set_movement_target(_current_target.position)
 
 	var current_agent_position: Vector3 = global_position
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	_rotate_towards(next_path_position.rotated(Vector3(0, 1, 0), 2*PI))
 	velocity = current_agent_position.direction_to(next_path_position) * DRIVING_SPEED
-	$model.play_animation("Run")
+	%AnimationPlayer.play("Run")
+	
+	
+func _start_attack():
+	%AnimationPlayer.play("Gnash")
+	_behaviour = Behaviours.ATTACK_START
+	_attack_direction = position.direction_to(_current_target.position)
+	if (attack_startup > 0):
+		$AttackStartup.start(attack_startup)
+	else:
+		_initiate_attack()
+	
+
+func _on_attack_startup_timeout():
+	_initiate_attack()
+		
+
+func _initiate_attack():
+	%AnimationPlayer.play("Leap")
+	$AttackHitbox.monitoring = true
+	_behaviour = Behaviours.ATTACKING
+	if (attack_duration > 0):
+		$AttackDuration.start(attack_duration)
+	else: # No attack duration, so just run _handle_attacking once
+		_handle_attacking()
+
 	
 func _handle_attacking():
-	_rotate_towards(_current_target.position.rotated(Vector3(0, 1, 0), 2*PI))
-	#velocity = position.direction_to(_current_target.position) * DRIVING_SPEED
-	if ($BulletEmitter.shoot()):
-		%AnimationPlayer.play("shoot")
-	
-func _attack_end():
+	velocity = _attack_direction * ATTACK_SPEED
+	#if (position.distance_to(_attack_direction) < min_attack_distance):
+		## End the attack duration early, as the target was reached already
+		#$AttackDuration.stop()
+		#_on_attack_duration_timeout()
+
+
+func _on_attack_duration_timeout():
+	$AttackHitbox.monitoring = false
 	if attack_cooldown > 0: # Start attack cooldown timer (unless it's 0)
+		%AnimationPlayer.play("Splat")
 		$AttackCooldown.start(attack_cooldown)
 		_behaviour = Behaviours.ATTACK_COOLDOWN
+	else: # No cooldown, immediately end attack
+		_end_attack()
+		
+
+func _on_attack_cooldown_timeout():
+	_end_attack()
+	
+	
+func _end_attack():
+	_behaviour = Behaviours.TRACKING
+
 
 func _set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
@@ -176,5 +227,6 @@ func _on_activation_timer_timeout():
 	_is_active = true
 
 
-func _on_attack_cooldown_timeout():
-	_behaviour = Behaviours.TRACKING
+func _on_attack_hitbox_body_entered(body):
+	if body.has_method("hit"):
+		body.hit()
