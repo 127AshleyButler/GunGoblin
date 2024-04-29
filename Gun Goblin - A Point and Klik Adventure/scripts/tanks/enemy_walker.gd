@@ -1,3 +1,4 @@
+class_name Enemy
 extends CharacterBody3D
 
 enum States {ALIVE, DEAD}
@@ -36,6 +37,7 @@ var _attack_direction : Vector3
 const DRIVING_SPEED = 10.0
 const ATTACK_SPEED = 20.0
 const ROTATION_SPEED = 0.08
+const WANDER_SPEED = 5.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -155,7 +157,11 @@ func _has_line_of_sight(target) -> bool:
 	return false
 
 func _handle_wandering():
-	pass
+	%AnimationPlayer.play("Run")
+	velocity = Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), rotation.y) * WANDER_SPEED
+	var collision = move_and_collide(velocity, true)
+	if collision:
+		rotate_y(PI / 2)
 
 func _handle_tracking():
 	if navigation_agent.is_navigation_finished():

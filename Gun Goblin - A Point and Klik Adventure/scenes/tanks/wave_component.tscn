@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbsvcg530n5e6"]
+
+[ext_resource type="Script" path="res://scripts/tanks/wave_component.gd" id="1_7m17p"]
+
+[node name="WaveComponent" type="Node3D" node_paths=PackedStringArray("enemies")]
+script = ExtResource("1_7m17p")
+enemies = [null]

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/tanks/tank_level_basic.gd" id="2_m2pmk"]
 [ext_resource type="PackedScene" uid="uid://vrqaov4grcpw" path="res://scenes/tanks/tank_level_basic_2.tscn" id="3_wlsro"]
 [ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/tanks/tank_driver.tscn" id="4_uh4ij"]
-[ext_resource type="PackedScene" uid="uid://cravqpq0hp4ng" path="res://scenes/tanks/enemy_walker.tscn" id="5_0qd86"]
+[ext_resource type="PackedScene" uid="uid://kwgk18pko6g2" path="res://scenes/tanks/portal.tscn" id="5_6yurd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w86r1"]
 size = Vector3(12, 1.80286, 3)
@@ -105,20 +105,11 @@ visible = false
 mesh = SubResource("BoxMesh_l1u1h")
 skeleton = NodePath("../..")
 
-[node name="enemy_walker" parent="." index="15" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4148, 24.8712)
+[node name="Portal" parent="." index="15" instance=ExtResource("5_6yurd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.4702)
 
-[node name="enemy_walker2" parent="." index="16" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78624, 1.1283, 24.7711)
+[node name="Portal2" parent="." index="16" instance=ExtResource("5_6yurd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2599, 0, 18.0794)
 
-[node name="enemy_walker3" parent="." index="17" instance=ExtResource("5_0qd86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.37663, 1.80403, 24.734)
-
-[node name="enemy_walker4" parent="." index="18" instance=ExtResource("5_0qd86")]
-transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1210.11, -10.996)
-
-[node name="enemy_walker5" parent="." index="19" instance=ExtResource("5_0qd86")]
-transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1225.29, -10.996)
-
-[node name="enemy_walker6" parent="." index="20" instance=ExtResource("5_0qd86")]
-transform = Transform3D(4.62487, 0, 0, 0, 4.62487, 0, 0, 0, 4.62487, 0, 1246.03, -10.996)
+[node name="Portal3" parent="." index="17" instance=ExtResource("5_6yurd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.48401, -0.0324101, 17.2665)

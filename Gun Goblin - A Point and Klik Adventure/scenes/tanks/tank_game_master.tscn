@@ -204,7 +204,7 @@ font_size = 287
 outline_size = 122
 
 [connection signal="timeout" from="OneTankLeftTimer" to="." method="_on_one_tank_left_timer_timeout"]
-[connection signal="timeout" from="NewRoundTimer" to="." method="_on_new_round_timer_timeout"]
 [connection signal="timeout" from="NewRoundTimer" to="." method="_on_round_over_timer_timeout"]
+[connection signal="timeout" from="NewRoundTimer" to="." method="_on_new_round_timer_timeout"]
 [connection signal="timeout" from="RoundStartTimer" to="." method="_on_round_start_timer_timeout"]
 [connection signal="timeout" from="TextDurationTimer" to="." method="_on_text_duration_timer_timeout"]
