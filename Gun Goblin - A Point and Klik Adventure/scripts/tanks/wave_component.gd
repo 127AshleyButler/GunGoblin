@@ -3,7 +3,7 @@ extends Node3D
 
 signal finished_spawning
 
-@export var enemies : Array[Enemy]
+@export var enemies : Array[PackedScene]
 
 
 # Called when the node enters the scene tree for the first time.

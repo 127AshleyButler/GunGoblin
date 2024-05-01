@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxowrubjf4xxf"]
+[gd_scene load_steps=4 format=3 uid="uid://cxowrubjf4xxf"]
 
 [ext_resource type="Script" path="res://scripts/tanks/WaveManager.gd" id="1_v6g03"]
+[ext_resource type="PackedScene" uid="uid://kwgk18pko6g2" path="res://scenes/tanks/portal.tscn" id="2_nuhmq"]
+[ext_resource type="PackedScene" uid="uid://cravqpq0hp4ng" path="res://scenes/tanks/enemy_walker.tscn" id="3_e5yei"]
 
-[node name="WaveManager" type="Node3D" node_paths=PackedStringArray("waves")]
+[node name="WaveManager" type="Node3D" node_paths=PackedStringArray("portal_spawn_locations")]
 script = ExtResource("1_v6g03")
-waves = [null]
+portal_spawn_locations = [null]
+portal_scene = ExtResource("2_nuhmq")
+enemy_types = {
+"OrangeArmMan": ExtResource("3_e5yei")
+}
+waves = {
+0: [&"OrangeArmMan", &"OrangeArmMan", &"OrangeArmMan"]
+}
