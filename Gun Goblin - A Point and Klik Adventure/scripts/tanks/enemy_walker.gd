@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody3D
 
+signal die
+
 enum States {ALIVE, DEAD}
 enum Behaviours {IDLE, WANDERING, TRACKING, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
@@ -94,6 +96,7 @@ func hit():
 	%AnimationPlayer.play("die")
 	if state == States.ALIVE:
 		state = States.DEAD
+		die.emit()
 
 	
 	
