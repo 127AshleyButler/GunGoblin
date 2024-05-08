@@ -128,21 +128,20 @@ func _update_target():
 	if _current_target: # Check if _current_target is still valid (alive)
 		if _current_target.state != TankDriver.States.ALIVE: # target is dead
 			_current_target = null
-			if _behaviour == Behaviours.ATTACKING or _behaviour == Behaviours.TRACKING:
+			if _behaviour == Behaviours.TRACKING:
 				_behaviour = Behaviours.WANDERING
 		elif _current_target.state == TankDriver.States.ALIVE: # Check if still has LOS to alive target
-			if not _has_line_of_sight(_current_target): # No LOS to target, pathfind towards them
-				if _behaviour == Behaviours.ATTACKING:
-					_behaviour = Behaviours.TRACKING
-			else: # has line of sight, check if close enough to be in attacking range
+			if _has_line_of_sight(_current_target): # has line of sight, check if close enough to be in attacking range
 				if _behaviour == Behaviours.TRACKING \
 						and (position.distance_to(_current_target.position) < attack_range):
 					_start_attack()
-	if not _current_target:
+	elif not _current_target:
 		_current_target = _get_nearest_player()
 		if _current_target and _behaviour == Behaviours.WANDERING:
 			_set_movement_target(_current_target.position)
 			_behaviour = Behaviours.TRACKING
+		elif not _current_target and _behaviour == Behaviours.TRACKING:
+			_behaviour = Behaviours.WANDERING
 
 
 func _has_line_of_sight(target) -> bool:

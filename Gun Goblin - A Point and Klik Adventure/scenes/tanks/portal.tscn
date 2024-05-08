@@ -69,7 +69,6 @@ _data = {
 }
 
 [node name="Portal" type="Node3D"]
-top_level = true
 script = ExtResource("1_t4kps")
 enemy_scene = ExtResource("2_ntulj")
 

@@ -832,6 +832,7 @@ rings = 8
 radius = 0.651135
 
 [node name="enemy_walker" type="CharacterBody3D"]
+top_level = true
 collision_layer = 80
 collision_mask = 17
 script = ExtResource("1_73qq7")

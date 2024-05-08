@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds3hctx353mf0"]
+[gd_scene load_steps=13 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/tank_level_basic.glb" id="1_2s81v"]
 [ext_resource type="Script" path="res://scripts/tanks/tank_level_basic.gd" id="2_m2pmk"]
@@ -15,6 +15,22 @@ albedo_color = Color(0.364706, 0.364706, 0.364706, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_l1u1h"]
 material = SubResource("StandardMaterial3D_lrvug")
 size = Vector3(12, 2, 3)
+
+[sub_resource type="Environment" id="Environment_pe6cb"]
+background_mode = 1
+glow_normalized = true
+glow_intensity = 1.0
+glow_bloom = 1.0
+glow_blend_mode = 1
+glow_hdr_luminance_cap = 1.0
+volumetric_fog_density = 0.019
+volumetric_fog_emission = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_yb42k"]
+dof_blur_far_distance = 36.57
+dof_blur_far_transition = 50.0
+dof_blur_near_distance = 28.32
+dof_blur_near_transition = 10.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_h2i8j"]
 vertices = PackedVector3Array(-24, 0.428739, 0, -7.5, 0.428739, 0, -7.5, 0.428739, -2, -24, 0.428739, 0, -7.5, 0.428739, -2, -6.75, 0.428739, -2.75, -5.5, 0.428739, -24, -24, 0.428739, -24, -6.75, 0.428739, -2.75, -5.25, 0.428739, -2.75, -5.5, 0.428739, -24, -5.25, 0.428739, -2.75, 5.25, 0.428739, -2.75, 5.5, 0.428739, -24, -5.5, 0.428739, -24, 7.5, 0.428739, -2, 7.5, 0.428739, 0, 24, 0.428739, 0, 6.75, 0.428739, -2.75, 7.5, 0.428739, -2, 24, 0.428739, 0, 24, 0.428739, -24, 5.5, 0.428739, -24, 5.5, 0.428739, -24, 5.25, 0.428739, -2.75, 6.75, 0.428739, -2.75, -5.5, 1.42874, -0.75, -5.5, 1.42874, 0.75, 5.5, 1.42874, 0.75, 5.5, 1.42874, -0.75, -7.5, 0.428739, 2, -7.5, 0.428739, 0, -24, 0.428739, 0, -6.75, 0.428739, 2.75, -7.5, 0.428739, 2, -24, 0.428739, 0, -24, 0.428739, 24, -5.5, 0.428739, 24, -5.5, 0.428739, 24, -5.25, 0.428739, 2.75, -6.75, 0.428739, 2.75, 24, 0.428739, 0, 7.5, 0.428739, 0, 7.5, 0.428739, 2, 24, 0.428739, 0, 7.5, 0.428739, 2, 6.75, 0.428739, 2.75, 5.5, 0.428739, 24, 24, 0.428739, 24, 6.75, 0.428739, 2.75, 5.25, 0.428739, 2.75, 5.5, 0.428739, 24, -5.5, 0.428739, 24, 5.5, 0.428739, 24, 5.25, 0.428739, 2.75, -5.25, 0.428739, 2.75)
@@ -81,8 +97,10 @@ in_lobby = true
 
 [node name="Camera3D" type="Camera3D" parent="." index="12"]
 transform = Transform3D(0.999998, 0.00103899, -0.00144868, 0, 0.812613, 0.582804, 0.00178274, -0.582803, 0.812612, -0.133531, 25.2595, 32.3904)
+environment = SubResource("Environment_pe6cb")
+attributes = SubResource("CameraAttributesPractical_yb42k")
 projection = 1
-fov = 118.125
+fov = 96.2
 size = 37.76
 
 [node name="TankDriver2" parent="." index="13" instance=ExtResource("4_uh4ij")]
@@ -123,3 +141,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80693, 0, 14.6393)
 
 [node name="PortalLocation4" type="Node3D" parent="WaveManager" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17251, 0, 18.703)
+
+[editable path="WaveManager"]
