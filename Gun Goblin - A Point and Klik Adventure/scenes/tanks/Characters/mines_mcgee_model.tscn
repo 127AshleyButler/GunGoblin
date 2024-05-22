@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://biqehhjnhdxp3"]
+
+[ext_resource type="PackedScene" uid="uid://87isn70pgah4" path="res://models/tank/Creatures/minesMcgee.glb" id="1_aj34c"]
+[ext_resource type="Script" path="res://scripts/tanks/creatures/mines_mcgee_model.gd" id="2_70sxw"]
+
+[node name="minesMcgee" instance=ExtResource("1_aj34c")]
+script = ExtResource("2_70sxw")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(1.62778, -0.106401, -1.03698)
+bones/1/rotation = Quaternion(0.00164482, 1.19209e-07, 1.96078e-10, 0.999999)
+bones/2/rotation = Quaternion(0.0596157, -0.0464166, 0.957519, -0.278295)
+bones/3/rotation = Quaternion(-0.320499, 0.0638888, -0.154832, 0.932323)
+bones/4/position = Vector3(0.0147864, 0.592689, 0.0595889)
+bones/4/rotation = Quaternion(-0.203121, -0.16953, -0.67566, 0.688103)
+bones/5/rotation = Quaternion(-0.0231733, -0.478419, -0.604967, 0.636077)
+bones/7/rotation = Quaternion(0.763869, 1.23367e-07, 5.75347e-07, 0.645371)
+bones/8/position = Vector3(0.172582, 0.815766, 0.157101)
+bones/8/scale = Vector3(0.334659, 0.334659, 0.334659)
+bones/10/scale = Vector3(1, 1.01193, 1.06136)
+bones/11/position = Vector3(1.64538e-07, 0.159726, -0.161522)
+bones/14/scale = Vector3(1, 1.01193, 1.06136)
+bones/15/position = Vector3(-1.64538e-07, 0.159726, -0.161522)
+bones/18/rotation = Quaternion(-0.168761, 0.351356, 0.891934, 0.229177)
+bones/19/rotation = Quaternion(-0.461986, -0.116091, 0.111445, 0.872165)
+bones/20/position = Vector3(-0.00244622, 0.586715, 0.00985823)
+bones/20/rotation = Quaternion(-0.177402, 0.144297, 0.681495, 0.695178)
+bones/21/rotation = Quaternion(-0.236462, 0.154336, 0.515336, 0.809133)
+bones/22/position = Vector3(2.16453e-07, 0.00684017, -0.918195)
+bones/22/rotation = Quaternion(0.0878573, -2.13437e-14, 2.09468e-08, 0.996133)
+bones/25/position = Vector3(-1.63454, 1.41825, -0.405379)
+bones/25/rotation = Quaternion(-0.641509, 0, 0, 0.767115)
+
+[node name="Tounge_2" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.113387, -4.04576e-10, -1.71697e-08, -4.31518e-09, 0.0314424, -0.115478, 8.5106e-09, 0.0213329, 0.170202, 0.172582, 1.45428, -0.130047)
+
+[node name="Pupils_R" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.00382273, 0.276999, 0.00244896, -0.290534, 0.00405321, -0.00687324, -0.0174892, -0.00188372, 0.333971, 0.651362, 1.9657, -0.335988)
+
+[node name="Eyes_R" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.00453341, 0.328368, 0.00309101, -0.344546, 0.00480488, -0.00867523, -0.0207405, -0.00223304, 0.421528, 0.606342, 2.02896, -0.528049)
+
+[node name="Pupils_L" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.00382269, 0.276999, 0.00244898, -0.290534, 0.00405324, -0.00687324, -0.0174892, -0.0018837, 0.333971, 0.651362, 1.9657, -0.335988)
+
+[node name="Eyes_L" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.00453337, 0.328368, 0.00309102, -0.344546, 0.00480494, -0.00867522, -0.0207405, -0.00223301, 0.421528, 0.606342, 2.02896, -0.528049)
+
+[node name="Backpack_2" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.555673, 3.55271e-15, 2.84217e-14, 1.77636e-15, 0.486672, -0.0662827, -4.26326e-14, 0.0698141, 0.462055, -2.46173e-09, 1.29376, -1.99233)
+
+[node name="Straps" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.00895748, 0.412041, 0.112441, -0.445819, 0.0268289, -0.0787661, -0.099212, -0.0879385, 0.348197, 0.529312, 1.22598, -1.11858)
