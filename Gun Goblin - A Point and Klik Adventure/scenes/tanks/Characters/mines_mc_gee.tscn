@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3qd0kkhu2shb"]
 
-[ext_resource type="PackedScene" uid="uid://biqehhjnhdxp3" path="res://scenes/tanks/Characters/mines_mcgee_model.tscn" id="1_5mi6a"]
+[ext_resource type="PackedScene" uid="uid://biqehhjnhdxp3" path="res://scenes/Tanks/Characters/mines_mcgee_model.tscn" id="1_5mi6a"]
 
 [node name="MinesMcGee" type="Node3D"]
 

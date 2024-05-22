@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b70q14xqajtjd"]
+
+[ext_resource type="PackedScene" uid="uid://dkk2xqkll44n2" path="res://models/tank/Creatures/orangeArmMan.glb" id="1_eqdwh"]
+[ext_resource type="Script" path="res://scripts/Tanks/Creatures/orangeArmMan_model.gd" id="2_g1avk"]
+
+[node name="orangeArmMan" instance=ExtResource("1_eqdwh")]
+script = ExtResource("2_g1avk")
+
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+bones/0/rotation = Quaternion(0, 0.126579, 0, 0.991956)
+bones/2/rotation = Quaternion(-5.46067e-08, 0.94147, -0.337096, 7.10791e-08)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.151668, -0.262663, 0.825203, -0.476493)
+bones/4/rotation = Quaternion(2.1072e-08, 1.46556e-07, -0.333918, 0.942602)
+bones/5/rotation = Quaternion(-2.75292e-08, -1.51678e-07, -0.121878, 0.992545)
+bones/6/rotation = Quaternion(0.151668, -0.262663, 0.825203, 0.476493)
+bones/6/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(0.457956, 4.29515e-08, -2.21265e-08, 0.888975)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(0.136647, 1.18091e-07, 1.62896e-08, 0.99062)
+bones/11/rotation = Quaternion(-0.29992, -1.13374e-07, -3.46472e-08, 0.953964)
+bones/14/rotation = Quaternion(0.707107, 2.8297e-07, 2.8297e-07, 0.707107)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(0.707107, 4.51557e-07, 4.51557e-07, 0.707107)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/rotation = Quaternion(0.707107, -3.68903e-07, -3.68903e-07, 0.707107)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(0.707107, -5.37491e-07, -5.37491e-07, 0.707107)
+bones/21/scale = Vector3(1, 1, 1)
+bones/22/scale = Vector3(1, 1, 1)

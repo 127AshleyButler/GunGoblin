@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://biqehhjnhdxp3"]
 
 [ext_resource type="PackedScene" uid="uid://87isn70pgah4" path="res://models/tank/Creatures/minesMcgee.glb" id="1_aj34c"]
-[ext_resource type="Script" path="res://scripts/tanks/creatures/mines_mcgee_model.gd" id="2_70sxw"]
+[ext_resource type="Script" path="res://scripts/Tanks/Creatures/mines_mcgee_model.gd" id="2_70sxw"]
 
 [node name="minesMcgee" instance=ExtResource("1_aj34c")]
 script = ExtResource("2_70sxw")
