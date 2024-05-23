@@ -7,23 +7,20 @@ enum States {ALIVE, DEAD}
 enum Behaviours {IDLE, WANDERING, TRACKING, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
 ## How long from spawning in until this tank will start fighting
-@export var activation_time := 3.0
+@export var activation_time : float = 3.0
 ## The state this tank starts in
-@export var state = States.ALIVE
-## How long this tank has to wait before it can search for a new target
-@export var new_target_cooldown := 4.0
+@export var state : States = States.ALIVE
 ## The max distance allowed for line of sight checks
-@export var line_of_sight_max_distance := 30
+@export var line_of_sight_max_distance : float = 45
 ## How close this wants to get to its target before initiating an attack
-@export var attack_range := 15
+@export var attack_range : float = 15
 ## The startup time before this AI releases its attack
-@export var attack_startup := 0.5
+@export var attack_startup :float = 0.5
 ## How long this attack lasts before it goes into cooldown
-@export var attack_duration := 0.7
+@export var attack_duration : float = 0.7
 ## How long this has to wait after an attack before it can perform other actions
-@export var attack_cooldown := 2.0
-## Distance until an attack has considered to have reached its target
-@export var min_attack_distance := 2.0
+@export var attack_cooldown : float = 2.0
+
 
 ## Whether or not this is currently active or still waiting for ActivationTimer to end
 var _is_active := false

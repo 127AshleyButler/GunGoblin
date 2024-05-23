@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ejoo308fapmo"]
 
 [ext_resource type="PackedScene" uid="uid://ba6gpn31vwps6" path="res://models/garf/garf.glb" id="3_3uyti"]
-[ext_resource type="PackedScene" uid="uid://bop313lkmdrti" path="res://scenes/levels/quickplat.tscn" id="3_u4unq"]
-[ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="4_2gsbk"]
+[ext_resource type="PackedScene" uid="uid://bop313lkmdrti" path="res://scenes/GunGoblin/levels/quickplat.tscn" id="3_u4unq"]
+[ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/GunGoblin/player.tscn" id="4_2gsbk"]
 [ext_resource type="Texture2D" uid="uid://db4ix5a2nr6oo" path="res://textures/sidewalk_birthday_tragedy_part1.jpg" id="4_dn34m"]
 [ext_resource type="Material" uid="uid://bxbtjg3kic143" path="res://shaders/falling_petals.tres" id="5_l38k2"]
 

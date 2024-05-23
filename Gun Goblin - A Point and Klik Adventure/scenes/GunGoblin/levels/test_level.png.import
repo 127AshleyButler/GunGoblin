@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpumdyr14aj5r"
-path.s3tc="res://.godot/imported/test_level.png-edb32b367c788b0856cc867c402a6d14.s3tc.ctex"
+path.s3tc="res://.godot/imported/test_level.png-1599c8c71a3e94a3e2bd505f8cbf29bf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/levels/test_level.png"
-dest_files=["res://.godot/imported/test_level.png-edb32b367c788b0856cc867c402a6d14.s3tc.ctex"]
+source_file="res://scenes/GunGoblin/levels/test_level.png"
+dest_files=["res://.godot/imported/test_level.png-1599c8c71a3e94a3e2bd505f8cbf29bf.s3tc.ctex"]
 
 [params]
 

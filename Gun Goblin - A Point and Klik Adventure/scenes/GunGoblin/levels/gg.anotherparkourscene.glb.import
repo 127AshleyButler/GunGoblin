@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://rbploi85j18k"
-path="res://.godot/imported/gg.anotherparkourscene.glb-97d945b035fac80491168089025aa545.scn"
+path="res://.godot/imported/gg.anotherparkourscene.glb-833370d89af674b37842286d9e8b1f9f.scn"
 
 [deps]
 
-source_file="res://scenes/levels/gg.anotherparkourscene.glb"
-dest_files=["res://.godot/imported/gg.anotherparkourscene.glb-97d945b035fac80491168089025aa545.scn"]
+source_file="res://scenes/GunGoblin/levels/gg.anotherparkourscene.glb"
+dest_files=["res://.godot/imported/gg.anotherparkourscene.glb-833370d89af674b37842286d9e8b1f9f.scn"]
 
 [params]
 

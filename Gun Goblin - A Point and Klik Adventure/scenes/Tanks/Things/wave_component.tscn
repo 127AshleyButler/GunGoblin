@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbsvcg530n5e6"]
-
-[ext_resource type="Script" path="res://scripts/Tanks/Things/wave_component.gd" id="1_7m17p"]
-
-[node name="WaveComponent" type="Node3D"]
-script = ExtResource("1_7m17p")
-enemies = Array[Resource("res://scripts/tanks/enemy_walker.gd")]([null])

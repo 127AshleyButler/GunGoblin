@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccwgr57u563r"]
 
-[ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
-[ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/levels/test_level.png" id="2_7246l"]
+[ext_resource type="PackedScene" uid="uid://rbploi85j18k" path="res://scenes/GunGoblin/levels/gg.anotherparkourscene.glb" id="1_f6dkf"]
+[ext_resource type="Texture2D" uid="uid://dpumdyr14aj5r" path="res://scenes/GunGoblin/levels/test_level.png" id="2_7246l"]
 [ext_resource type="Environment" uid="uid://dwxa4k04nxsh1" path="res://shaders/UTTTEnvironment.tres" id="2_n524h"]
-[ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/player.tscn" id="3_axnh8"]
+[ext_resource type="PackedScene" uid="uid://hm1s6dk7ysb" path="res://scenes/GunGoblin/player.tscn" id="3_axnh8"]
 
 [node name="gg_anotherparkourscene" instance=ExtResource("1_f6dkf")]
 

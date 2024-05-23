@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcvospindfe7d"]
+
+[ext_resource type="Script" path="res://scripts/Tanks/Things/melee_component.gd" id="1_or2we"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdlp5"]
+radius = 0.651135
+
+[node name="MeleeComponent" type="Node3D"]
+script = ExtResource("1_or2we")
+
+[node name="AttackStartup" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackDuration" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="AttackHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.260684)
+collision_layer = 32
+collision_mask = 32
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox"]
+transform = Transform3D(1.45128, 0, 0, 0, 1.45128, 0, 0, 0, 1.45128, 0, 0.931519, 0.466701)
+shape = SubResource("CapsuleShape3D_bdlp5")
+
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

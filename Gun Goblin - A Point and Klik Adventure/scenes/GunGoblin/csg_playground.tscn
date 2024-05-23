@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://b4w27goy76w6p" path="res://textures/texture_08.png" id="1_3q0bi"]
 [ext_resource type="Script" path="res://scripts/csg_playground.gd" id="1_vk383"]
-[ext_resource type="PackedScene" uid="uid://826b4fbeh616" path="res://scenes/klik.tscn" id="2_0fs1g"]
+[ext_resource type="PackedScene" uid="uid://826b4fbeh616" path="res://scenes/GunGoblin/klik.tscn" id="2_0fs1g"]
 [ext_resource type="MeshLibrary" uid="uid://2cfrtywltqj3" path="res://MeshLibrary.tres" id="4_sck33"]
-[ext_resource type="PackedScene" uid="uid://bkyghxdar0ydp" path="res://scenes/npc.tscn" id="5_yxvda"]
-[ext_resource type="PackedScene" uid="uid://dd8llx4apjbp1" path="res://scenes/possum_squish.tscn" id="6_wmyjd"]
-[ext_resource type="PackedScene" uid="uid://doe41vrnlimh3" path="res://scenes/homunculus.tscn" id="7_4bxdk"]
-[ext_resource type="PackedScene" uid="uid://cu1q4fnn2ggt5" path="res://scenes/klik_2.tscn" id="8_7ioxv"]
-[ext_resource type="PackedScene" uid="uid://bjvvn6b2b36t0" path="res://scenes/ponk.tscn" id="9_ohnpi"]
+[ext_resource type="PackedScene" uid="uid://bkyghxdar0ydp" path="res://scenes/GunGoblin/npc.tscn" id="5_yxvda"]
+[ext_resource type="PackedScene" uid="uid://dd8llx4apjbp1" path="res://scenes/GunGoblin/possum_squish.tscn" id="6_wmyjd"]
+[ext_resource type="PackedScene" uid="uid://doe41vrnlimh3" path="res://scenes/GunGoblin/homunculus.tscn" id="7_4bxdk"]
+[ext_resource type="PackedScene" uid="uid://cu1q4fnn2ggt5" path="res://scenes/GunGoblin/klik_2.tscn" id="8_7ioxv"]
+[ext_resource type="PackedScene" uid="uid://bjvvn6b2b36t0" path="res://scenes/GunGoblin/ponk.tscn" id="9_ohnpi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vi38y"]
 albedo_texture = ExtResource("1_3q0bi")
