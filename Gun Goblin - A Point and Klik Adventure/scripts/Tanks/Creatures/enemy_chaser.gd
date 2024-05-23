@@ -1,4 +1,4 @@
-#class_name Enemy
+#class_name EnemyChaser
 extends CharacterBody3D
 
 signal die
@@ -131,7 +131,7 @@ func _update_target():
 			if _has_line_of_sight(_current_target): # has line of sight, check if close enough to be in attacking range
 				if _behaviour == Behaviours.TRACKING \
 						and (position.distance_to(_current_target.position) < attack_range):
-					_start_attack()
+					$MeleeComponent.try_attacking()
 	elif not _current_target:
 		_current_target = _get_nearest_player()
 		if _current_target and _behaviour == Behaviours.WANDERING:

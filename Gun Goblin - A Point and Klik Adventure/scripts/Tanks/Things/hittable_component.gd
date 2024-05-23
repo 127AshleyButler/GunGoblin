@@ -1,6 +1,6 @@
 #hittable_component.gd
 ## A component for nodes that can be affected by projectiles, explosions, and falling OOBs.
-class_name HittableComponent
+#class_name HittableComponent
 extends Node
 
 ## Called when entity is hit with a damaging projectile

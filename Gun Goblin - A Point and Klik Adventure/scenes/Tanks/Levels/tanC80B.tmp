@@ -92,8 +92,11 @@ text = "go and kill, my robot children"
 
 [node name="TankDriver" parent="." index="11" instance=ExtResource("4_uh4ij")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693691, 0.891005, -17.2783)
+charge_tier_increment_time = null
+max_concurrent_bullets = null
 player_num = "1"
 can_shoot = true
+state = null
 in_lobby = true
 
 [node name="Camera3D" type="Camera3D" parent="." index="12"]
@@ -106,8 +109,11 @@ size = 37.76
 
 [node name="TankDriver2" parent="." index="13" instance=ExtResource("4_uh4ij")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.825644, 0.147395, -5.07953)
+charge_tier_increment_time = null
+max_concurrent_bullets = null
 player_num = "2"
 can_shoot = true
+state = null
 in_lobby = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." index="14"]

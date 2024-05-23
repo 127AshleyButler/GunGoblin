@@ -1,4 +1,5 @@
-class_name TankDriver
+#class_name TankDriver
+
 extends CharacterBody3D
 
 signal killed(player_num)

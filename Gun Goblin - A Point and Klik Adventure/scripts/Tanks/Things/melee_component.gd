@@ -1,5 +1,5 @@
-class_name MeleeComponent
-extends CharacterBody3D
+#class_name MeleeComponent
+extends Node3D
 
 signal prepped_attack()
 signal attack_started()
@@ -37,6 +37,12 @@ func _process(delta):
 			States.ATTACKING:
 				_handle_attacking()
 
+
+func try_attacking() -> bool:
+	if _state == States.IDLE:
+		_start_attack()
+		return true
+	return false
 	
 func _rotate_towards(target: Vector3):
 	# Based on: https://forum.godotengine.org/t/how-to-slowly-rotate-object-towards-another-object/18133/3
@@ -74,7 +80,8 @@ func _initiate_attack():
 
 	
 func _handle_attacking():
-	velocity = _attack_direction * attack_speed
+	pass
+	#velocity = _attack_direction * attack_speed
 	#if (position.distance_to(_attack_direction) < min_attack_distance):
 		## End the attack duration early, as the target was reached already
 		#$AttackDuration.stop()
