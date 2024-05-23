@@ -804,7 +804,7 @@ stream_0/weight = 1.0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.336538, 0.895702), 0.0, 0.0, 0, 0, Vector2(0.936538, 0.612607), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="CurveTexture" id="CurveTexture_wap75"]
+[sub_resource type="CurveTexture" id="CurveTexture_xn8q2"]
 curve = SubResource("Curve_2hj34")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y817w"]
@@ -817,14 +817,14 @@ gravity = Vector3(0, -2, 0)
 damping_min = 5.0
 damping_max = 5.0
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_wap75")
+scale_curve = SubResource("CurveTexture_xn8q2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v56ay"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmue5"]
 transparency = 1
 albedo_color = Color(0.945098, 0.854902, 0.823529, 0.796078)
 
 [sub_resource type="SphereMesh" id="SphereMesh_bivb6"]
-material = SubResource("StandardMaterial3D_v56ay")
+material = SubResource("StandardMaterial3D_hmue5")
 radial_segments = 8
 rings = 8
 

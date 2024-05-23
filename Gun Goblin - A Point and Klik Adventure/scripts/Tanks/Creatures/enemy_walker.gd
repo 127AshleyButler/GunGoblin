@@ -1,4 +1,4 @@
-class_name EnemyV2
+class_name Enemy
 extends CharacterBody3D
 
 signal die
