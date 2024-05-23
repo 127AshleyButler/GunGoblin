@@ -1,4 +1,4 @@
-class_name MeleeComponent
+class_name MeleeComponent2
 extends CharacterBody3D
 
 signal prepped_attack()

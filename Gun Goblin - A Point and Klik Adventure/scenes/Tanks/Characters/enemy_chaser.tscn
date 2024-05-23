@@ -1,17 +1,18 @@
-[gd_scene load_steps=36 format=3 uid="uid://cravqpq0hp4ng"]
+[gd_scene load_steps=37 format=3 uid="uid://ciplchxivptbl"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Creatures/enemy_walker.gd" id="1_73qq7"]
-[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/Tanks/Things/bullet_emitter.tscn" id="3_k276v"]
-[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/Tanks/Things/tank_bullet.tscn" id="4_msq12"]
-[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="5_7qaly"]
-[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="6_7swut"]
-[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="7_vxmnh"]
-[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="8_7vjky"]
-[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="9_jq44l"]
-[ext_resource type="AudioStream" uid="uid://busweff3a474f" path="res://sounds/SFX/surprised_SFX.wav" id="9_qplsc"]
-[ext_resource type="PackedScene" uid="uid://b70q14xqajtjd" path="res://scenes/Tanks/Characters/orange_arm_man_model.tscn" id="9_u1o2m"]
+[ext_resource type="Script" path="res://scripts/tanks/Creatures/enemy_chaser.gd" id="1_0gsbn"]
+[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/Tanks/Things/bullet_emitter.tscn" id="2_nbhp4"]
+[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/Tanks/Things/tank_bullet.tscn" id="3_fd6dp"]
+[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="4_icscw"]
+[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="5_ms07s"]
+[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="6_0756x"]
+[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="7_t4mos"]
+[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="8_81v5e"]
+[ext_resource type="AudioStream" uid="uid://busweff3a474f" path="res://sounds/SFX/surprised_SFX.wav" id="9_rqh54"]
+[ext_resource type="PackedScene" uid="uid://b70q14xqajtjd" path="res://scenes/Tanks/Characters/orange_arm_man_model.tscn" id="10_iuicq"]
+[ext_resource type="PackedScene" uid="uid://c76q5t302enqf" path="res://scenes/Tanks/Things/hittable_component.tscn" id="11_xqllc"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k8kce"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ore"]
 radius = 1.02569
 height = 2.13478
 
@@ -776,38 +777,38 @@ _data = {
 "shoot": SubResource("Animation_joy07")
 }
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8e1fm"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2u7tx"]
 random_pitch = 1.1
 streams_count = 3
-stream_0/stream = ExtResource("5_7qaly")
+stream_0/stream = ExtResource("4_icscw")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("6_7swut")
+stream_1/stream = ExtResource("5_ms07s")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("7_vxmnh")
+stream_2/stream = ExtResource("6_0756x")
 stream_2/weight = 1.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vg773"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ur1rs"]
 random_pitch = 1.2
 streams_count = 2
-stream_0/stream = ExtResource("8_7vjky")
+stream_0/stream = ExtResource("7_t4mos")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("9_jq44l")
+stream_1/stream = ExtResource("8_81v5e")
 stream_1/weight = 1.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xnupf"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1w56k"]
 random_pitch = 1.1
 streams_count = 1
-stream_0/stream = ExtResource("9_qplsc")
+stream_0/stream = ExtResource("9_rqh54")
 stream_0/weight = 1.0
 
-[sub_resource type="Curve" id="Curve_2hj34"]
+[sub_resource type="Curve" id="Curve_52j6s"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.336538, 0.895702), 0.0, 0.0, 0, 0, Vector2(0.936538, 0.612607), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="CurveTexture" id="CurveTexture_wap75"]
-curve = SubResource("Curve_2hj34")
+[sub_resource type="CurveTexture" id="CurveTexture_xn8q2"]
+curve = SubResource("Curve_52j6s")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y817w"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5vft6"]
 direction = Vector3(0, 1, 0.5)
 spread = 21.6
 flatness = 1.0
@@ -817,30 +818,26 @@ gravity = Vector3(0, -2, 0)
 damping_min = 5.0
 damping_max = 5.0
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_wap75")
+scale_curve = SubResource("CurveTexture_xn8q2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v56ay"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmue5"]
 transparency = 1
 albedo_color = Color(0.945098, 0.854902, 0.823529, 0.796078)
 
-[sub_resource type="SphereMesh" id="SphereMesh_bivb6"]
-material = SubResource("StandardMaterial3D_v56ay")
+[sub_resource type="SphereMesh" id="SphereMesh_taveu"]
+material = SubResource("StandardMaterial3D_hmue5")
 radial_segments = 8
 rings = 8
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8tpbe"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8q4tk"]
 radius = 0.651135
 
-[node name="enemy_walker" type="CharacterBody3D"]
-top_level = true
-collision_layer = 80
-collision_mask = 17
-script = ExtResource("1_73qq7")
-activation_time = 1.0
+[node name="EnemyChaser" type="CharacterBody3D"]
+script = ExtResource("1_0gsbn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
-shape = SubResource("CapsuleShape3D_k8kce")
+shape = SubResource("CapsuleShape3D_y6ore")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -871,25 +868,24 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
-[node name="BulletEmitter" parent="." node_paths=PackedStringArray("emission_position") instance=ExtResource("3_k276v")]
+[node name="BulletEmitter" parent="." instance=ExtResource("2_nbhp4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18248, 1.57294)
-bullet_scene = ExtResource("4_msq12")
+bullet_scene = ExtResource("3_fd6dp")
 max_concurrent_bullets = 5
 shooting_delay = 0.25
-emission_position = NodePath("../BulletSpawnPosition")
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_8e1fm")
+stream = SubResource("AudioStreamRandomizer_2u7tx")
 bus = &"SFX"
 
 [node name="Destroyed" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_vg773")
+stream = SubResource("AudioStreamRandomizer_ur1rs")
 pitch_scale = 1.2
 bus = &"SFX"
 
 [node name="Surprise" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0185518, 1.19209e-07, 0.0214186)
-stream = SubResource("AudioStreamRandomizer_xnupf")
+stream = SubResource("AudioStreamRandomizer_1w56k")
 pitch_scale = 1.23
 
 [node name="SprintParticles" type="GPUParticles3D" parent="."]
@@ -898,10 +894,10 @@ emitting = false
 amount = 10
 lifetime = 0.91
 randomness = 0.97
-process_material = SubResource("ParticleProcessMaterial_y817w")
-draw_pass_1 = SubResource("SphereMesh_bivb6")
+process_material = SubResource("ParticleProcessMaterial_5vft6")
+draw_pass_1 = SubResource("SphereMesh_taveu")
 
-[node name="model" parent="." instance=ExtResource("9_u1o2m")]
+[node name="model" parent="." instance=ExtResource("10_iuicq")]
 
 [node name="Label3D" type="Label3D" parent="model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -922,10 +918,6 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox"]
 transform = Transform3D(1.45128, 0, 0, 0, 1.45128, 0, 0, 0, 1.45128, 0, 0.931519, 0.466701)
-shape = SubResource("CapsuleShape3D_8tpbe")
+shape = SubResource("CapsuleShape3D_8q4tk")
 
-[connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
-[connection signal="timeout" from="AttackStartup" to="." method="_on_attack_startup_timeout"]
-[connection signal="timeout" from="AttackDuration" to="." method="_on_attack_duration_timeout"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
+[node name="HittableComponent" parent="." instance=ExtResource("11_xqllc")]
