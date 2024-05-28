@@ -32,4 +32,7 @@ monitoring = false
 transform = Transform3D(1.45128, 0, 0, 0, 1.45128, 0, 0, 0, 1.45128, 0, 0.931519, 0.466701)
 shape = SubResource("CapsuleShape3D_bdlp5")
 
+[connection signal="timeout" from="AttackStartup" to="." method="_on_attack_startup_timeout"]
+[connection signal="timeout" from="AttackDuration" to="." method="_on_attack_duration_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

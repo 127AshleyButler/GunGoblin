@@ -3,8 +3,8 @@ extends Node3D
 
 signal prepped_attack()
 signal attack_started()
-signal attack_cooldown_started()
-signal attack_ended()
+signal attack_duration_ended()
+signal attack_cooldown_ended()
 
 enum States {IDLE, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
@@ -16,16 +16,11 @@ enum States {IDLE, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 @export var attack_cooldown : float = 2.0
 ## The speed at which this character moves while attacking
 @export var attack_speed : float = 20.0
-@export var rotation_speed : float = 0.08
 ## Whether or not this attack component is currently active
 @export var is_active : bool = true
 
 
 var _state : States = States.IDLE
-## Direction this AI is attacking at if it is in the attacking state
-var _attack_direction : Vector3
-## The current tank driver this AI is hunting
-var _current_target : TankDriver
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,7 +28,7 @@ func _process(delta):
 	if is_active:	
 		match _state:
 			States.ATTACK_START:
-				_rotate_towards((position + _attack_direction).rotated(Vector3(0, 1, 0), 2*PI))
+				pass
 			States.ATTACKING:
 				_handle_attacking()
 
@@ -44,21 +39,10 @@ func try_attacking() -> bool:
 		return true
 	return false
 	
-func _rotate_towards(target: Vector3):
-	# Based on: https://forum.godotengine.org/t/how-to-slowly-rotate-object-towards-another-object/18133/3
-	var global_pos = global_transform.origin
-	var target_pos = target
-	var wtransform = global_transform.looking_at(Vector3(target_pos.x,global_pos.y,target_pos.z),Vector3(0,1,0)).rotated(Vector3(0,1,0), PI)
-	var wrotation = Quaternion(global_transform.basis).slerp(Quaternion(wtransform.basis), rotation_speed)
-	#var _this_scale = scale
-	global_transform = Transform3D(Basis(wrotation), global_transform.origin)
-	#scale = _this_scale
-
 
 func _start_attack():
 	prepped_attack.emit()
 	_state = States.ATTACK_START
-	_attack_direction = position.direction_to(_current_target.position)
 	if (attack_startup > 0):
 		$AttackStartup.start(attack_startup)
 	else:
@@ -81,15 +65,10 @@ func _initiate_attack():
 	
 func _handle_attacking():
 	pass
-	#velocity = _attack_direction * attack_speed
-	#if (position.distance_to(_attack_direction) < min_attack_distance):
-		## End the attack duration early, as the target was reached already
-		#$AttackDuration.stop()
-		#_on_attack_duration_timeout()
 
 
 func _on_attack_duration_timeout():
-	attack_cooldown_started.emit()
+	attack_duration_ended.emit()
 	$AttackHitbox.monitoring = false
 	if attack_cooldown > 0: # Start attack cooldown timer (unless it's 0)
 		$AttackCooldown.start(attack_cooldown)
@@ -103,7 +82,7 @@ func _on_attack_cooldown_timeout():
 	
 	
 func _end_attack():
-	attack_ended.emit()
+	attack_cooldown_ended.emit()
 	_state = States.IDLE
 
 

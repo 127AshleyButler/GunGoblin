@@ -1,0 +1,173 @@
+[gd_scene load_steps=23 format=3 uid="uid://girim0br41iv"]
+
+[ext_resource type="Script" path="res://scripts/Tanks/Creatures/mines_mcgee.gd" id="1_u2een"]
+[ext_resource type="PackedScene" uid="uid://dcvospindfe7d" path="res://scenes/Tanks/Things/melee_component.tscn" id="2_kypp6"]
+[ext_resource type="PackedScene" uid="uid://c76q5t302enqf" path="res://scenes/Tanks/Things/hittable_component.tscn" id="3_dqxsi"]
+[ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="6_ng2lj"]
+[ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="7_8r02k"]
+[ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="8_47q6u"]
+[ext_resource type="AudioStream" uid="uid://d2hkoevooth0j" path="res://sounds/SFX/tank_destroyed1.wav" id="9_eykrr"]
+[ext_resource type="PackedScene" uid="uid://biqehhjnhdxp3" path="res://scenes/Tanks/Characters/mines_mcgee_model.tscn" id="10_dwo3j"]
+[ext_resource type="AudioStream" uid="uid://drdvxn4a4fugi" path="res://sounds/SFX/tank_destroyed2.wav" id="10_jbe36"]
+[ext_resource type="AudioStream" uid="uid://busweff3a474f" path="res://sounds/SFX/surprised_SFX.wav" id="11_faptq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2kqhc"]
+radius = 1.05189
+height = 2.64885
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lqpce"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("6_ng2lj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_8r02k")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_47q6u")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kipxt"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("9_eykrr")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("10_jbe36")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_11w0p"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("11_faptq")
+stream_0/weight = 1.0
+
+[sub_resource type="Curve" id="Curve_u4jh3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.336538, 0.895702), 0.0, 0.0, 0, 0, Vector2(0.936538, 0.612607), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_xn8q2"]
+curve = SubResource("Curve_u4jh3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t4ivk"]
+direction = Vector3(0, 1, 0.5)
+spread = 21.6
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -2, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_xn8q2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmue5"]
+transparency = 1
+albedo_color = Color(0.945098, 0.854902, 0.823529, 0.796078)
+
+[sub_resource type="SphereMesh" id="SphereMesh_88xjh"]
+material = SubResource("StandardMaterial3D_hmue5")
+radial_segments = 8
+rings = 8
+
+[sub_resource type="Animation" id="Animation_lmvbl"]
+resource_name = "Idle"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Standing"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nskfw"]
+resource_name = "Run"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Running"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xy2n"]
+_data = {
+"Idle": SubResource("Animation_lmvbl"),
+"Run": SubResource("Animation_nskfw")
+}
+
+[node name="MinesMcgee" type="CharacterBody3D"]
+script = ExtResource("1_u2een")
+activation_time = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
+shape = SubResource("CapsuleShape3D_2kqhc")
+
+[node name="MeleeComponent" parent="." instance=ExtResource("2_kypp6")]
+
+[node name="HittableComponent" parent="." instance=ExtResource("3_dqxsi")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 1.5
+max_neighbors = 5
+
+[node name="ActivationTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_lqpce")
+bus = &"SFX"
+
+[node name="Destroyed" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_kipxt")
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="Surprise" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0185518, 1.19209e-07, 0.0214186)
+stream = SubResource("AudioStreamRandomizer_11w0p")
+pitch_scale = 1.23
+
+[node name="SprintParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00288105, -0.0123972, -1.28195)
+emitting = false
+amount = 10
+lifetime = 0.91
+randomness = 0.97
+process_material = SubResource("ParticleProcessMaterial_t4ivk")
+draw_pass_1 = SubResource("SphereMesh_88xjh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8xy2n")
+}
+autoplay = "Idle"
+
+[node name="model" parent="." instance=ExtResource("10_dwo3j")]
+
+[node name="Label3D" type="Label3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+billboard = 1
+outline_modulate = Color(0.631373, 0, 0, 1)
+text = "😈"
+font_size = 112
+outline_size = 57
+
+[connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
+
+[editable path="HittableComponent"]

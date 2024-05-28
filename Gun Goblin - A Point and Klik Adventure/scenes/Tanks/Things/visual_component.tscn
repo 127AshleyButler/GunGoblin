@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfmid7dsbptg1"]
+
+[ext_resource type="PackedScene" uid="uid://87isn70pgah4" path="res://models/tank/Creatures/minesMcgee.glb" id="1_namkk"]
+[ext_resource type="Script" path="res://scripts/Tanks/Things/visual_component.gd" id="1_r1xa3"]
+
+[node name="VisualComponent" type="Node3D"]
+script = ExtResource("1_r1xa3")
+
+[node name="model" parent="." instance=ExtResource("1_namkk")]

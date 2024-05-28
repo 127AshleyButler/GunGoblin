@@ -1,4 +1,4 @@
-class_name EnemyChaser
+class_name MinesMcgee
 extends CharacterBody3D
 
 signal die
@@ -54,8 +54,7 @@ func _ready():
 	navigation_agent.target_desired_distance = 0.5
 	# Make sure to not await during _ready.
 	call_deferred("_actor_setup")
-	
-	$model.play_animation("Idle")
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
