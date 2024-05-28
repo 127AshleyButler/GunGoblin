@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://m26dkpwj5i6b"
-path="res://.godot/imported/level_simple_geometry.glb-f6e5690b9d49a31be313c69829d303ef.scn"
+path="res://.godot/imported/level_simple_geometry.glb-7ecfccf0090f98cd700995c6345e1574.scn"
 
 [deps]
 
-source_file="res://scenes/tanks/level_simple_geometry.glb"
-dest_files=["res://.godot/imported/level_simple_geometry.glb-f6e5690b9d49a31be313c69829d303ef.scn"]
+source_file="res://scenes/Tanks/level_simple_geometry.glb"
+dest_files=["res://.godot/imported/level_simple_geometry.glb-7ecfccf0090f98cd700995c6345e1574.scn"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dreq6g3c0niyr" path="res://models/tank/levels/level_garf_shrine.glb" id="1_80u1u"]
 [ext_resource type="Script" path="res://scripts/tanks/level_garf_shrine.gd" id="2_cq6p8"]
-[ext_resource type="PackedScene" uid="uid://o1kolv3p78q4" path="res://scenes/tanks/fire_projectile.tscn" id="3_r7260"]
+[ext_resource type="PackedScene" uid="uid://o1kolv3p78q4" path="res://scenes/Tanks/Mechanics/fire_projectile.tscn" id="3_r7260"]
 [ext_resource type="AudioStream" uid="uid://b5x2br3fqtyed" path="res://scenes/483450__pappabert__stone-creek.wav" id="4_5qjtp"]
 [ext_resource type="AudioStream" uid="uid://dhxj5ju1bdfau" path="res://sounds/SFX/422729__grubzyy__s_spotlight_off.wav" id="5_mgswi"]
 

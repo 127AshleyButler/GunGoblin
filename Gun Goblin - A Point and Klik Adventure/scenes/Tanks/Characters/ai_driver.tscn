@@ -1,9 +1,9 @@
 [gd_scene load_steps=35 format=3 uid="uid://djq3vhqqp0yr0"]
 
 [ext_resource type="Script" path="res://scripts/tanks/ai_driver.gd" id="1_ko2uc"]
-[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/tanks/bullet_emitter.tscn" id="2_vc51c"]
-[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/tanks/tank_bullet.tscn" id="3_o1ysx"]
-[ext_resource type="PackedScene" uid="uid://eoix351rmxt3" path="res://scenes/tanks/tank_peasint_2.tscn" id="4_xcqgy"]
+[ext_resource type="PackedScene" uid="uid://bdrnr8f1olomj" path="res://scenes/Tanks/Mechanics/bullet_emitter.tscn" id="2_vc51c"]
+[ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/Tanks/tank_bullet.tscn" id="3_o1ysx"]
+[ext_resource type="PackedScene" uid="uid://eoix351rmxt3" path="res://scenes/Tanks/tank_peasint_2.tscn" id="4_xcqgy"]
 [ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="5_48fmw"]
 [ext_resource type="AudioStream" uid="uid://cgpyh6in475p6" path="res://sounds/SFX/Peasint_Tank_Fire2.wav" id="6_ro0bt"]
 [ext_resource type="AudioStream" uid="uid://b5ankut2wxyee" path="res://sounds/SFX/Peasint_Tank_Fire3.wav" id="7_qv7ss"]

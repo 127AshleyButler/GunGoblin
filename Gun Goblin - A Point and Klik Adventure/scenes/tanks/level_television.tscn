@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7xxrftfa6qcb"]
 
 [ext_resource type="PackedScene" uid="uid://dreyocyitewe0" path="res://models/tank/levels/level_television.glb" id="1_ot1ng"]
-[ext_resource type="PackedScene" uid="uid://dxg42thl0m2lp" path="res://scenes/tanks/gee_vee_gee_logo.tscn" id="2_c0xqk"]
+[ext_resource type="PackedScene" uid="uid://dxg42thl0m2lp" path="res://scenes/Tanks/Mechanics/gee_vee_gee_logo.tscn" id="2_c0xqk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh2pr"]
 transparency = 1

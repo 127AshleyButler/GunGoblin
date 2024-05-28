@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d2x8jt3bjb13b" path="res://models/tank/portal.glb" id="1_gd34d"]
 [ext_resource type="Script" path="res://scripts/tanks/portal.gd" id="1_t4kps"]
-[ext_resource type="PackedScene" uid="uid://cravqpq0hp4ng" path="res://scenes/tanks/enemy_walker.tscn" id="2_ntulj"]
+[ext_resource type="PackedScene" uid="uid://cravqpq0hp4ng" path="res://scenes/Tanks/Characters/enemy_walker.tscn" id="2_ntulj"]
 
 [sub_resource type="Animation" id="Animation_0mqim"]
 resource_name = "Despawn"
