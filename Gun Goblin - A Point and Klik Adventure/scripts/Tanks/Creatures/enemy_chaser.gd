@@ -1,4 +1,4 @@
-#class_name EnemyChaser
+class_name EnemyChaser
 extends CharacterBody3D
 
 signal die

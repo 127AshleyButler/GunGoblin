@@ -54,8 +54,8 @@ func _load_next_wave() -> bool:
 
 func _spawn(enemyName : StringName):
 	print("Spawning: ", enemyName)
-	#var new_portal = portal_scene.instantiate() as Portal
-	var new_portal = portal_scene.instantiate()
+	var new_portal = portal_scene.instantiate() as Portal
+	#var new_portal = portal_scene.instantiate()
 	if not enemy_types.has(enemyName):
 		print("Error, [", enemyName, "] not in enemy types.")
 		return

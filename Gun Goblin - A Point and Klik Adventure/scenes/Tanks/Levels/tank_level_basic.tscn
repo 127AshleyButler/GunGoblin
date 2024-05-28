@@ -124,8 +124,7 @@ visible = false
 mesh = SubResource("BoxMesh_l1u1h")
 skeleton = NodePath("../..")
 
-[node name="WaveManager" parent="." index="15" node_paths=PackedStringArray("portal_spawn_locations") instance=ExtResource("5_sodyc")]
-portal_spawn_locations = [NodePath("PortalLocation1"), NodePath("PortalLocation2"), NodePath("PortalLocation3"), NodePath("PortalLocation4")]
+[node name="WaveManager" parent="." index="15" instance=ExtResource("5_sodyc")]
 waves = {
 0: [&"OrangeArmMan", &"OrangeArmMan", &"OrangeArmMan"],
 1: [&"OrangeArmMan", &"Something", &"Something"]

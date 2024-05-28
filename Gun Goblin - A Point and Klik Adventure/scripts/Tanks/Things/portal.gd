@@ -1,4 +1,4 @@
-#class_name Portal
+class_name Portal
 extends Node3D
 
 signal enemy_spawned(enemy)
