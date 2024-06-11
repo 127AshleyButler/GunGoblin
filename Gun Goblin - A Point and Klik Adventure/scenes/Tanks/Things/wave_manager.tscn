@@ -1,38 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxowrubjf4xxf"]
+[gd_scene load_steps=11 format=3 uid="uid://cxowrubjf4xxf"]
 
 [ext_resource type="Script" path="res://scripts/Tanks/Things/WaveManager.gd" id="1_v6g03"]
 [ext_resource type="PackedScene" uid="uid://kwgk18pko6g2" path="res://scenes/Tanks/Things/portal.tscn" id="2_nuhmq"]
-[ext_resource type="PackedScene" uid="uid://cravqpq0hp4ng" path="res://scenes/Tanks/Characters/enemy_walker.tscn" id="3_e5yei"]
-
-[sub_resource type="Animation" id="Animation_opyxm"]
-resource_name = "Wave_1"
-length = 10.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 3, 6, 7, 8.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"values": [{
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}]
-}
+[ext_resource type="PackedScene" uid="uid://nbuul8sfjr7k" path="res://scenes/Tanks/Characters/enemy_chaser.tscn" id="3_waocq"]
+[ext_resource type="PackedScene" uid="uid://girim0br41iv" path="res://scenes/Tanks/Characters/MinesMcgee.tscn" id="4_5ewp8"]
 
 [sub_resource type="Animation" id="Animation_ol586"]
 resource_name = "Wave_2"
@@ -47,13 +18,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2.2, 5, 5.2, 5.4, 7, 8.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
-"args": [&"OrangeArmMan"],
+"args": [&"MinesMcgee"],
 "method": &"_spawn"
 }, {
-"args": [&"OrangeArmMan"],
+"args": [&"MinesMcgee"],
 "method": &"_spawn"
 }, {
-"args": [&"OrangeArmMan"],
+"args": [&"MinesMcgee"],
 "method": &"_spawn"
 }, {
 "args": [&"OrangeArmMan"],
@@ -154,7 +125,7 @@ tracks/0/keys = {
 "args": [&"OrangeArmMan"],
 "method": &"_spawn"
 }, {
-"args": [&"OrangeArmMan"],
+"args": [&"MinesMcgee"],
 "method": &"_spawn"
 }, {
 "args": [&"OrangeArmMan"],
@@ -196,7 +167,7 @@ tracks/0/keys = {
 "args": [&"OrangeArmMan"],
 "method": &"_spawn"
 }, {
-"args": [&"OrangeArmMan"],
+"args": [&"MinesMcgee"],
 "method": &"_spawn"
 }, {
 "args": [&"OrangeArmMan"],
@@ -230,19 +201,93 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_opyxm"]
+resource_name = "Wave_5"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3, 6, 7, 8.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xydt8"]
+resource_name = "Wave_1"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.4, 1.8, 2.2, 3, 6, 7, 8.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0jbqy"]
 _data = {
-"Wave_1": SubResource("Animation_opyxm"),
+"Wave_1": SubResource("Animation_xydt8"),
 "Wave_2": SubResource("Animation_ol586"),
 "Wave_3": SubResource("Animation_6grkp"),
-"Wave_4": SubResource("Animation_5pfiu")
+"Wave_4": SubResource("Animation_5pfiu"),
+"Wave_5": SubResource("Animation_opyxm")
 }
 
 [node name="WaveManager" type="Node3D"]
 script = ExtResource("1_v6g03")
 portal_scene = ExtResource("2_nuhmq")
 enemy_types = {
-"OrangeArmMan": ExtResource("3_e5yei")
+"MinesMcgee": ExtResource("4_5ewp8"),
+"OrangeArmMan": ExtResource("3_waocq")
 }
 waves = {
 0: [&"OrangeArmMan", &"OrangeArmMan", &"OrangeArmMan"]

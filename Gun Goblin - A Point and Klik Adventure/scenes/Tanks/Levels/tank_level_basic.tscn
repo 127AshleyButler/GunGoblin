@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ds3hctx353mf0"]
+[gd_scene load_steps=14 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/levels/tank_level_basic.glb" id="1_2s81v"]
 [ext_resource type="Script" path="res://scripts/Tanks/Levels/tank_level_basic.gd" id="2_m2pmk"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/Tanks/Characters/tank_driver.tscn" id="4_uh4ij"]
 [ext_resource type="PackedScene" uid="uid://cxowrubjf4xxf" path="res://scenes/Tanks/Things/wave_manager.tscn" id="5_sodyc"]
 [ext_resource type="PackedScene" uid="uid://nbuul8sfjr7k" path="res://scenes/Tanks/Characters/enemy_chaser.tscn" id="6_5h3vl"]
-[ext_resource type="PackedScene" uid="uid://girim0br41iv" path="res://scenes/Tanks/Characters/MinesMcgee.tscn" id="7_sf38j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w86r1"]
 size = Vector3(12, 1.80286, 3)
@@ -104,7 +103,7 @@ fov = 96.2
 size = 37.76
 
 [node name="TankDriver2" parent="." index="13" instance=ExtResource("4_uh4ij")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.825644, 0.147395, -5.07953)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8256, 0.147395, -5.07953)
 player_num = "1"
 in_lobby = true
 
@@ -142,14 +141,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80693, 0, 14.6393)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17251, 0, 18.703)
 
 [node name="EnemyChaser" parent="." index="16" instance=ExtResource("6_5h3vl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0024, 0, 0)
-
-[node name="MeleeComponent" parent="EnemyChaser" index="0"]
-attack_cooldown = 0.0
-
-[node name="MinesMcgee" parent="." index="17" instance=ExtResource("7_sf38j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39413, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4697, 0, 0)
 
 [editable path="WaveManager"]
-[editable path="EnemyChaser"]
-[editable path="EnemyChaser/HittableComponent"]

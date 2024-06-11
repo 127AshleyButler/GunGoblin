@@ -5,6 +5,7 @@ signal prepped_attack()
 signal attack_started()
 signal attack_duration_ended()
 signal attack_cooldown_ended()
+signal hit(body : Node3D)
 
 enum States {IDLE, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
@@ -89,3 +90,4 @@ func _end_attack():
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("hit"):
 		body.hit()
+		hit.emit(body)

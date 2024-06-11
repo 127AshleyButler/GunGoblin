@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://girim0br41iv"]
+[gd_scene load_steps=28 format=3 uid="uid://girim0br41iv"]
 
 [ext_resource type="Script" path="res://scripts/Tanks/Creatures/mines_mcgee.gd" id="1_u2een"]
 [ext_resource type="PackedScene" uid="uid://dcvospindfe7d" path="res://scenes/Tanks/Things/melee_component.tscn" id="2_kypp6"]
@@ -100,22 +100,195 @@ tracks/0/keys = {
 "method": &"play_animation"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SprintParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ehc3x"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SprintParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Destroyed:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pyulp"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ofntb"]
+resource_name = "Pickup"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Pickup"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_g2jcx"]
+resource_name = "FallDown"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["FallDown"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_053hd"]
+resource_name = "FallDownFunny"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["FallDownFunny"],
+"method": &"play_animation"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xy2n"]
 _data = {
+"FallDown": SubResource("Animation_g2jcx"),
+"FallDownFunny": SubResource("Animation_053hd"),
 "Idle": SubResource("Animation_lmvbl"),
-"Run": SubResource("Animation_nskfw")
+"Pickup": SubResource("Animation_ofntb"),
+"RESET": SubResource("Animation_pyulp"),
+"Run": SubResource("Animation_nskfw"),
+"die": SubResource("Animation_ehc3x")
 }
 
 [node name="MinesMcgee" type="CharacterBody3D"]
+collision_layer = 64
+collision_mask = 81
 script = ExtResource("1_u2een")
 activation_time = 1.0
+attack_range = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.986716, 0)
 shape = SubResource("CapsuleShape3D_2kqhc")
 
-[node name="MeleeComponent" parent="." instance=ExtResource("2_kypp6")]
+[node name="MineMeleeComponent" parent="." instance=ExtResource("2_kypp6")]
+attack_startup = 0.0
+attack_duration = 0.3
+attack_cooldown = 1.0
+attack_speed = 5.0
+
+[node name="AttackHitbox" parent="MineMeleeComponent" index="3"]
+collision_mask = 2
+
+[node name="CollisionShape3D" parent="MineMeleeComponent/AttackHitbox" index="0"]
+transform = Transform3D(1.45128, 0, 0, 0, 1.45128, 0, 0, 0, 1.45128, 0, 0.931519, 0.466701)
 
 [node name="HittableComponent" parent="." instance=ExtResource("3_dqxsi")]
 
@@ -144,7 +317,6 @@ pitch_scale = 1.23
 
 [node name="SprintParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00288105, -0.0123972, -1.28195)
-emitting = false
 amount = 10
 lifetime = 0.91
 randomness = 0.97
@@ -168,6 +340,12 @@ text = "😈"
 font_size = 112
 outline_size = 57
 
+[connection signal="attack_cooldown_ended" from="MineMeleeComponent" to="." method="_end_attack"]
+[connection signal="attack_duration_ended" from="MineMeleeComponent" to="." method="_on_attack_duration_timeout"]
+[connection signal="attack_started" from="MineMeleeComponent" to="." method="_initiate_attack"]
+[connection signal="hit" from="MineMeleeComponent" to="." method="_on_melee_component_hit"]
+[connection signal="prepped_attack" from="MineMeleeComponent" to="." method="_start_mine_grab_attack"]
 [connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
 
+[editable path="MineMeleeComponent"]
 [editable path="HittableComponent"]

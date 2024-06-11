@@ -1,10 +1,16 @@
+class_name Mine
+
 extends CharacterBody3D
+
+enum States {AIRBORNE, UNPRIMED, PRIMED, BLINKING, EXPLODED, DISSOLVING, DISAPPEARED}
 
 @export_category("Mine Properties")
 ## How long after placement until the mine will detect tanks driving over it
 @export_range(0, 20, 0.5, "or_greater", "or_less") var mine_activation_time = 1
 ## How large the mine grows with each mine assimilated
 @export var mine_growth_factor = 0.25
+## The state this mine starts in
+@export var state = States.AIRBORNE
 var mine_active = false
 var mine_about_to_explode = false
 var airborne = true
@@ -39,9 +45,10 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		
 	var collision = move_and_collide(velocity * delta)
-	if collision and not mine_about_to_explode and airborne:
+	if collision and state == States.AIRBORNE:
 		velocity = velocity.slide(collision.get_normal())
 		airborne = false
+		state = States.UNPRIMED
 		$ActivationTimer.start()
 		$AnimationPlayer.play("landing")
 
@@ -63,11 +70,20 @@ func _on_detection_radius_body_entered(body):
 		
 		
 func dissolve():
+	state = States.DISSOLVING
 	can_assimilate = false
 	can_be_assimilated = false
 	mine_active = true
 	$AnimationPlayer.play("dissolve")
-		
+
+
+func disappear():
+	state = States.DISAPPEARED
+	can_assimilate = false
+	can_be_assimilated = false
+	mine_active = false
+	$AnimationPlayer.play("disappear")
+
 		
 func increase_scale(amount = 1):
 	if mine_about_to_explode:
@@ -80,6 +96,7 @@ func increase_scale(amount = 1):
 	$Explosion.pitch_scale -= 0.01 * amount
 		
 func get_ready_to_explode():
+	state = States.BLINKING
 	#$AnimationPlayer.speed_scale = 1 / (1 + mines_assimilated)
 	can_assimilate = false
 	can_be_assimilated = false
@@ -95,6 +112,7 @@ func _on_activation_timer_timeout():
 	mine_active = true
 	$DetectionRadius.monitoring = true
 	if not mine_about_to_explode:
+		state = States.PRIMED
 		$AnimationPlayer.play("priming")
 
 

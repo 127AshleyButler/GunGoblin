@@ -167,7 +167,7 @@ func handle_mine_laying():
 	else:
 		current_shooting_delay = shooting_delay
 	mine_count += 1
-	var new_mine = mine_scene.instantiate()
+	var new_mine = mine_scene.instantiate() as Mine
 	new_mine.charge_tier = charge_tier
 	mines_layed += 1
 	new_mine.mine_number = mines_layed

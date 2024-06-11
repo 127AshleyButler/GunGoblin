@@ -6,6 +6,8 @@ signal die
 enum States {ALIVE, DEAD}
 enum Behaviours {IDLE, WANDERING, TRACKING, ATTACK_START, ATTACKING, ATTACK_COOLDOWN}
 
+
+@export_category("Basic Stats")
 ## How long from spawning in until this tank will start fighting
 @export var activation_time : float = 3.0
 ## The state this tank starts in
@@ -21,6 +23,12 @@ enum Behaviours {IDLE, WANDERING, TRACKING, ATTACK_START, ATTACKING, ATTACK_COOL
 ## How long this has to wait after an attack before it can perform other actions
 @export var attack_cooldown : float = 2.0
 
+@export_category("MinesMcgee")
+## How many mines MinesMcgee starts with
+@export var mine_count : int = 0
+## Max number of mines MinesMcgee can hold
+@export var max_mines : int = 5
+
 
 ## Whether or not this is currently active or still waiting for ActivationTimer to end
 var _is_active := false
@@ -31,10 +39,11 @@ var _behaviour := Behaviours.WANDERING
 ## Direction this AI is attacking at if it is in the attacking state
 var _attack_direction : Vector3
 
+var _current_mine_target : Mine
 
 
 const DRIVING_SPEED = 10.0
-const ATTACK_SPEED = 20.0
+const ATTACK_SPEED = 5.0
 const ROTATION_SPEED = 0.08
 const WANDER_SPEED = 5.0
 
@@ -112,35 +121,76 @@ func _get_nearest_player() -> TankDriver:
 	var nearest_player = null
 	var nearest_player_distance = INF
 	for player in players:
-		if player.state == TankDriver.States.ALIVE and _has_line_of_sight(player):
+		if player.state == TankDriver.States.ALIVE and _has_line_of_sight(player, TankDriver):
 			var player_distance = position.distance_squared_to(player.position)
 			if player_distance < nearest_player_distance:
 				nearest_player_distance = player_distance
 				nearest_player = player	
 	return nearest_player
+	
+	
+func _get_nearest_mine() -> Mine:
+	var Mines = get_tree().get_nodes_in_group("Mine") as Array[Mine]
+	var nearest_mine = null
+	var nearest_mine_distance = INF
+	for mine in Mines:
+		if mine.state == Mine.States.PRIMED and _has_line_of_sight(mine, Mine):
+			var mine_distance = position.distance_squared_to(mine.position)
+			if mine_distance < nearest_mine_distance:
+				nearest_mine_distance = mine_distance
+				nearest_mine = mine	
+	return nearest_mine
 
 
 func _update_target():
-	if _current_target: # Check if _current_target is still valid (alive)
-		if _current_target.state != TankDriver.States.ALIVE: # target is dead
-			_current_target = null
-			if _behaviour == Behaviours.TRACKING:
+	if mine_count < max_mines:
+		if is_instance_valid(_current_mine_target):
+			if _current_mine_target.state != Mine.States.PRIMED: # target is dead
+				_current_mine_target = null
+				if _behaviour == Behaviours.TRACKING:
+					_behaviour = Behaviours.WANDERING
+			elif _current_mine_target.state == Mine.States.PRIMED: # Check if still has LOS to alive target
+				if _has_line_of_sight(_current_mine_target, Mine): # has line of sight, check if close enough to be in attacking range
+					if _behaviour == Behaviours.TRACKING \
+							and (position.distance_to(_current_mine_target.position) < attack_range):
+						_mine_pickup()
+		elif not is_instance_valid(_current_mine_target):
+			_current_mine_target = _get_nearest_mine()
+			if _current_mine_target and _behaviour == Behaviours.WANDERING:
+				_set_movement_target(_current_mine_target.position)
+				_behaviour = Behaviours.TRACKING
+			elif not _current_mine_target and _behaviour == Behaviours.TRACKING:
 				_behaviour = Behaviours.WANDERING
-		elif _current_target.state == TankDriver.States.ALIVE: # Check if still has LOS to alive target
-			if _has_line_of_sight(_current_target): # has line of sight, check if close enough to be in attacking range
-				if _behaviour == Behaviours.TRACKING \
-						and (position.distance_to(_current_target.position) < attack_range):
-					$MeleeComponent.try_attacking()
-	elif not _current_target:
-		_current_target = _get_nearest_player()
-		if _current_target and _behaviour == Behaviours.WANDERING:
-			_set_movement_target(_current_target.position)
-			_behaviour = Behaviours.TRACKING
-		elif not _current_target and _behaviour == Behaviours.TRACKING:
-			_behaviour = Behaviours.WANDERING
+	else: # Already has max mines, search for players
+		if _current_target: # Check if _current_target is still valid (alive)
+			if _current_target.state != TankDriver.States.ALIVE: # target is dead
+				_current_target = null
+				if _behaviour == Behaviours.TRACKING:
+					_behaviour = Behaviours.WANDERING
+			elif _current_target.state == TankDriver.States.ALIVE: # Check if still has LOS to alive target
+				if _has_line_of_sight(_current_target, TankDriver): # has line of sight, check if close enough to be in attacking range
+					if _behaviour == Behaviours.TRACKING \
+							and (position.distance_to(_current_target.position) < attack_range):
+						_fall_down_attack()
+		elif not _current_target:
+			_current_target = _get_nearest_player()
+			if _current_target and _behaviour == Behaviours.WANDERING:
+				_set_movement_target(_current_target.position)
+				_behaviour = Behaviours.TRACKING
+			elif not _current_target and _behaviour == Behaviours.TRACKING:
+				_behaviour = Behaviours.WANDERING
 
 
-func _has_line_of_sight(target) -> bool:
+func _mine_pickup():
+	$MineMeleeComponent.try_attacking()
+	%AnimationPlayer.play("Pickup")
+	
+
+func _fall_down_attack():
+	%AnimationPlayer.play("FallDownFunny")
+
+
+func _has_line_of_sight(target, typeToCheck) -> bool:
 	var space_state = get_world_3d().direct_space_state
 	var origin = position
 	var end = target.position
@@ -150,7 +200,7 @@ func _has_line_of_sight(target) -> bool:
 	query.collide_with_areas = true
 	
 	var result = space_state.intersect_ray(query)
-	if result and result.collider is TankDriver:
+	if result and is_instance_of(result.collider, typeToCheck):
 		return true
 	return false
 
@@ -173,10 +223,10 @@ func _handle_tracking():
 	%AnimationPlayer.play("Run")
 	
 	
-func _start_attack():
+func _start_mine_grab_attack():
 	%AnimationPlayer.play("Gnash")
 	_behaviour = Behaviours.ATTACK_START
-	_attack_direction = position.direction_to(_current_target.position)
+	_attack_direction = position.direction_to(_current_mine_target.position)
 
 		
 
@@ -209,3 +259,9 @@ func _on_activation_timer_timeout():
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("hit"):
 		body.hit()
+
+
+func _on_melee_component_hit(body):
+	if body.is_in_group("Mine"):
+		body.disappear()
+		mine_count = min(max_mines, mine_count + 1)

@@ -8,9 +8,6 @@ signal enemy_died
 
 signal all_enemies_dead
 
-@export_category("Enemies")
-@export var orange_arm_man_scene : PackedScene
-
 @export_category("Variables")
 ## How many enemies are allowed to exist at once before the WaveComponent pauses in spawning more
 @export var max_enemies : int = 4
@@ -85,7 +82,7 @@ func _wait_for_no_enemies_left():
 	await all_enemies_dead
 
 
-func _on_enemy_spawned(new_enemy : Enemy):
+func _on_enemy_spawned(new_enemy):
 	new_enemy.die.connect(_on_enemy_die)
 	
 	

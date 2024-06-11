@@ -350,7 +350,7 @@ _data = {
 [node name="heart_bullet" type="CharacterBody3D" groups=["Projectile"]]
 top_level = true
 collision_layer = 4
-collision_mask = 17
+collision_mask = 113
 script = ExtResource("1_pm3bs")
 
 [node name="model" type="MeshInstance3D" parent="."]

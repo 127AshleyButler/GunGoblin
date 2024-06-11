@@ -178,7 +178,6 @@ func _start_attack():
 	%AnimationPlayer.play("Gnash")
 	_behaviour = Behaviours.ATTACK_START
 	_attack_direction = position.direction_to(_current_target.position)
-
 		
 
 func _initiate_attack():
