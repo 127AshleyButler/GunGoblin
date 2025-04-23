@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://girim0br41iv"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Creatures/mines_mcgee.gd" id="1_u2een"]
+[ext_resource type="Script" uid="uid://3anocvdt4caw" path="res://scripts/Tanks/Creatures/mines_mcgee.gd" id="1_u2een"]
 [ext_resource type="PackedScene" uid="uid://dcvospindfe7d" path="res://scenes/Tanks/Things/melee_component.tscn" id="2_kypp6"]
 [ext_resource type="PackedScene" uid="uid://c76q5t302enqf" path="res://scenes/Tanks/Things/hittable_component.tscn" id="3_dqxsi"]
 [ext_resource type="AudioStream" uid="uid://djrt12l4aeo3c" path="res://sounds/SFX/Peasint_Tank_Fire1.wav" id="6_ng2lj"]
@@ -19,25 +19,19 @@ height = 2.64885
 random_pitch = 1.1
 streams_count = 3
 stream_0/stream = ExtResource("6_ng2lj")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("7_8r02k")
-stream_1/weight = 1.0
 stream_2/stream = ExtResource("8_47q6u")
-stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kipxt"]
 random_pitch = 1.2
 streams_count = 2
 stream_0/stream = ExtResource("9_eykrr")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("10_jbe36")
-stream_1/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_11w0p"]
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("11_faptq")
-stream_0/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_u4jh3"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182692, 0.320755), 0.0, 0.0, 0, 0, Vector2(0.336538, 0.895702), 0.0, 0.0, 0, 0, Vector2(0.936538, 0.612607), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -67,6 +61,40 @@ material = SubResource("StandardMaterial3D_hmue5")
 radial_segments = 8
 rings = 8
 
+[sub_resource type="Animation" id="Animation_g2jcx"]
+resource_name = "FallDown"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["FallDown"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_053hd"]
+resource_name = "FallDownFunny"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["FallDownFunny"],
+"method": &"play_animation"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_lmvbl"]
 resource_name = "Idle"
 tracks/0/type = "method"
@@ -82,6 +110,50 @@ tracks/0/keys = {
 "args": ["Standing"],
 "method": &"play_animation"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_ofntb"]
+resource_name = "Pickup"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Pickup"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pyulp"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_nskfw"]
@@ -178,93 +250,15 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_pyulp"]
-resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("model:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_ofntb"]
-resource_name = "Pickup"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["Pickup"],
-"method": &"play_animation"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_g2jcx"]
-resource_name = "FallDown"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["FallDown"],
-"method": &"play_animation"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_053hd"]
-resource_name = "FallDownFunny"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["FallDownFunny"],
-"method": &"play_animation"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xy2n"]
 _data = {
-"FallDown": SubResource("Animation_g2jcx"),
-"FallDownFunny": SubResource("Animation_053hd"),
-"Idle": SubResource("Animation_lmvbl"),
-"Pickup": SubResource("Animation_ofntb"),
-"RESET": SubResource("Animation_pyulp"),
-"Run": SubResource("Animation_nskfw"),
-"die": SubResource("Animation_ehc3x")
+&"FallDown": SubResource("Animation_g2jcx"),
+&"FallDownFunny": SubResource("Animation_053hd"),
+&"Idle": SubResource("Animation_lmvbl"),
+&"Pickup": SubResource("Animation_ofntb"),
+&"RESET": SubResource("Animation_pyulp"),
+&"Run": SubResource("Animation_nskfw"),
+&"die": SubResource("Animation_ehc3x")
 }
 
 [node name="MinesMcgee" type="CharacterBody3D"]
@@ -286,9 +280,6 @@ attack_speed = 5.0
 
 [node name="AttackHitbox" parent="MineMeleeComponent" index="3"]
 collision_mask = 2
-
-[node name="CollisionShape3D" parent="MineMeleeComponent/AttackHitbox" index="0"]
-transform = Transform3D(1.45128, 0, 0, 0, 1.45128, 0, 0, 0, 1.45128, 0, 0.931519, 0.466701)
 
 [node name="HittableComponent" parent="." instance=ExtResource("3_dqxsi")]
 
@@ -326,7 +317,7 @@ draw_pass_1 = SubResource("SphereMesh_88xjh")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_8xy2n")
+&"": SubResource("AnimationLibrary_8xy2n")
 }
 autoplay = "Idle"
 

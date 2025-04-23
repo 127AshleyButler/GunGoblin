@@ -19,4 +19,3 @@ func _spawn_enemy():
 	enemy_spawned.emit(new_enemy)
 	get_parent().add_child(new_enemy)
 	queue_free()
-

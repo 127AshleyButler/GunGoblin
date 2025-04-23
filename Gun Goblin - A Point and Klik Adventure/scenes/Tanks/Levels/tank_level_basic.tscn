@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://ds3hctx353mf0"]
 
 [ext_resource type="PackedScene" uid="uid://d2g55jmgfwfao" path="res://models/tank/levels/tank_level_basic.glb" id="1_2s81v"]
-[ext_resource type="Script" path="res://scripts/Tanks/Levels/tank_level_basic.gd" id="2_m2pmk"]
+[ext_resource type="Script" uid="uid://fobxcxb4wohu" path="res://scripts/Tanks/Levels/tank_level_basic.gd" id="2_m2pmk"]
 [ext_resource type="PackedScene" uid="uid://vrqaov4grcpw" path="res://scenes/Tanks/Levels/tank_level_basic_2.tscn" id="3_wlsro"]
 [ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/Tanks/Characters/tank_driver.tscn" id="4_uh4ij"]
 [ext_resource type="PackedScene" uid="uid://cxowrubjf4xxf" path="res://scenes/Tanks/Things/wave_manager.tscn" id="5_sodyc"]

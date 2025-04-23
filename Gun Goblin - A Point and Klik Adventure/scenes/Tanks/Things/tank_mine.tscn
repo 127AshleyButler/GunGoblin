@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://csassjfat0bdr"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Things/tank_mine.gd" id="1_mluqr"]
+[ext_resource type="Script" uid="uid://gvg1jw2kyd0q" path="res://scripts/Tanks/Things/tank_mine.gd" id="1_mluqr"]
 [ext_resource type="Texture2D" uid="uid://b7gj6eri8xncs" path="res://textures/Tanks/mine shadow.png" id="2_acdfu"]
 [ext_resource type="AudioStream" uid="uid://7u8v5536qgk2" path="res://sounds/SFX/275136__rfmfilm__magnet-sticking-to-magnet-wall.wav" id="3_6uqh1"]
 [ext_resource type="AudioStream" uid="uid://cp35jyyan3j" path="res://sounds/SFX/sr_pelo_boom.wav" id="4_hx723"]
@@ -28,19 +28,16 @@ rings = 3
 random_pitch = 1.54
 streams_count = 1
 stream_0/stream = ExtResource("3_6uqh1")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_28wvx"]
 random_pitch = 1.01
 streams_count = 1
 stream_0/stream = ExtResource("4_req6k")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fcui8"]
 random_pitch = 1.3
 streams_count = 1
 stream_0/stream = ExtResource("4_hx723")
-stream_0/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_tdojn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0788462, 0.9851), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -408,6 +405,143 @@ tracks/14/keys = {
 "update": 0,
 "values": [1.0]
 }
+
+[sub_resource type="Animation" id="Animation_m4s3x"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hurtbox/Model:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionRadius:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExplosionRadius:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExplosionRadius:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExplosionRadius/MeshInstance3D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ExplosionMark:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hurtbox/Model:surface_material_override/0")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"decrement_parent_mine_count"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [false],
+"method": &"set_physics_process"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/10/type = "scale_3d"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Hurtbox")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0.387066, 0.387066, 0.387066, 1, 1, 0.01, 0.01, 0.01)
 
 [sub_resource type="Animation" id="Animation_322es"]
 resource_name = "dissolve"
@@ -1070,154 +1204,17 @@ tracks/11/keys = {
 "values": [1.2]
 }
 
-[sub_resource type="Animation" id="Animation_m4s3x"]
-resource_name = "disappear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hurtbox/Model:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ExplosionRadius:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ExplosionRadius:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ExplosionRadius:monitorable")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("ExplosionRadius/MeshInstance3D:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ExplosionMark:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Hurtbox/Model:surface_material_override/0")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/8/type = "method"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"decrement_parent_mine_count"
-}]
-}
-tracks/9/type = "method"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath(".")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [false],
-"method": &"set_physics_process"
-}, {
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/10/type = "scale_3d"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Hurtbox")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, 0.387066, 0.387066, 0.387066, 1, 1, 0.01, 0.01, 0.01)
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r24o5"]
 _data = {
-"blinking": SubResource("Animation_abciq"),
-"destroy": SubResource("Animation_qsfl3"),
-"disappear": SubResource("Animation_m4s3x"),
-"dissolve": SubResource("Animation_322es"),
-"idle": SubResource("Animation_tuof3"),
-"idle_unprimed": SubResource("Animation_ws0vb"),
-"landing": SubResource("Animation_0j3td"),
-"preview_explosion_radius": SubResource("Animation_7rn61"),
-"priming": SubResource("Animation_brm27")
+&"blinking": SubResource("Animation_abciq"),
+&"destroy": SubResource("Animation_qsfl3"),
+&"disappear": SubResource("Animation_m4s3x"),
+&"dissolve": SubResource("Animation_322es"),
+&"idle": SubResource("Animation_tuof3"),
+&"idle_unprimed": SubResource("Animation_ws0vb"),
+&"landing": SubResource("Animation_0j3td"),
+&"preview_explosion_radius": SubResource("Animation_7rn61"),
+&"priming": SubResource("Animation_brm27")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8r82i"]
@@ -1297,7 +1294,7 @@ draw_pass_1 = SubResource("PrismMesh_acihv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_r24o5")
+&"": SubResource("AnimationLibrary_r24o5")
 }
 
 [node name="DetectionRadius" type="Area3D" parent="."]

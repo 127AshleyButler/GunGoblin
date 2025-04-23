@@ -1,6 +1,6 @@
 [gd_scene load_steps=72 format=3 uid="uid://cj8co8kr1xew8"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Creatures/tank_driver.gd" id="1_nsmu1"]
+[ext_resource type="Script" uid="uid://83sdmbqso5l5" path="res://scripts/Tanks/Creatures/tank_driver.gd" id="1_nsmu1"]
 [ext_resource type="PackedScene" uid="uid://cuo40gpwolul4" path="res://scenes/Tanks/Things/tank_bullet.tscn" id="2_k7qxt"]
 [ext_resource type="PackedScene" uid="uid://csassjfat0bdr" path="res://scenes/Tanks/Things/tank_mine.tscn" id="3_yomm6"]
 [ext_resource type="PackedScene" uid="uid://b380wq4ko3hvm" path="res://scenes/Tanks/Things/heart_bullet.tscn" id="4_baoda"]
@@ -586,36 +586,31 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pk1r4"]
 _data = {
-"cough": SubResource("Animation_6rvdq"),
-"die": SubResource("Animation_tytrd"),
-"idle": SubResource("Animation_dbl8a"),
-"invisible": SubResource("Animation_5je3g"),
-"join": SubResource("Animation_gdlsk"),
-"leave": SubResource("Animation_3efcs"),
-"love": SubResource("Animation_ls5dd"),
-"revive": SubResource("Animation_a765p"),
-"shoot": SubResource("Animation_joy07")
+&"cough": SubResource("Animation_6rvdq"),
+&"die": SubResource("Animation_tytrd"),
+&"idle": SubResource("Animation_dbl8a"),
+&"invisible": SubResource("Animation_5je3g"),
+&"join": SubResource("Animation_gdlsk"),
+&"leave": SubResource("Animation_3efcs"),
+&"love": SubResource("Animation_ls5dd"),
+&"revive": SubResource("Animation_a765p"),
+&"shoot": SubResource("Animation_joy07")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wc2fb"]
 random_pitch = 1.1
 streams_count = 3
 stream_0/stream = ExtResource("4_do5q2")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("5_lf5f5")
-stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_xrrrh")
-stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4xi6g"]
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("8_ymsnc")
-stream_0/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_2tdhh"]
-min_value = -10.0
-max_value = 10.0
+_limits = [-10.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 3.37595, 0, 1, Vector2(0.578846, 1.95415), 0.0, 0.0, 0, 0, Vector2(0.990385, 9.40401), 0.0, 0.0, 0, 0, Vector2(1, 0), -978.013, 0.0, 1, 0]
 point_count = 4
 
@@ -654,7 +649,6 @@ rings = 1
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("7_5tk2f")
-stream_0/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_yftxa"]
 _data = [Vector2(0, 0), 0.0, 5.04117, 0, 0, Vector2(0.137218, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -691,9 +685,7 @@ size = Vector3(1, 0.7, 1)
 random_pitch = 1.1
 streams_count = 2
 stream_0/stream = ExtResource("12_vjth7")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("13_m1nb8")
-stream_1/weight = 1.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bmbju"]
 animations = [{
@@ -717,33 +709,25 @@ radius = 0.2
 random_pitch = 1.2
 streams_count = 2
 stream_0/stream = ExtResource("16_nstyx")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("17_tw765")
-stream_1/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o6i8g"]
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("16_gai2h")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0bmqg"]
 random_pitch = 1.1
 streams_count = 3
 stream_0/stream = ExtResource("19_6iiaq")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("20_tvrdw")
-stream_1/weight = 1.0
 stream_2/stream = ExtResource("21_ff4t8")
-stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6ynkm"]
 random_pitch = 1.1
 streams_count = 2
 stream_0/stream = ExtResource("22_o7aql")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("23_oix2h")
-stream_1/weight = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q80m7"]
 particle_flag_rotate_y = true
@@ -789,11 +773,8 @@ rings = 8
 random_pitch = 1.1
 streams_count = 3
 stream_0/stream = ExtResource("26_7scma")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("27_f8364")
-stream_1/weight = 1.0
 stream_2/stream = ExtResource("28_bybg3")
-stream_2/weight = 1.0
 
 [node name="TankDriver" type="CharacterBody3D" groups=["Player", "TankDriver"]]
 collision_layer = 48
@@ -819,7 +800,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_pk1r4")
+&"": SubResource("AnimationLibrary_pk1r4")
 }
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]

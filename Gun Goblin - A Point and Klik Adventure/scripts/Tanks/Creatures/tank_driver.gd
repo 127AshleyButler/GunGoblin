@@ -149,7 +149,8 @@ func handle_shooting():
 	bullet_count += 1
 	var new_bullet = bullet_scene.instantiate()
 	new_bullet.charge_tier = charge_tier
-	new_bullet.position = $BulletSpawner.position
+	new_bullet.position = $BulletSpawner.global_position
+	new_bullet.rotation.y = rotation.y
 	new_bullet.parent_id = get_rid()
 	add_child(new_bullet)
 	$Fire.play()
@@ -172,9 +173,10 @@ func handle_mine_laying():
 	mines_layed += 1
 	new_mine.mine_number = mines_layed
 	if charge_tier < 1: # Uncharged, lay mine directly behind tank.
-		new_mine.position = $MineSpawner.position
+		new_mine.position = $MineSpawner.global_position
 	else: # Charged mine, shoot the mine outwards in an arc instead.
-		new_mine.position = $BulletSpawner.position
+		new_mine.position = $BulletSpawner.global_position
+		new_mine.rotation.y = rotation.y
 		new_mine.airborne = true
 		new_mine.launched = true
 		$FireMine.play()
@@ -194,7 +196,8 @@ func handle_heart_shooting():
 	bullet_count += 1
 	var new_heart = heart_bullet_scene.instantiate()
 	new_heart.charge_tier = charge_tier
-	new_heart.position = $BulletSpawner.position
+	new_heart.position = $BulletSpawner.global_position
+	new_heart.rotation.y = rotation.y
 	new_heart.parent_id = get_rid()
 	add_child(new_heart)
 	$FireHeart.play()

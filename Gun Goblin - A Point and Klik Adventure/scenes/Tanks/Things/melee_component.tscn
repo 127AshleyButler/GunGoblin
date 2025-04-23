@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcvospindfe7d"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Things/melee_component.gd" id="1_or2we"]
+[ext_resource type="Script" uid="uid://r8weit1h87p" path="res://scripts/Tanks/Things/melee_component.gd" id="1_or2we"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdlp5"]
 radius = 1.0

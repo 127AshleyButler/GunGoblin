@@ -1,9 +1,51 @@
 [gd_scene load_steps=11 format=3 uid="uid://cxowrubjf4xxf"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Things/WaveManager.gd" id="1_v6g03"]
+[ext_resource type="Script" uid="uid://hr8twoy7fmv" path="res://scripts/Tanks/Things/WaveManager.gd" id="1_v6g03"]
 [ext_resource type="PackedScene" uid="uid://kwgk18pko6g2" path="res://scenes/Tanks/Things/portal.tscn" id="2_nuhmq"]
 [ext_resource type="PackedScene" uid="uid://nbuul8sfjr7k" path="res://scenes/Tanks/Characters/enemy_chaser.tscn" id="3_waocq"]
 [ext_resource type="PackedScene" uid="uid://girim0br41iv" path="res://scenes/Tanks/Characters/MinesMcgee.tscn" id="4_5ewp8"]
+
+[sub_resource type="Animation" id="Animation_xydt8"]
+resource_name = "Wave_1"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.4, 1.8, 2.2, 3, 6, 7, 8.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"MinesMcgee"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}, {
+"args": [&"OrangeArmMan"],
+"method": &"_spawn"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ol586"]
 resource_name = "Wave_2"
@@ -231,55 +273,13 @@ tracks/0/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_xydt8"]
-resource_name = "Wave_1"
-length = 10.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.7, 1, 1.4, 1.8, 2.2, 3, 6, 7, 8.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"MinesMcgee"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}, {
-"args": [&"OrangeArmMan"],
-"method": &"_spawn"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0jbqy"]
 _data = {
-"Wave_1": SubResource("Animation_xydt8"),
-"Wave_2": SubResource("Animation_ol586"),
-"Wave_3": SubResource("Animation_6grkp"),
-"Wave_4": SubResource("Animation_5pfiu"),
-"Wave_5": SubResource("Animation_opyxm")
+&"Wave_1": SubResource("Animation_xydt8"),
+&"Wave_2": SubResource("Animation_ol586"),
+&"Wave_3": SubResource("Animation_6grkp"),
+&"Wave_4": SubResource("Animation_5pfiu"),
+&"Wave_5": SubResource("Animation_opyxm")
 }
 
 [node name="WaveManager" type="Node3D"]
@@ -295,7 +295,7 @@ waves = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0jbqy")
+&"": SubResource("AnimationLibrary_0jbqy")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

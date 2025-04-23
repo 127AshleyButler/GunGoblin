@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://d07580we6kkox"]
 
 [ext_resource type="PackedScene" uid="uid://bamoput0j3nkx" path="res://models/tank/levels/level_controls.glb" id="1_s1n5o"]
-[ext_resource type="Script" path="res://scripts/Tanks/Levels/level_controls.gd" id="2_h7it7"]
+[ext_resource type="Script" uid="uid://dek4eb5h1q0q0" path="res://scripts/Tanks/Levels/level_controls.gd" id="2_h7it7"]
 [ext_resource type="Texture2D" uid="uid://cb475x1x61tr2" path="res://models/tank/levels/keycaps.png" id="2_m44g7"]
 [ext_resource type="PackedScene" uid="uid://cj8co8kr1xew8" path="res://scenes/Tanks/Characters/tank_driver.tscn" id="2_slf7j"]
 [ext_resource type="PackedScene" uid="uid://cdx66awewgsh6" path="res://scenes/Tanks/Things/tank_selectable.tscn" id="3_7d5tu"]
@@ -188,8 +188,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7toff"]
 _data = {
-"countdown": SubResource("Animation_5to2f"),
-"idle": SubResource("Animation_3nasc")
+&"countdown": SubResource("Animation_5to2f"),
+&"idle": SubResource("Animation_3nasc")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gosxy"]
@@ -212,35 +212,30 @@ material_override = SubResource("StandardMaterial3D_8vwn5")
 [node name="TankDriver" parent="." index="12" instance=ExtResource("2_slf7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3007, 0.486996, -18.1229)
 player_num = "1"
-can_shoot = true
 state = 2
 in_lobby = true
 
 [node name="TankDriver2" parent="." index="13" instance=ExtResource("2_slf7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6993, 0.486996, -18.4436)
 player_num = "2"
-can_shoot = true
 state = 2
 in_lobby = true
 
 [node name="TankDriver3" parent="." index="14" instance=ExtResource("2_slf7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.699, 0.921, -13.4824)
 player_num = "3"
-can_shoot = true
 state = 2
 in_lobby = true
 
 [node name="TankDriver4" parent="." index="15" instance=ExtResource("2_slf7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3986, 0.973992, -12.8872)
 player_num = "4"
-can_shoot = true
 state = 2
 in_lobby = true
 
 [node name="TankDriver5" parent="." index="16" instance=ExtResource("2_slf7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0979, 0.920545, -7.3308)
 player_num = "5"
-can_shoot = true
 state = 2
 in_lobby = true
 
@@ -265,7 +260,7 @@ model = NodePath("../P1 Pillar")
 [node name="P2Select" parent="." index="20" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6.52, 21.594)
 color_override = Color(0.980392, 0.733333, 0.380392, 1)
-text_override = "🎃
+text_override = "☠
 V"
 particle_mesh_override = SubResource("SphereMesh_nsjmp")
 model = NodePath("../P2 Pillar")
@@ -273,7 +268,7 @@ model = NodePath("../P2 Pillar")
 [node name="P3Select" parent="." index="21" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6.52, 21.594)
 color_override = Color(0.203922, 0.988235, 0.262745, 1)
-text_override = "🍀
+text_override = "᠅
 V"
 particle_mesh_override = SubResource("SphereMesh_w6ggh")
 model = NodePath("../P3 Pillar")
@@ -281,7 +276,7 @@ model = NodePath("../P3 Pillar")
 [node name="P4Select" parent="." index="22" node_paths=PackedStringArray("model") instance=ExtResource("3_7d5tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 6.52, 21.594)
 color_override = Color(0.980392, 0.266667, 0.541176, 1)
-text_override = "💓
+text_override = "♥
 V"
 particle_mesh_override = SubResource("SphereMesh_03kgd")
 model = NodePath("../P4 Pillar")
@@ -323,7 +318,7 @@ animation = &"Starting Match in"
 [node name="CountdownAnimation" type="AnimationPlayer" parent="." index="45"]
 root_node = NodePath("../Pillar Text")
 libraries = {
-"": SubResource("AnimationLibrary_7toff")
+&"": SubResource("AnimationLibrary_7toff")
 }
 
 [node name="OutOfBounds" type="Area3D" parent="." index="46"]

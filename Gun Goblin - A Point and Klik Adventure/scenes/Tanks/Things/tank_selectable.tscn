@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cdx66awewgsh6"]
 
-[ext_resource type="Script" path="res://scripts/Tanks/Things/TankSelectable.gd" id="1_e06qw"]
+[ext_resource type="Script" uid="uid://bgnl50ffeysw1" path="res://scripts/Tanks/Things/TankSelectable.gd" id="1_e06qw"]
 [ext_resource type="AudioStream" uid="uid://b5x2br3fqtyed" path="res://sounds/SFX/483450__pappabert__stone-creek.wav" id="2_0tsdw"]
 
 [sub_resource type="Gradient" id="Gradient_7jre7"]
@@ -22,6 +22,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 5.0
 emission_ring_inner_radius = 5.0
+emission_ring_cone_angle = 90.0
 gravity = Vector3(0, -1.1, 0)
 scale_curve = SubResource("CurveTexture_etrn6")
 color_initial_ramp = SubResource("GradientTexture1D_soikn")
